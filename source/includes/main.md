@@ -30,6 +30,8 @@ lukaz expects for the API key to be included in all API requests to the server i
 
 # Workspaces
 
+
+
 ## Get All Workspaces
 
 ```bash
@@ -96,6 +98,9 @@ This endpoint retrieves all workspaces.
 
 There are no query params available at the moment.
 
+
+
+
 ## Get a Specific Workspace
 
 ```bash
@@ -161,6 +166,9 @@ This endpoint retrieves a specific workspace.
 ### HTTP Request (with ID)
 
 `GET https://luk.az/workspace/<WORKSPACE_ID>`
+
+
+
 
 ## Create New Workspace
 
@@ -236,6 +244,9 @@ description | (string) The descripton of the workspace
 notify      | (boolean) Notify new users
 options     | (object) Workspace options
 roles       | (object) User roles
+
+
+
 
 
 ## Delete Existing Workspace
@@ -499,5 +510,96 @@ Property    | Description
 ---------   | -----------
             | (string) The file URL of the generated audio
 
+
+
+
+## Get All Questions
+
+```bash
+curl "https://luk.az/questions"
+  -H "Authorization: <LUKAZ_API_KEY>"
+```
+
+```javascript
+import { lukaz } from '@lukaz/client'
+
+const client = lukaz.auth('<LUKAZ_API_KEY>')
+const questions = await client.getQuestions()
+```
+
+> The above endpoint returns JSON structured like this:
+
+```json
+[
+  {
+    "answer": "This is workspace is about the history of AI.",
+    "audioUrl": "https://example.com/Answer_Audio_File.mp3",
+    "createdAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
+    "feedback": 0,
+    "id": "<QUESTION_ID>",
+    "question": "What is this workspace about?",
+    "sensitive": false,
+    "updatedAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
+    "visible": true,
+    "workspaceId": "my-workspace"
+  }
+]
+```
+
+This endpoint retrieves all user questions of a specific workspace.
+
+### HTTP Request
+
+`GET https://luk.az/workspaces`
+
+### Query Parameters
+
+There are no query params available at the moment.
+
+
+
+
+## Get a Specific Question
+
+```bash
+curl "https://luk.az/getQuestion/<QUESTION_ID>"
+  -H "Authorization: <LUKAZ_API_KEY>"
+```
+
+```javascript
+import { lukaz } from '@lukaz/client'
+
+const client = lukaz.auth('<LUKAZ_API_KEY>')
+const question = await client.getQuestion('<QUESTION_ID>')
+```
+
+> The above endpoint returns JSON structured like this:
+
+```json
+{
+  "answer": "This is workspace is about the history of AI.",
+  "audioUrl": "https://example.com/Answer_Audio_File.mp3",
+  "createdAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
+  "feedback": 0,
+  "id": "<QUESTION_ID>",
+  "question": "What is this workspace about?",
+  "sensitive": false,
+  "updatedAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
+  "visible": true,
+  "workspaceId": "my-workspace"
+}
+```
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID        | The ID of the question to retrieve
+
+This endpoint retrieves a specific question.
+
+### HTTP Request (with ID)
+
+`GET https://luk.az/getQuestion/<QUESTION_ID>`
 
 
