@@ -366,9 +366,7 @@ const workspace = await client.deleteFile('<WORKSPACE_ID>', {
 > The above endpoint returns JSON structured like this:
 
 ```json
-{
-  "transcript": "This is the text from the audio file."
-}
+"This is the text from the audio file."
 ```
 
 ### HTTP Request (with ID)
@@ -393,7 +391,7 @@ audioUrl    | (string) The URL of an .wav audio file
 
 Property    | Description
 ---------   | -----------
-transcript  | (string) The text extracted from the audio file
+            | (string) The text extracted from the audio file
 
 
 ## Ask Question to Workspace
@@ -407,7 +405,7 @@ curl "https://luk.az/ask/<WORKSPACE_ID>"
 import { lukaz } from '@lukaz/client'
 
 const client = lukaz.auth('<LUKAZ_API_KEY>')
-const workspace = await client.ask('<WORKSPACE_ID>', {
+const answer = await client.ask('<WORKSPACE_ID>', {
     question: 'What is this workspace about?',
     translateAnswer: false
 })
@@ -451,4 +449,49 @@ answer      | (string) The answer generate for the question asked
 question    | (string) The question asked to the workspace
 questionId  | (string) The unique id of the question asked
 sensitive   | (boolean) If question context is sensitive or not
+
+
+## Get Answer Audio
+
+```bash
+curl "https://luk.az/getAudio/<WORKSPACE_ID>"
+  -H "Authorization: <LUKAZ_API_KEY>"
+```
+
+```javascript
+import { lukaz } from '@lukaz/client'
+
+const client = lukaz.auth('<LUKAZ_API_KEY>')
+const answerAudioUrl = await client.getAudio('<WORKSPACE_ID>')
+```
+
+> The above endpoint returns JSON structured like this:
+
+```json
+"https://example.com/Audio_File.wav"
+```
+
+### HTTP Request (with ID)
+
+`POST https://luk.az/getTranscript/<WORKSPACE_ID>`
+
+This endpoint transcripts the text from an audio file.
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID        | The ID of the workspace to ask a questionn
+
+### HTTP Request Body
+
+Property    | Description
+---------   | -----------
+audioUrl    | (string) The URL of an .wav audio file
+
+### HTTP Response Body
+
+Property    | Description
+---------   | -----------
+            | (string) The text extracted from the audio file
 
