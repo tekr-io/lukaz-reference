@@ -205,7 +205,9 @@ curl "https://luk.az/updateWorkspace/<ID>"
 import { lukaz } from '@lukaz/client'
 
 const client = lukaz.auth('<LUKAZ_API_KEY>')
-const workspace = await client.updateWorkspace('<WORKSPACE_ID>')
+const workspace = await client.updateWorkspace('<WORKSPACE_ID>', {
+    
+})
 ```
 
 > The above endpoint returns JSON structured like this:
@@ -267,103 +269,6 @@ This endpoint retrieves a specific workspace.
 
 ### HTTP Request (with ID)
 
-`POST https://luk.az/workspace/<ID>`
+`DELETE https://luk.az/deleteWorkspace/<ID>`
 
-### HTTP Request Body
-
-Property    | Description
----------   | -----------
-description | (string) The descripton of the workspace
-notify      | (boolean) Notify new users
-options     | (object) Workspace options
-roles       | (object) User roles
-
-This endpoint updates a specific workspace.
-
-
-## Update Existing Workspace
-
-```bash
-curl "https://luk.az/updateWorkspace/<ID>"
-  -H "Authorization: <LUKAZ_API_KEY>"
-```
-
-```javascript
-import { lukaz } from '@lukaz/client'
-
-const client = lukaz.auth('<LUKAZ_API_KEY>')
-const workspace = await client.updateWorkspace('<WORKSPACE_ID>')
-```
-
-> The above endpoint returns JSON structured like this:
-
-```json
-null
-```
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID        | The ID of the workspace to retrieve
-
-This endpoint retrieves a specific workspace.
-
-### HTTP Request (with ID)
-
-`POST https://luk.az/workspace/<ID>`
-
-### HTTP Request Body
-
-Property    | Description
----------   | -----------
-description | (string) The descripton of the workspace
-notify      | (boolean) Notify new users
-options     | (object) Workspace options
-roles       | (object) User roles
-
-This endpoint updates a specific workspace.
-
-## Delete Existing Workspace
-
-```bash
-curl "https://luk.az/deleteWorkspace/<ID>"
-  -H "Authorization: <LUKAZ_API_KEY>"
-```
-
-```javascript
-import { lukaz } from '@lukaz/client'
-
-const client = lukaz.auth('<LUKAZ_API_KEY>')
-const workspace = await client.deleteWorkspace('<WORKSPACE_ID>')
-```
-
-> The above endpoint returns JSON structured like this:
-
-```json
-null
-```
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID        | The ID of the workspace to retrieve
-
-This endpoint retrieves a specific workspace.
-
-### HTTP Request (with ID)
-
-`POST https://luk.az/workspace/<ID>`
-
-### HTTP Request Body
-
-Property    | Description
----------   | -----------
-description | (string) The descripton of the workspace
-notify      | (boolean) Notify new users
-options     | (object) Workspace options
-roles       | (object) User roles
-
-This endpoint updates a specific workspace.
-
+This endpoint deletes a specific workspace.
