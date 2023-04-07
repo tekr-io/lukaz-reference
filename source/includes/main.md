@@ -99,7 +99,7 @@ There are no query params available at the moment.
 ## Get a Specific Workspace
 
 ```bash
-curl "https://luk.az/workspace/<ID>"
+curl "https://luk.az/workspace/<WORKSPACE_ID>"
   -H "Authorization: <LUKAZ_API_KEY>"
 ```
 
@@ -160,12 +160,12 @@ This endpoint retrieves a specific workspace.
 
 ### HTTP Request (with ID)
 
-`GET https://luk.az/workspace/<ID>`
+`GET https://luk.az/workspace/<WORKSPACE_ID>`
 
 ## Create New Workspace
 
 ```bash
-curl "https://luk.az/createWorkspace/<ID>"
+curl "https://luk.az/createWorkspace/<WORKSPACE_ID>"
   -H "Authorization: <LUKAZ_API_KEY>"
 ```
 
@@ -192,12 +192,12 @@ This endpoint retrieves a specific workspace.
 
 ### HTTP Request (with ID)
 
-`POST https://luk.az/workspace/<ID>`
+`POST https://luk.az/workspace/<WORKSPACE_ID>`
 
 ## Update Existing Workspace
 
 ```bash
-curl "https://luk.az/updateWorkspace/<ID>"
+curl "https://luk.az/updateWorkspace/<WORKSPACE_ID>"
   -H "Authorization: <LUKAZ_API_KEY>"
 ```
 
@@ -226,7 +226,7 @@ This endpoint retrieves a specific workspace.
 
 ### HTTP Request (with ID)
 
-`POST https://luk.az/workspace/<ID>`
+`POST https://luk.az/workspace/<WORKSPACE_ID>`
 
 ### HTTP Request Body
 
@@ -242,7 +242,7 @@ This endpoint updates a specific workspace.
 ## Delete Existing Workspace
 
 ```bash
-curl "https://luk.az/deleteWorkspace/<ID>"
+curl "https://luk.az/deleteWorkspace/<WORKSPACE_ID>"
   -H "Authorization: <LUKAZ_API_KEY>"
 ```
 
@@ -259,6 +259,12 @@ const workspace = await client.deleteWorkspace('<WORKSPACE_ID>')
 null
 ```
 
+### HTTP Request (with ID)
+
+`DELETE https://luk.az/deleteWorkspace/<WORKSPACE_ID>`
+
+This endpoint deletes a specific workspace.
+
 ### URL Parameters
 
 Parameter | Description
@@ -267,8 +273,39 @@ ID        | The ID of the workspace to retrieve
 
 This endpoint retrieves a specific workspace.
 
+## Upload File onto Workspace
+
+```bash
+curl "https://luk.az/upload/<WORKSPACE_ID>"
+  -H "Authorization: <LUKAZ_API_KEY>"
+```
+
+```javascript
+import { lukaz } from '@lukaz/client'
+
+const client = lukaz.auth('<LUKAZ_API_KEY>')
+const workspace = await client.upload('<WORKSPACE_ID>', {
+    files: File,
+    fields: {description: 'This is custom file info', ...}
+})
+```
+
+> The above endpoint returns JSON structured like this:
+
+```json
+null
+```
+
 ### HTTP Request (with ID)
 
-`DELETE https://luk.az/deleteWorkspace/<ID>`
+`POST https://luk.az/upload/<WORKSPACE_ID>`
 
-This endpoint deletes a specific workspace.
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID        | The ID of the workspace to upload the file
+
+This endpoint uploads a file onto a specific workspace.
+
