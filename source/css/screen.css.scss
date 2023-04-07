@@ -81,7 +81,7 @@ html, body {
       display: block;
       max-width: 80%;
       max-height: 100px;
-      margin: $logo-margin auto 0px auto;
+      margin: $logo-margin auto ($logo-margin)-5 auto;
       }
    &>.search {
       position: relative;

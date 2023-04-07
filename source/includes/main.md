@@ -2,15 +2,20 @@
 
 Welcome to the lukaz API! You can use our API to access lukaz API endpoints.
 
-We have a client available in JavaScript. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+We have a client available in JavaScript. You can view code examples in the dark area to the right.
+
+
 
 # Authentication
 
-> To authorize, use this code:
+
+## Authenticate User
+
+> To authorize, use this code before calling other endpoints:
 
 ```bash
 # With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
+curl "https://luk.az/getUser"
   -H "Authorization: <LUKAZ_API_KEY>"
 ```
 
@@ -22,15 +27,58 @@ const client = await lukaz.authorize('<LUKAZ_API_KEY>')
 
 > Make sure to replace `<LUKAZ_API_KEY>` with your API key.
 
-lukaz uses API keys to allow access to the API. You can create a new lukaz API key at [settings](https://lukaz.ai/settings) page under security options.
+lukaz uses API keys to allow access to the API. You can create a new API key on the [settings](https://lukaz.ai/settings) page under security options.
 
 lukaz expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
 `Authorization: <LUKAZ_API_KEY>`
 
+
+
+
+## Get Authenticated User
+
+```bash
+curl "https://luk.az/getUser"
+  -H "Authorization: <LUKAZ_API_KEY>"
+```
+
+```javascript
+import { lukaz } from '@lukaz/client'
+
+const client = await lukaz.auth('<LUKAZ_API_KEY>')
+const user = await client.getUser()
+```
+
+> The above endpoint returns JSON structured like this:
+
+```json
+{
+  "displayName": "Example User",
+  "email": "user@example.com",
+  "photoURL": "https://example.com/User_Photo.jpg",
+  "quota": {
+    "questions": 1000,
+    "workspaces": 10
+  },
+  "savedQuestions": ["questionId", "anotherQuestionId"],
+  "usage": {
+    "questions": 834,
+    "workspaces": 7
+  }
+}
+```
+
+This endpoint reads the user data related to the API key in use.
+
+### HTTP Request (with ID)
+
+`GET https://luk.az/getUser`
+
+
+
+
 # Workspaces
-
-
 
 
 ## Get All Workspaces
@@ -54,7 +102,7 @@ const workspaces = await client.workspaces()
   {
     "id": "<WORKSPACE_ID>",
     "createdAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
-    "description": "This a workspace on lukaz!",
+    "description": "This my AI workspace on lukaz.",
     "documents": [
       {
         "createdAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
@@ -83,8 +131,7 @@ const workspaces = await client.workspaces()
       "docs": 2,
       "questions": 7
     },
-    "updatedAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
-    "userEmails": ["owner@example.com", "user@example.com"]
+    "updatedAt": {"_seconds": 1680559078, "_nanoseconds": 928000000}
   }
 ]
 ```
@@ -118,7 +165,7 @@ const workspace = await client.workspace('<WORKSPACE_ID>')
 {
   "id": "<WORKSPACE_ID>",
   "createdAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
-  "description": "This is my first workspace on lukaz!",
+  "description": "This is my AI workspace on lukaz.",
   "documents": [
     {
       "createdAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
@@ -147,8 +194,7 @@ const workspace = await client.workspace('<WORKSPACE_ID>')
     "docs": 2,
     "questions": 7
   },
-  "updatedAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
-  "userEmails": ["owner@example.com", "user@example.com"]
+  "updatedAt": {"_seconds": 1680559078, "_nanoseconds": 928000000}
 }
 ```
 
@@ -214,7 +260,18 @@ import { lukaz } from '@lukaz/client'
 
 const client = await lukaz.auth('<LUKAZ_API_KEY>')
 await client.updateWorkspace('<WORKSPACE_ID>', {
-    
+    description: 'This is a new description for my AI workspace',
+    notify: true,
+    options: {
+        ask: true,
+        free: false,
+        public: false,
+        upload: true
+    },
+    roles: {
+        'owner@example.com': 5,
+        'user@example.com': 4
+    }
 })
 ```
 
@@ -241,7 +298,7 @@ ID        | The ID of the workspace to update
 Property    | Description
 ---------   | -----------
 description | (string) The descripton of the workspace
-notify      | (boolean) Notify new users
+notify      | (boolean) Send invite email for new user roles
 options     | (object) Workspace options
 roles       | (object) User roles
 
@@ -320,6 +377,10 @@ Parameter | Description
 --------- | -----------
 ID        | The ID of the workspace to upload the file
 
+
+
+
+
 ## Delete File from Workspace
 
 ```bash
@@ -359,6 +420,8 @@ ID        | The ID of the workspace to delete the file from
 Property    | Description
 ---------   | -----------
 fileName    | (string) The name of the file to be deleted
+
+
 
 
 
@@ -409,7 +472,7 @@ audioUrl    | (string) The URL of an .wav audio file
 
 Property    | Description
 ---------   | -----------
-            | (string) The text extracted from the audio file
+(body)      | (string) The text extracted from the audio file
 
 
 
@@ -438,7 +501,7 @@ const answer = await client.ask('<WORKSPACE_ID>', {
 {
   "answer": "This workspace is about the history of AI.",
   "question": "What is this workspace about?",
-  "questionId": "01I83mudzoQWVrKMoFbx0T8XQZS2",
+  "questionId": "<QUESTION_ID>",
   "sensitive": false
 }
 ```
@@ -515,7 +578,7 @@ The request body must be empty.
 
 Property    | Description
 ---------   | -----------
-            | (string) The file URL of the generated audio
+(body)      | (string) The file URL of the generated audio
 
 
 
@@ -548,7 +611,7 @@ const questions = await client.getQuestions()
     "sensitive": false,
     "updatedAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
     "visible": true,
-    "workspaceId": "my-workspace"
+    "workspaceId": "<WORKSPACE_ID>"
   }
 ]
 ```
@@ -593,7 +656,7 @@ const question = await client.getQuestion('<QUESTION_ID>')
   "sensitive": false,
   "updatedAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
   "visible": true,
-  "workspaceId": "my-workspace"
+  "workspaceId": "<WORKSPACE_ID>"
 }
 ```
 
@@ -787,49 +850,3 @@ This endpoint rates the answer of a specific question.
 Parameter | Description
 --------- | -----------
 ID        | The ID of the question to rate
-
-
-
-
-
-# Users
-
-## Get Authenticated User
-
-```bash
-curl "https://luk.az/getUser/<QUESTION_ID>"
-  -H "Authorization: <LUKAZ_API_KEY>"
-```
-
-```javascript
-import { lukaz } from '@lukaz/client'
-
-const client = await lukaz.auth('<LUKAZ_API_KEY>')
-const user = await client.getUser()
-```
-
-> The above endpoint returns JSON structured like this:
-
-```json
-{
-  "displayName": "Example User",
-  "email": "user@example.com",
-  "photoURL": "https://example.com/User_Photo.jpg",
-  "quota": {
-    "questions": 1000,
-    "workspaces": 10
-  },
-  "savedQuestions": ["questionId", "anotherQuestionId"],
-  "usage": {
-    "questions": 834,
-    "workspaces": 7
-  }
-}
-```
-
-This endpoint reads the user data related to the API key in use.
-
-### HTTP Request (with ID)
-
-`GET https://luk.az/getUser`
-
