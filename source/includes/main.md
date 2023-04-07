@@ -105,15 +105,15 @@ const workspaces = await client.getWorkspaces()
 [
   {
     "id": "<WORKSPACE_ID>",
-    "createdAt": Timestamp,
+    "createdAt": "Timestamp",
     "description": "This my AI workspace on lukaz.",
     "documents": [
       {
-        "createdAt": Timestamp,
+        "createdAt": "Timestamp",
         "extension": "pdf",
         "name": "File_Name.pdf",
         "processed": true,
-        "updatedAt": Timestamp,
+        "updatedAt": "Timestamp",
         "workspaceId": "<WORKSPACE_ID>"
       }
     ],
@@ -125,7 +125,7 @@ const workspaces = await client.getWorkspaces()
       "upload": true
     },
     "processing": false,
-    "processedAt": Timestamp,
+    "processedAt": "Timestamp",
     "roles": {
       "owner@example.com": 5,
       "user@example.com": 4
@@ -135,7 +135,7 @@ const workspaces = await client.getWorkspaces()
       "docs": 2,
       "questions": 7
     },
-    "updatedAt": Timestamp
+    "updatedAt": "Timestamp"
   }
 ]
 ```
@@ -168,15 +168,15 @@ const workspace = await client.getWorkspace('<WORKSPACE_ID>')
 ```json
 {
   "id": "<WORKSPACE_ID>",
-  "createdAt": Timestamp,
+  "createdAt": "Timestamp",
   "description": "This is my AI workspace on lukaz.",
   "documents": [
     {
-      "createdAt": Timestamp,
+      "createdAt": "Timestamp",
       "extension": "pdf",
       "name": "File_Name.pdf",
       "processed": true,
-      "updatedAt": Timestamp,
+      "updatedAt": "Timestamp",
       "workspaceId": "<WORKSPACE_ID>"
     }
   ],
@@ -188,7 +188,7 @@ const workspace = await client.getWorkspace('<WORKSPACE_ID>')
     "upload": true
   },
   "processing": false,
-  "processedAt": Timestamp,
+  "processedAt": "Timestamp",
   "roles": {
     "owner@example.com": 5,
     "user@example.com": 4
@@ -198,7 +198,7 @@ const workspace = await client.getWorkspace('<WORKSPACE_ID>')
     "docs": 2,
     "questions": 7
   },
-  "updatedAt": Timestamp
+  "updatedAt": "Timestamp"
 }
 ```
 
@@ -302,10 +302,10 @@ ID        | The ID of the workspace to update
 
 Property    | Description
 ---------   | -----------
-description | (string) The descripton of the workspace
-notify      | (boolean) Send invite email for new user roles
-options     | (object) Workspace options
-roles       | (object) User roles
+description | The descripton of the workspace
+notify      | Send invite email for new user roles
+options     | Workspace options
+roles       | User roles
 
 
 
@@ -425,7 +425,7 @@ ID        | The ID of the workspace to delete the file from
 
 Property    | Description
 ---------   | -----------
-fileName    | (string) The name of the file to be deleted
+fileName    | The name of the file to be deleted
 
 
 
@@ -472,13 +472,13 @@ ID        | The ID of the workspace to ask a questionn
 
 Property    | Description
 ---------   | -----------
-audioUrl    | (string) The URL of an .wav audio file
+audioUrl    | The URL of an .wav audio file
 
 ### HTTP Response Body
 
 Property    | Description
 ---------   | -----------
-transcript  | (string) The text extracted from the audio file
+transcript  | The text extracted from the audio file
 
 
 
@@ -528,17 +528,17 @@ ID        | The ID of the workspace to ask a questionn
 
 Property         | Description
 ---------        | -----------
-question         | (string) The natural question to ask
-translateAnswer  | (boolean) Answer language should be same as question
+question         | The natural question to ask
+translateAnswer  | Answer language should be same as question
 
 ### HTTP Response Body
 
 Property    | Description
 ---------   | -----------
-answer      | (string) The answer generate for the question asked
-question    | (string) The question asked to the workspace
-questionId  | (string) The unique id of the question asked
-sensitive   | (boolean) If question context is sensitive or not
+answer      | The answer generate for the question asked
+question    | The question asked to the workspace
+questionId  | The unique id of the question asked
+sensitive   | If question context is sensitive or not
 
 
 
@@ -561,7 +561,7 @@ const audioUrl = await client.getAudio('<QUESTION_ID>')
 > HTTP Response Body:
 
 ```json
-"https://example.com/Answer_Audio_File.mp3"
+"https://example.com/Answer_Audio.mp3"
 ```
 
 This endpoint generates an audio file from the answer.
@@ -584,7 +584,7 @@ The request body must be empty.
 
 Property    | Description
 ---------   | -----------
-audioUrl    | (string) The file URL of the generated audio
+audioUrl    | The file URL of the generated audio
 
 
 
@@ -609,13 +609,13 @@ const questions = await client.getQuestions()
 [
   {
     "answer": "This is workspace is about AI.",
-    "audioUrl": "https://example.com/Answer_Audio_File.mp3",
-    "createdAt": Timestamp,
+    "audioUrl": "https://example.com/Answer_Audio.mp3",
+    "createdAt": "Timestamp",
     "feedback": 0,
     "id": "<QUESTION_ID>",
     "question": "What is this workspace about?",
     "sensitive": false,
-    "updatedAt": Timestamp,
+    "updatedAt": "Timestamp",
     "visible": true,
     "workspaceId": "<WORKSPACE_ID>"
   }
@@ -626,7 +626,7 @@ This endpoint retrieves all user questions of a specific workspace.
 
 ### HTTP Request
 
-`GET https://luk.az/workspaces`
+`GET https://luk.az/getQuestions`
 
 ### Query Parameters
 
@@ -654,13 +654,13 @@ const question = await client.getQuestion('<QUESTION_ID>')
 ```json
 {
   "answer": "This is workspace is about AI.",
-  "audioUrl": "https://example.com/Answer_Audio_File.mp3",
-  "createdAt": Timestamp,
+  "audioUrl": "https://example.com/Answer_Audio.mp3",
+  "createdAt": "Timestamp",
   "feedback": 0,
   "id": "<QUESTION_ID>",
   "question": "What is this workspace about?",
   "sensitive": false,
-  "updatedAt": Timestamp,
+  "updatedAt": "Timestamp",
   "visible": true,
   "workspaceId": "<WORKSPACE_ID>"
 }
