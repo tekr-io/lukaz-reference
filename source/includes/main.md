@@ -396,10 +396,10 @@ Property    | Description
 transcript  | (string) The text extracted from the audio file
 
 
-## Get Question Transcript
+## Ask Question to Workspace
 
 ```bash
-curl "https://luk.az/getTranscript/<WORKSPACE_ID>"
+curl "https://luk.az/ask/<WORKSPACE_ID>"
   -H "Authorization: <LUKAZ_API_KEY>"
 ```
 
@@ -407,8 +407,9 @@ curl "https://luk.az/getTranscript/<WORKSPACE_ID>"
 import { lukaz } from '@lukaz/client'
 
 const client = lukaz.auth('<LUKAZ_API_KEY>')
-const workspace = await client.deleteFile('<WORKSPACE_ID>', {
-    audioUrl: 'https://example.com/Audio_File.wav',
+const workspace = await client.ask('<WORKSPACE_ID>', {
+    question: 'What is this workspace about?',
+    translateAnswer: false
 })
 ```
 
@@ -416,7 +417,10 @@ const workspace = await client.deleteFile('<WORKSPACE_ID>', {
 
 ```json
 {
-  "transcript": "This is the text from the audio file."
+  "answer": "This workspace is about the history of AI.",
+  "question": "What is this workspace about?",
+  "questionId": "01I83mudzoQWVrKMoFbx0T8XQZS2",
+  "sensitive": false
 }
 ```
 
@@ -424,7 +428,7 @@ const workspace = await client.deleteFile('<WORKSPACE_ID>', {
 
 `POST https://luk.az/getTranscript/<WORKSPACE_ID>`
 
-This endpoint transcripts the text from an audio file.
+This endpoint asks a question to a specific workspace.
 
 ### URL Parameters
 
@@ -434,13 +438,17 @@ ID        | The ID of the workspace to ask a questionn
 
 ### HTTP Request Body
 
-Property    | Description
----------   | -----------
-audioUrl    | (string) The URL of an .wav audio file
+Property         | Description
+---------        | -----------
+question         | (string) The natural question to ask
+translateAnswer  | (boolean) Answer language should be same as question
 
 ### HTTP Response Body
 
 Property    | Description
 ---------   | -----------
-transcript  | (string) The text extracted from the audio file
+answer      | (string) The answer generate for the question asked
+question    | (string) The question asked to the workspace
+questionId  | (string) The unique id of the question asked
+sensitive   | (boolean) If question context is sensitive or not
 
