@@ -454,7 +454,9 @@ const workspace = await lukaz.deleteFile('<WORKSPACE_ID>', {
 > HTTP Response Body:
 
 ```json
-"This is the text from the audio file."
+{
+  "transcript": "This is the text from the audio file."
+}
 ```
 This endpoint transcripts the text from an audio file.
 
@@ -472,7 +474,7 @@ ID        | The ID of the workspace to ask a questionn
 
 Property    | Description
 ---------   | -----------
-audioUrl    | The URL of an .wav audio file
+audioUrl    | The URL of a .wav audio file
 
 ### HTTP Response Body
 
@@ -561,7 +563,9 @@ const audioUrl = await lukaz.getAudio('<QUESTION_ID>')
 > HTTP Response Body:
 
 ```json
-"https://example.com/Answer_Audio.mp3"
+{
+  "audioUrl": "https://example.com/Answer_Audio.mp3"
+}
 ```
 
 This endpoint generates an audio file from the answer.
