@@ -30,11 +30,14 @@ const lukaz = new client('<LUKAZ_API_KEY>')
 
 > Make sure to replace `<LUKAZ_API_KEY>` with your API key.
 
-lukaz uses API keys to allow access to the API. You can create a new API key on the [settings](https://lukaz.ai/settings) page under security options.
+
+<aside>
+lukaz uses API keys to allow access to the API. You can create a new API key on the <a href="https://lukaz.ai/settings" target="_blank">settings</a> page under security options.
+</aside>
 
 lukaz expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
-`Authorization: <LUKAZ_API_KEY>`
+`x-api-key: <LUKAZ_API_KEY>`
 
 
 
