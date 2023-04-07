@@ -17,7 +17,7 @@ curl "api_endpoint_here"
 ```javascript
 import { lukaz } from 'lukaz'
 
-const client = await lukaz.authorize('<LUKAZ_API_KEY>')
+const client = await await lukaz.authorize('<LUKAZ_API_KEY>')
 ```
 
 > Make sure to replace `<LUKAZ_API_KEY>` with your API key.
@@ -42,7 +42,7 @@ curl "https://luk.az/workspaces"
 ```javascript
 import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>')
+const client = await lukaz.auth('<LUKAZ_API_KEY>')
 const workspaces = await client.workspaces()
 ```
 
@@ -111,7 +111,7 @@ curl "https://luk.az/workspace/<WORKSPACE_ID>"
 ```javascript
 import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>')
+const client = await lukaz.auth('<LUKAZ_API_KEY>')
 const workspace = await client.workspace('<WORKSPACE_ID>')
 ```
 
@@ -180,7 +180,7 @@ curl "https://luk.az/createWorkspace/<WORKSPACE_ID>"
 ```javascript
 import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>')
+const client = await lukaz.auth('<LUKAZ_API_KEY>')
 const workspace = await client.workspace('<WORKSPACE_ID>')
 ```
 
@@ -212,7 +212,7 @@ curl "https://luk.az/updateWorkspace/<WORKSPACE_ID>"
 ```javascript
 import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>')
+const client = await lukaz.auth('<LUKAZ_API_KEY>')
 const workspace = await client.updateWorkspace('<WORKSPACE_ID>', {
     
 })
@@ -259,7 +259,7 @@ curl "https://luk.az/deleteWorkspace/<WORKSPACE_ID>"
 ```javascript
 import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>')
+const client = await lukaz.auth('<LUKAZ_API_KEY>')
 const workspace = await client.deleteWorkspace('<WORKSPACE_ID>')
 ```
 
@@ -283,6 +283,10 @@ ID        | The ID of the workspace to retrieve
 
 This endpoint retrieves a specific workspace.
 
+
+
+
+
 ## Upload File onto Workspace
 
 ```bash
@@ -293,7 +297,7 @@ curl "https://luk.az/upload/<WORKSPACE_ID>"
 ```javascript
 import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>')
+const client = await lukaz.auth('<LUKAZ_API_KEY>')
 const workspace = await client.upload('<WORKSPACE_ID>', {
     file: File,
 })
@@ -328,7 +332,7 @@ curl "https://luk.az/deleteFile/<WORKSPACE_ID>"
 ```javascript
 import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>')
+const client = await lukaz.auth('<LUKAZ_API_KEY>')
 const workspace = await client.deleteFile('<WORKSPACE_ID>', {
     fileName: 'Test_File.pdf',
 })
@@ -360,6 +364,10 @@ fileName    | (string) The name of the file to be deleted
 
 
 
+# Questions
+
+
+
 ## Get Question Transcript
 
 ```bash
@@ -370,7 +378,7 @@ curl "https://luk.az/getTranscript/<WORKSPACE_ID>"
 ```javascript
 import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>')
+const client = await lukaz.auth('<LUKAZ_API_KEY>')
 const workspace = await client.deleteFile('<WORKSPACE_ID>', {
     audioUrl: 'https://example.com/Audio_File.wav',
 })
@@ -409,6 +417,7 @@ Property    | Description
 
 
 
+
 ## Ask Question to Workspace
 
 ```bash
@@ -419,7 +428,7 @@ curl "https://luk.az/ask/<WORKSPACE_ID>"
 ```javascript
 import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>')
+const client = await lukaz.auth('<LUKAZ_API_KEY>')
 const answer = await client.ask('<WORKSPACE_ID>', {
     question: 'What is this workspace about?',
     translateAnswer: false
@@ -468,6 +477,7 @@ sensitive   | (boolean) If question context is sensitive or not
 
 
 
+
 ## Get Answer Audio
 
 ```bash
@@ -478,7 +488,7 @@ curl "https://luk.az/getAudio/<QUESTION_ID>"
 ```javascript
 import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>')
+const client = await lukaz.auth('<LUKAZ_API_KEY>')
 const audioUrl = await client.getAudio('<QUESTION_ID>')
 ```
 
@@ -523,7 +533,7 @@ curl "https://luk.az/questions"
 ```javascript
 import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>')
+const client = await lukaz.auth('<LUKAZ_API_KEY>')
 const questions = await client.getQuestions()
 ```
 
@@ -569,7 +579,7 @@ curl "https://luk.az/getQuestion/<QUESTION_ID>"
 ```javascript
 import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>')
+const client = await lukaz.auth('<LUKAZ_API_KEY>')
 const question = await client.getQuestion('<QUESTION_ID>')
 ```
 
@@ -605,6 +615,7 @@ This endpoint retrieves a specific question.
 
 
 
+
 ## Make Question Visible
 
 ```bash
@@ -615,7 +626,7 @@ curl "https://luk.az/showQuestion/<QUESTION_ID>"
 ```javascript
 import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>')
+const client = await lukaz.auth('<LUKAZ_API_KEY>')
 await client.showQuestion('<QUESTION_ID>')
 ```
 
@@ -640,6 +651,7 @@ This endpoint makes a specific question visible on its workspace.
 
 
 
+
 ## Make Question Invisible
 
 ```bash
@@ -650,7 +662,7 @@ curl "https://luk.az/hideQuestion/<QUESTION_ID>"
 ```javascript
 import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>')
+const client = await lukaz.auth('<LUKAZ_API_KEY>')
 await client.showQuestion('<QUESTION_ID>')
 ```
 
@@ -674,41 +686,6 @@ This endpoint makes a specific question invisible on its workspace.
 
 
 
-## Make Question Visible
-
-```bash
-curl "https://luk.az/showQuestion/<QUESTION_ID>"
-  -H "Authorization: <LUKAZ_API_KEY>"
-```
-
-```javascript
-import { lukaz } from '@lukaz/client'
-
-const client = lukaz.auth('<LUKAZ_API_KEY>')
-await client.showQuestion('<QUESTION_ID>')
-```
-
-> The above endpoint returns JSON structured like this:
-
-```json
-true
-```
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID        | The ID of the question to make visible
-
-This endpoint makes a specific question visible on its workspace.
-
-### HTTP Request (with ID)
-
-`PUT https://luk.az/showQuestion/<QUESTION_ID>`
-
-
-
-
 ## Save Question to Favourites
 
 ```bash
@@ -719,7 +696,7 @@ curl "https://luk.az/saveQuestion/<QUESTION_ID>"
 ```javascript
 import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>')
+const client = await lukaz.auth('<LUKAZ_API_KEY>')
 await client.saveQuestion('<QUESTION_ID>')
 ```
 
@@ -743,6 +720,8 @@ This endpoint saves a specific question as favourite.
 
 
 
+
+
 ## Remove Question from Favourites
 
 ```bash
@@ -753,7 +732,7 @@ curl "https://luk.az/removeQuestion/<QUESTION_ID>"
 ```javascript
 import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>')
+const client = await lukaz.auth('<LUKAZ_API_KEY>')
 await client.removeQuestion('<QUESTION_ID>')
 ```
 
@@ -778,6 +757,7 @@ This endpoint removes a specific question from favourites.
 
 
 
+
 ## Rate Question Answer
 
 ```bash
@@ -788,7 +768,7 @@ curl "https://luk.az/rateAnswer/<QUESTION_ID>"
 ```javascript
 import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>')
+const client = await lukaz.auth('<LUKAZ_API_KEY>')
 await client.rateAnswer('<QUESTION_ID>')
 ```
 
@@ -810,4 +790,46 @@ This endpoint rates the answer of a specific question.
 
 `PUT https://luk.az/rateAnswer/<QUESTION_ID>`
 
+
+
+
+
+## Get Authenticated User
+
+```bash
+curl "https://luk.az/getUser/<QUESTION_ID>"
+  -H "Authorization: <LUKAZ_API_KEY>"
+```
+
+```javascript
+import { lukaz } from '@lukaz/client'
+
+const client = await lukaz.auth('<LUKAZ_API_KEY>')
+const user = await client.getUser()
+```
+
+> The above endpoint returns JSON structured like this:
+
+```json
+{
+  "displayName": "Example User",
+  "email": "user@example.com",
+  "photoURL": "https://example.com/User_Photo.jpg",
+  "quota": {
+    "questions": 1000,
+    "workspaces": 10
+  },
+  "savedQuestions": ["questionId", "anotherQuestionId"],
+  "usage": {
+    "questions": 834,
+    "workspaces": 7
+  }
+}
+```
+
+This endpoint reads the user data related to the API key in use.
+
+### HTTP Request (with ID)
+
+`GET https://luk.az/getUser`
 
