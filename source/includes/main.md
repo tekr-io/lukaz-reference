@@ -603,3 +603,211 @@ This endpoint retrieves a specific question.
 `GET https://luk.az/getQuestion/<QUESTION_ID>`
 
 
+
+
+## Make Question Visible
+
+```bash
+curl "https://luk.az/showQuestion/<QUESTION_ID>"
+  -H "Authorization: <LUKAZ_API_KEY>"
+```
+
+```javascript
+import { lukaz } from '@lukaz/client'
+
+const client = lukaz.auth('<LUKAZ_API_KEY>')
+await client.showQuestion('<QUESTION_ID>')
+```
+
+> The above endpoint returns JSON structured like this:
+
+```json
+true
+```
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID        | The ID of the question to make visible
+
+This endpoint makes a specific question visible on its workspace.
+
+### HTTP Request (with ID)
+
+`PUT https://luk.az/showQuestion/<QUESTION_ID>`
+
+
+
+
+## Make Question Invisible
+
+```bash
+curl "https://luk.az/hideQuestion/<QUESTION_ID>"
+  -H "Authorization: <LUKAZ_API_KEY>"
+```
+
+```javascript
+import { lukaz } from '@lukaz/client'
+
+const client = lukaz.auth('<LUKAZ_API_KEY>')
+await client.showQuestion('<QUESTION_ID>')
+```
+
+> The above endpoint returns JSON structured like this:
+
+```json
+true
+```
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID        | The ID of the question to make invisible
+
+This endpoint makes a specific question invisible on its workspace.
+
+### HTTP Request (with ID)
+
+`PUT https://luk.az/hideQuestion/<QUESTION_ID>`
+
+
+
+## Make Question Visible
+
+```bash
+curl "https://luk.az/showQuestion/<QUESTION_ID>"
+  -H "Authorization: <LUKAZ_API_KEY>"
+```
+
+```javascript
+import { lukaz } from '@lukaz/client'
+
+const client = lukaz.auth('<LUKAZ_API_KEY>')
+await client.showQuestion('<QUESTION_ID>')
+```
+
+> The above endpoint returns JSON structured like this:
+
+```json
+true
+```
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID        | The ID of the question to make visible
+
+This endpoint makes a specific question visible on its workspace.
+
+### HTTP Request (with ID)
+
+`PUT https://luk.az/showQuestion/<QUESTION_ID>`
+
+
+
+
+## Save Question to Favourites
+
+```bash
+curl "https://luk.az/saveQuestion/<QUESTION_ID>"
+  -H "Authorization: <LUKAZ_API_KEY>"
+```
+
+```javascript
+import { lukaz } from '@lukaz/client'
+
+const client = lukaz.auth('<LUKAZ_API_KEY>')
+await client.saveQuestion('<QUESTION_ID>')
+```
+
+> The above endpoint returns JSON structured like this:
+
+```json
+true
+```
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID        | The ID of the question to save in favourites list
+
+This endpoint saves a specific question as favourite.
+
+### HTTP Request (with ID)
+
+`PUT https://luk.az/saveQuestion/<QUESTION_ID>`
+
+
+
+## Remove Question from Favourites
+
+```bash
+curl "https://luk.az/removeQuestion/<QUESTION_ID>"
+  -H "Authorization: <LUKAZ_API_KEY>"
+```
+
+```javascript
+import { lukaz } from '@lukaz/client'
+
+const client = lukaz.auth('<LUKAZ_API_KEY>')
+await client.removeQuestion('<QUESTION_ID>')
+```
+
+> The above endpoint returns JSON structured like this:
+
+```json
+true
+```
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID        | The ID of the question to remove from favourites list
+
+This endpoint removes a specific question from favourites.
+
+### HTTP Request (with ID)
+
+`PUT https://luk.az/removeQuestion/<QUESTION_ID>`
+
+
+
+
+## Rate Question Answer
+
+```bash
+curl "https://luk.az/rateAnswer/<QUESTION_ID>"
+  -H "Authorization: <LUKAZ_API_KEY>"
+```
+
+```javascript
+import { lukaz } from '@lukaz/client'
+
+const client = lukaz.auth('<LUKAZ_API_KEY>')
+await client.rateAnswer('<QUESTION_ID>')
+```
+
+> The above endpoint returns JSON structured like this:
+
+```json
+true
+```
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID        | The ID of the question to rate
+
+This endpoint rates the answer of a specific question.
+
+### HTTP Request (with ID)
+
+`PUT https://luk.az/rateAnswer/<QUESTION_ID>`
+
+
