@@ -64,7 +64,7 @@ const user = await lukaz.getUser()
     "questions": 1000,
     "workspaces": 10
   },
-  "savedQuestions": ["questionId", "anotherQuestionId"],
+  "savedQuestions": ["<QUESTION_ID>", "<QUESTION_ID>"],
   "usage": {
     "questions": 834,
     "workspaces": 7
@@ -105,15 +105,15 @@ const workspaces = await lukaz.getWorkspaces()
 [
   {
     "id": "<WORKSPACE_ID>",
-    "createdAt": "Timestamp",
+    "createdAt": timestamp,
     "description": "This my AI workspace on lukaz.",
     "documents": [
       {
-        "createdAt": "Timestamp",
+        "createdAt": timestamp,
         "extension": "pdf",
         "name": "File_Name.pdf",
         "processed": true,
-        "updatedAt": "Timestamp",
+        "updatedAt": timestamp,
         "workspaceId": "<WORKSPACE_ID>"
       }
     ],
@@ -125,7 +125,7 @@ const workspaces = await lukaz.getWorkspaces()
       "upload": true
     },
     "processing": false,
-    "processedAt": "Timestamp",
+    "processedAt": timestamp,
     "roles": {
       "owner@example.com": 5,
       "user@example.com": 4
@@ -135,7 +135,7 @@ const workspaces = await lukaz.getWorkspaces()
       "docs": 2,
       "questions": 7
     },
-    "updatedAt": "Timestamp"
+    "updatedAt": timestamp
   }
 ]
 ```
@@ -168,15 +168,15 @@ const workspace = await lukaz.getWorkspace('<WORKSPACE_ID>')
 ```json
 {
   "id": "<WORKSPACE_ID>",
-  "createdAt": "Timestamp",
+  "createdAt": timestamp,
   "description": "This is my AI workspace on lukaz.",
   "documents": [
     {
-      "createdAt": "Timestamp",
+      "createdAt": timestamp,
       "extension": "pdf",
       "name": "File_Name.pdf",
       "processed": true,
-      "updatedAt": "Timestamp",
+      "updatedAt": timestamp,
       "workspaceId": "<WORKSPACE_ID>"
     }
   ],
@@ -188,7 +188,7 @@ const workspace = await lukaz.getWorkspace('<WORKSPACE_ID>')
     "upload": true
   },
   "processing": false,
-  "processedAt": "Timestamp",
+  "processedAt": timestamp,
   "roles": {
     "owner@example.com": 5,
     "user@example.com": 4
@@ -198,7 +198,7 @@ const workspace = await lukaz.getWorkspace('<WORKSPACE_ID>')
     "docs": 2,
     "questions": 7
   },
-  "updatedAt": "Timestamp"
+  "updatedAt": timestamp
 }
 ```
 
@@ -617,12 +617,12 @@ const questions = await lukaz.getQuestions()
   {
     "answer": "This is workspace is about AI.",
     "audioUrl": "https://example.com/Answer_Audio.mp3",
-    "createdAt": "Timestamp",
+    "createdAt": timestamp,
     "feedback": 0,
     "id": "<QUESTION_ID>",
     "question": "What is this workspace about?",
     "sensitive": false,
-    "updatedAt": "Timestamp",
+    "updatedAt": timestamp,
     "visible": true,
     "workspaceId": "<WORKSPACE_ID>"
   }
@@ -662,12 +662,12 @@ const question = await lukaz.getQuestion('<QUESTION_ID>')
 {
   "answer": "This is workspace is about AI.",
   "audioUrl": "https://example.com/Answer_Audio.mp3",
-  "createdAt": "Timestamp",
+  "createdAt": timestamp,
   "feedback": 0,
   "id": "<QUESTION_ID>",
   "question": "What is this workspace about?",
   "sensitive": false,
-  "updatedAt": "Timestamp",
+  "updatedAt": timestamp,
   "visible": true,
   "workspaceId": "<WORKSPACE_ID>"
 }
