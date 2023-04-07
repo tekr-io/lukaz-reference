@@ -347,6 +347,8 @@ Property    | Description
 ---------   | -----------
 fileName    | (string) The name of the file to be deleted
 
+
+
 ## Get Question Transcript
 
 ```bash
@@ -392,6 +394,8 @@ audioUrl    | (string) The URL of an .wav audio file
 Property    | Description
 ---------   | -----------
             | (string) The text extracted from the audio file
+
+
 
 
 ## Ask Question to Workspace
@@ -451,10 +455,12 @@ questionId  | (string) The unique id of the question asked
 sensitive   | (boolean) If question context is sensitive or not
 
 
+
+
 ## Get Answer Audio
 
 ```bash
-curl "https://luk.az/getAudio/<WORKSPACE_ID>"
+curl "https://luk.az/getAudio/<QUESTION_ID>"
   -H "Authorization: <LUKAZ_API_KEY>"
 ```
 
@@ -462,36 +468,36 @@ curl "https://luk.az/getAudio/<WORKSPACE_ID>"
 import { lukaz } from '@lukaz/client'
 
 const client = lukaz.auth('<LUKAZ_API_KEY>')
-const answerAudioUrl = await client.getAudio('<WORKSPACE_ID>')
+const audioUrl = await client.getAudio('<QUESTION_ID>')
 ```
 
 > The above endpoint returns JSON structured like this:
 
 ```json
-"https://example.com/Audio_File.wav"
+"https://example.com/Answer_Audio_File.mp3"
 ```
 
 ### HTTP Request (with ID)
 
-`POST https://luk.az/getTranscript/<WORKSPACE_ID>`
+`POST https://luk.az/getAudio/<QUESTION_ID>`
 
-This endpoint transcripts the text from an audio file.
+This endpoint generates an audio file from the answer.
 
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
-ID        | The ID of the workspace to ask a questionn
+ID        | The ID of the question to generate the audio
 
 ### HTTP Request Body
 
-Property    | Description
----------   | -----------
-audioUrl    | (string) The URL of an .wav audio file
+The request body must be empty.
 
 ### HTTP Response Body
 
 Property    | Description
 ---------   | -----------
-            | (string) The text extracted from the audio file
+            | (string) The file URL of the generated audio
+
+
 
