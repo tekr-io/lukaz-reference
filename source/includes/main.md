@@ -1,8 +1,12 @@
 # Introduction
 
-Welcome to the lukaz API! You can use our API to access lukaz API endpoints.
+Welcome to the lukaz API! You can use our API to access lukaz endpoints.
 
-We have a client available in JavaScript. You can view code examples in the dark area to the right.
+We have a client available in JavaScript. You can view code examples in the right side.
+
+You can install lukaz with the following command:
+
+`npm i @lukaz/client`
 
 
 
