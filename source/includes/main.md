@@ -19,7 +19,7 @@ You can install lukaz with the following command:
 
 ```bash
 curl "https://luk.az/getUser"
-  -H "Authorization: <LUKAZ_API_KEY>"
+  -H "x-api-key: <LUKAZ_API_KEY>"
 ```
 
 ```javascript
@@ -43,7 +43,7 @@ lukaz expects for the API key to be included in all API requests to the server i
 
 ```bash
 curl "https://luk.az/getUser"
-  -H "Authorization: <LUKAZ_API_KEY>"
+  -H "x-api-key: <LUKAZ_API_KEY>"
 ```
 
 ```javascript
@@ -88,7 +88,7 @@ This endpoint reads the user data related to the API key in use.
 
 ```bash
 curl "https://luk.az/getWorkspaces"
-  -H "Authorization: <LUKAZ_API_KEY>"
+  -H "x-api-key: <LUKAZ_API_KEY>"
   
 ```
 
@@ -153,7 +153,7 @@ This endpoint retrieves all workspaces that the authenticated user owns or has a
 
 ```bash
 curl "https://luk.az/workspace/<WORKSPACE_ID>"
-  -H "Authorization: <LUKAZ_API_KEY>"
+  -H "x-api-key: <LUKAZ_API_KEY>"
 ```
 
 ```javascript
@@ -221,7 +221,7 @@ ID        | The ID of the workspace to retrieve
 
 ```bash
 curl "https://luk.az/createWorkspace/<WORKSPACE_ID>"
-  -H "Authorization: <LUKAZ_API_KEY>"
+  -H "x-api-key: <LUKAZ_API_KEY>"
   -d '{"description": "Nice workspace description"}'
 ```
 
@@ -257,7 +257,7 @@ ID        | The ID of the workspace to create
 
 ```bash
 curl "https://luk.az/updateWorkspace/<WORKSPACE_ID>"
-  -H "Authorization: <LUKAZ_API_KEY>"
+  -H "x-api-key: <LUKAZ_API_KEY>"
   -d '{"options": {"ask": false, "upload": false}'
 ```
 
@@ -315,7 +315,7 @@ roles       | User roles
 
 ```bash
 curl "https://luk.az/deleteWorkspace/<WORKSPACE_ID>"
-  -H "Authorization: <LUKAZ_API_KEY>"
+  -H "x-api-key: <LUKAZ_API_KEY>"
 ```
 
 ```javascript
@@ -351,7 +351,7 @@ ID        | The ID of the workspace to delete
 
 ```bash
 curl "https://luk.az/upload/<WORKSPACE_ID>"
-  -H "Authorization: <LUKAZ_API_KEY>"
+  -H "x-api-key: <LUKAZ_API_KEY>"
   -d '{"file": "<FILE_BLOB>"}'
 ```
 
@@ -391,7 +391,7 @@ ID        | The ID of the workspace to upload the file
 
 ```bash
 curl "https://luk.az/deleteFile/<WORKSPACE_ID>"
-  -H "Authorization: <LUKAZ_API_KEY>"
+  -H "x-api-key: <LUKAZ_API_KEY>"
   -d '{"fileName": "<FILE_NAME>"}'
 ```
 
@@ -440,7 +440,7 @@ fileName    | The name of the file to be deleted
 
 ```bash
 curl "https://luk.az/getTranscript/<WORKSPACE_ID>"
-  -H "Authorization: <LUKAZ_API_KEY>"
+  -H "x-api-key: <LUKAZ_API_KEY>"
   -d '{"audioUrl": "https://example.com/Audio_File.wav"}'
 ```
 
@@ -492,7 +492,7 @@ transcript  | The text extracted from the audio file
 
 ```bash
 curl "https://luk.az/ask/<WORKSPACE_ID>"
-  -H "Authorization: <LUKAZ_API_KEY>"
+  -H "x-api-key: <LUKAZ_API_KEY>"
   -d '{"question": "What is this workspace about?"}'
 ```
 
@@ -553,7 +553,7 @@ sensitive   | If question context is sensitive or not
 
 ```bash
 curl "https://luk.az/getAudio/<QUESTION_ID>"
-  -H "Authorization: <LUKAZ_API_KEY>"
+  -H "x-api-key: <LUKAZ_API_KEY>"
 ```
 
 ```javascript
@@ -600,7 +600,7 @@ audioUrl    | The file URL of the generated audio
 
 ```bash
 curl "https://luk.az/questions"
-  -H "Authorization: <LUKAZ_API_KEY>"
+  -H "x-api-key: <LUKAZ_API_KEY>"
 ```
 
 ```javascript
@@ -646,7 +646,7 @@ There are no query params available at the moment.
 
 ```bash
 curl "https://luk.az/getQuestion/<QUESTION_ID>"
-  -H "Authorization: <LUKAZ_API_KEY>"
+  -H "x-api-key: <LUKAZ_API_KEY>"
 ```
 
 ```javascript
@@ -692,7 +692,7 @@ ID        | The ID of the question to retrieve
 
 ```bash
 curl "https://luk.az/showQuestion/<QUESTION_ID>"
-  -H "Authorization: <LUKAZ_API_KEY>"
+  -H "x-api-key: <LUKAZ_API_KEY>"
 ```
 
 ```javascript
@@ -727,7 +727,7 @@ ID        | The ID of the question to make visible
 
 ```bash
 curl "https://luk.az/hideQuestion/<QUESTION_ID>"
-  -H "Authorization: <LUKAZ_API_KEY>"
+  -H "x-api-key: <LUKAZ_API_KEY>"
 ```
 
 ```javascript
@@ -763,7 +763,7 @@ ID        | The ID of the question to make invisible
 
 ```bash
 curl "https://luk.az/saveQuestion/<QUESTION_ID>"
-  -H "Authorization: <LUKAZ_API_KEY>"
+  -H "x-api-key: <LUKAZ_API_KEY>"
 ```
 
 ```javascript
@@ -799,7 +799,7 @@ ID        | The ID of the question to save in favourites list
 
 ```bash
 curl "https://luk.az/removeQuestion/<QUESTION_ID>"
-  -H "Authorization: <LUKAZ_API_KEY>"
+  -H "x-api-key: <LUKAZ_API_KEY>"
 ```
 
 ```javascript
@@ -836,7 +836,7 @@ ID        | The ID of the question to remove from favourites list
 
 ```bash
 curl "https://luk.az/rateAnswer/<QUESTION_ID>"
-  -H "Authorization: <LUKAZ_API_KEY>"
+  -H "x-api-key: <LUKAZ_API_KEY>"
   -d '{"feedback": 1}'
 ```
 
