@@ -258,7 +258,7 @@ ID        | The ID of the workspace to create
 ```bash
 curl "https://luk.az/updateWorkspace/<WORKSPACE_ID>"
   -H "Authorization: <LUKAZ_API_KEY>"
-  -d '{"options": {"ask": false, "upload": false}
+  -d '{"options": {"ask": false, "upload": false}'
 ```
 
 ```javascript
@@ -352,7 +352,7 @@ ID        | The ID of the workspace to delete
 ```bash
 curl "https://luk.az/upload/<WORKSPACE_ID>"
   -H "Authorization: <LUKAZ_API_KEY>"
-  -d "{'fileName': fileName}"
+  -d '{"file": "<FILE_BLOB>"}'
 ```
 
 ```javascript
@@ -392,6 +392,7 @@ ID        | The ID of the workspace to upload the file
 ```bash
 curl "https://luk.az/deleteFile/<WORKSPACE_ID>"
   -H "Authorization: <LUKAZ_API_KEY>"
+  -d '{"fileName": "<FILE_NAME>"}'
 ```
 
 ```javascript
@@ -399,7 +400,7 @@ import {lukaz as client} from '@lukaz/client'
 
 const lukaz = new client('<LUKAZ_API_KEY>')
 const workspace = await lukaz.deleteFile('<WORKSPACE_ID>', {
-    fileName: 'Test_File.pdf',
+    fileName: '<FILE_NAME>',
 })
 ```
 
@@ -440,6 +441,7 @@ fileName    | The name of the file to be deleted
 ```bash
 curl "https://luk.az/getTranscript/<WORKSPACE_ID>"
   -H "Authorization: <LUKAZ_API_KEY>"
+  -d '{"audioUrl": "https://example.com/Audio_File.wav"}'
 ```
 
 ```javascript
@@ -491,6 +493,7 @@ transcript  | The text extracted from the audio file
 ```bash
 curl "https://luk.az/ask/<WORKSPACE_ID>"
   -H "Authorization: <LUKAZ_API_KEY>"
+  -d '{"question": "What is this workspace about?"}'
 ```
 
 ```javascript
@@ -834,13 +837,16 @@ ID        | The ID of the question to remove from favourites list
 ```bash
 curl "https://luk.az/rateAnswer/<QUESTION_ID>"
   -H "Authorization: <LUKAZ_API_KEY>"
+  -d '{"feedback": 1}'
 ```
 
 ```javascript
 import {lukaz as client} from '@lukaz/client'
 
 const lukaz = new client('<LUKAZ_API_KEY>')
-await lukaz.rateAnswer('<QUESTION_ID>')
+await lukaz.rateAnswer('<QUESTION_ID>', {
+    feedback: 1
+})
 ```
 
 > HTTP Response Body:
