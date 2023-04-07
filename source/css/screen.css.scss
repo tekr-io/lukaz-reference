@@ -79,9 +79,9 @@ html, body {
       }
    &>img {  //logo at the top of the ToC
       display: block;
-      max-width: 80%;
+      max-width: 60%;
       max-height: 100px;
-      margin: $logo-margin auto ($logo-margin)-5 auto;
+      margin: $logo-margin;
       }
    &>.search {
       position: relative;
@@ -99,11 +99,14 @@ html, body {
          }
       &::before {
          position: absolute;
-         top: 17px;
+         top: 25px;
          left: $nav-padding;
          color: $nav-text;
          @extend %icon-search;
          }
+      }
+      &::placeholder {
+         color: $nav-text;
       }
    img+.tocify {
       margin-top: $logo-margin;

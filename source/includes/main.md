@@ -15,10 +15,9 @@ You can install lukaz with the following command:
 
 ## Authenticate User
 
-> To authorize, use this code before calling other endpoints:
+> Send a valid API key in the Authorization header for every request:
 
 ```bash
-# With shell, you can just pass the correct header with each request
 curl "https://luk.az/getUser"
   -H "Authorization: <LUKAZ_API_KEY>"
 ```
@@ -54,7 +53,7 @@ const client = await lukaz.auth('<LUKAZ_API_KEY>')
 const user = await client.getUser()
 ```
 
-> The above endpoint returns JSON structured like this:
+> HTTP Response Body:
 
 ```json
 {
@@ -75,7 +74,7 @@ const user = await client.getUser()
 
 This endpoint reads the user data related to the API key in use.
 
-### HTTP Request (with ID)
+### HTTP Request
 
 `GET https://luk.az/getUser`
 
@@ -90,30 +89,31 @@ This endpoint reads the user data related to the API key in use.
 ```bash
 curl "https://luk.az/getWorkspaces"
   -H "Authorization: <LUKAZ_API_KEY>"
+  
 ```
 
 ```javascript
 import { lukaz } from '@lukaz/client'
 
 const client = await lukaz.auth('<LUKAZ_API_KEY>')
-const workspaces = await client.workspaces()
+const workspaces = await client.getWorkspaces()
 ```
 
-> The above endpoint returns JSON structured like this:
+> HTTP Response Body:
 
 ```json
 [
   {
     "id": "<WORKSPACE_ID>",
-    "createdAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
+    "createdAt": Timestamp,
     "description": "This my AI workspace on lukaz.",
     "documents": [
       {
-        "createdAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
+        "createdAt": Timestamp,
         "extension": "pdf",
         "name": "File_Name.pdf",
         "processed": true,
-        "updatedAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
+        "updatedAt": Timestamp,
         "workspaceId": "<WORKSPACE_ID>"
       }
     ],
@@ -125,7 +125,7 @@ const workspaces = await client.workspaces()
       "upload": true
     },
     "processing": false,
-    "processedAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
+    "processedAt": Timestamp,
     "roles": {
       "owner@example.com": 5,
       "user@example.com": 4
@@ -135,7 +135,7 @@ const workspaces = await client.workspaces()
       "docs": 2,
       "questions": 7
     },
-    "updatedAt": {"_seconds": 1680559078, "_nanoseconds": 928000000}
+    "updatedAt": Timestamp
   }
 ]
 ```
@@ -160,23 +160,23 @@ curl "https://luk.az/workspace/<WORKSPACE_ID>"
 import { lukaz } from '@lukaz/client'
 
 const client = await lukaz.auth('<LUKAZ_API_KEY>')
-const workspace = await client.workspace('<WORKSPACE_ID>')
+const workspace = await client.getWorkspace('<WORKSPACE_ID>')
 ```
 
-> The above endpoint returns JSON structured like this:
+> HTTP Response Body:
 
 ```json
 {
   "id": "<WORKSPACE_ID>",
-  "createdAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
+  "createdAt": Timestamp,
   "description": "This is my AI workspace on lukaz.",
   "documents": [
     {
-      "createdAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
+      "createdAt": Timestamp,
       "extension": "pdf",
       "name": "File_Name.pdf",
       "processed": true,
-      "updatedAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
+      "updatedAt": Timestamp,
       "workspaceId": "<WORKSPACE_ID>"
     }
   ],
@@ -188,7 +188,7 @@ const workspace = await client.workspace('<WORKSPACE_ID>')
     "upload": true
   },
   "processing": false,
-  "processedAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
+  "processedAt": Timestamp,
   "roles": {
     "owner@example.com": 5,
     "user@example.com": 4
@@ -198,7 +198,7 @@ const workspace = await client.workspace('<WORKSPACE_ID>')
     "docs": 2,
     "questions": 7
   },
-  "updatedAt": {"_seconds": 1680559078, "_nanoseconds": 928000000}
+  "updatedAt": Timestamp
 }
 ```
 
@@ -210,9 +210,9 @@ Parameter | Description
 --------- | -----------
 ID        | The ID of the workspace to retrieve
 
-### HTTP Request (with ID)
+### HTTP Request
 
-`GET https://luk.az/workspace/<WORKSPACE_ID>`
+`GET https://luk.az/getWorkspace/<WORKSPACE_ID>`
 
 
 
@@ -222,6 +222,7 @@ ID        | The ID of the workspace to retrieve
 ```bash
 curl "https://luk.az/createWorkspace/<WORKSPACE_ID>"
   -H "Authorization: <LUKAZ_API_KEY>"
+  -d '{"description": "Nice workspace description"}'
 ```
 
 ```javascript
@@ -231,7 +232,7 @@ const client = await lukaz.auth('<LUKAZ_API_KEY>')
 await client.workspace('<WORKSPACE_ID>')
 ```
 
-> The above endpoint returns JSON structured like this:
+> HTTP Response Body:
 
 ```json
 true
@@ -245,18 +246,19 @@ Parameter | Description
 --------- | -----------
 ID        | The ID of the workspace to create
 
-### HTTP Request (with ID)
+### HTTP Request
 
 `POST https://luk.az/createWorkspace/<WORKSPACE_ID>`
 
 
 
 
-## Update Existing Workspace
+## Update Workspace
 
 ```bash
 curl "https://luk.az/updateWorkspace/<WORKSPACE_ID>"
   -H "Authorization: <LUKAZ_API_KEY>"
+  -d '{"options": {"ask": false, "upload": false}
 ```
 
 ```javascript
@@ -264,8 +266,7 @@ import { lukaz } from '@lukaz/client'
 
 const client = await lukaz.auth('<LUKAZ_API_KEY>')
 await client.updateWorkspace('<WORKSPACE_ID>', {
-    description: 'This is a new description for my AI workspace',
-    notify: true,
+    description: 'New description of my AI workspace.',
     options: {
         ask: true,
         free: false,
@@ -279,7 +280,7 @@ await client.updateWorkspace('<WORKSPACE_ID>', {
 })
 ```
 
-> The above endpoint returns JSON structured like this:
+> HTTP Response Body:
 
 ```json
 true
@@ -287,7 +288,7 @@ true
 
 This endpoint updates a specific workspace.
 
-### HTTP Request (with ID)
+### HTTP Request
 
 `PUT https://luk.az/updateWorkspace/<WORKSPACE_ID>`
 
@@ -310,7 +311,7 @@ roles       | (object) User roles
 
 
 
-## Delete Existing Workspace
+## Delete Workspace
 
 ```bash
 curl "https://luk.az/deleteWorkspace/<WORKSPACE_ID>"
@@ -324,7 +325,7 @@ const client = await lukaz.auth('<LUKAZ_API_KEY>')
 await client.deleteWorkspace('<WORKSPACE_ID>')
 ```
 
-> The above endpoint returns JSON structured like this:
+> HTTP Response Body:
 
 ```json
 true
@@ -332,7 +333,7 @@ true
 
 This endpoint deletes a specific workspace.
 
-### HTTP Request (with ID)
+### HTTP Request
 
 `DELETE https://luk.az/deleteWorkspace/<WORKSPACE_ID>`
 
@@ -351,6 +352,7 @@ ID        | The ID of the workspace to delete
 ```bash
 curl "https://luk.az/upload/<WORKSPACE_ID>"
   -H "Authorization: <LUKAZ_API_KEY>"
+  -d "{'fileName': fileName}"
 ```
 
 ```javascript
@@ -362,7 +364,7 @@ const workspace = await client.upload('<WORKSPACE_ID>', {
 })
 ```
 
-> The above endpoint returns JSON structured like this:
+> HTTP Response Body:
 
 ```json
 true
@@ -370,7 +372,7 @@ true
 
 This endpoint uploads a file onto a specific workspace.
 
-### HTTP Request (with ID)
+### HTTP Request
 
 `POST https://luk.az/upload/<WORKSPACE_ID>`
 
@@ -401,7 +403,7 @@ const workspace = await client.deleteFile('<WORKSPACE_ID>', {
 })
 ```
 
-> The above endpoint returns JSON structured like this:
+> HTTP Response Body:
 
 ```json
 true
@@ -409,9 +411,9 @@ true
 
 This endpoint deletes a file from a specific workspace.
 
-### HTTP Request (with ID)
+### HTTP Request
 
-`DELETE https://luk.az/deleteFile/<WORKSPACE_ID>`
+`PUT https://luk.az/deleteFile/<WORKSPACE_ID>`
 
 ### URL Parameters
 
@@ -449,14 +451,14 @@ const workspace = await client.deleteFile('<WORKSPACE_ID>', {
 })
 ```
 
-> The above endpoint returns JSON structured like this:
+> HTTP Response Body:
 
 ```json
 "This is the text from the audio file."
 ```
 This endpoint transcripts the text from an audio file.
 
-### HTTP Request (with ID)
+### HTTP Request
 
 `POST https://luk.az/getTranscript/<WORKSPACE_ID>`
 
@@ -476,7 +478,7 @@ audioUrl    | (string) The URL of an .wav audio file
 
 Property    | Description
 ---------   | -----------
-(body)      | (string) The text extracted from the audio file
+transcript  | (string) The text extracted from the audio file
 
 
 
@@ -499,11 +501,11 @@ const answer = await client.ask('<WORKSPACE_ID>', {
 })
 ```
 
-> The above endpoint returns JSON structured like this:
+> HTTP Response Body:
 
 ```json
 {
-  "answer": "This workspace is about the history of AI.",
+  "answer": "This workspace is about AI.",
   "question": "What is this workspace about?",
   "questionId": "<QUESTION_ID>",
   "sensitive": false
@@ -512,9 +514,9 @@ const answer = await client.ask('<WORKSPACE_ID>', {
 
 This endpoint asks a question to a specific workspace.
 
-### HTTP Request (with ID)
+### HTTP Request
 
-`POST https://luk.az/getTranscript/<WORKSPACE_ID>`
+`POST https://luk.az/ask/<WORKSPACE_ID>`
 
 ### URL Parameters
 
@@ -556,7 +558,7 @@ const client = await lukaz.auth('<LUKAZ_API_KEY>')
 const audioUrl = await client.getAudio('<QUESTION_ID>')
 ```
 
-> The above endpoint returns JSON structured like this:
+> HTTP Response Body:
 
 ```json
 "https://example.com/Answer_Audio_File.mp3"
@@ -564,7 +566,7 @@ const audioUrl = await client.getAudio('<QUESTION_ID>')
 
 This endpoint generates an audio file from the answer.
 
-### HTTP Request (with ID)
+### HTTP Request
 
 `POST https://luk.az/getAudio/<QUESTION_ID>`
 
@@ -582,7 +584,7 @@ The request body must be empty.
 
 Property    | Description
 ---------   | -----------
-(body)      | (string) The file URL of the generated audio
+audioUrl    | (string) The file URL of the generated audio
 
 
 
@@ -601,19 +603,19 @@ const client = await lukaz.auth('<LUKAZ_API_KEY>')
 const questions = await client.getQuestions()
 ```
 
-> The above endpoint returns JSON structured like this:
+> HTTP Response Body:
 
 ```json
 [
   {
-    "answer": "This is workspace is about the history of AI.",
+    "answer": "This is workspace is about AI.",
     "audioUrl": "https://example.com/Answer_Audio_File.mp3",
-    "createdAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
+    "createdAt": Timestamp,
     "feedback": 0,
     "id": "<QUESTION_ID>",
     "question": "What is this workspace about?",
     "sensitive": false,
-    "updatedAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
+    "updatedAt": Timestamp,
     "visible": true,
     "workspaceId": "<WORKSPACE_ID>"
   }
@@ -647,18 +649,18 @@ const client = await lukaz.auth('<LUKAZ_API_KEY>')
 const question = await client.getQuestion('<QUESTION_ID>')
 ```
 
-> The above endpoint returns JSON structured like this:
+> HTTP Response Body:
 
 ```json
 {
-  "answer": "This is workspace is about the history of AI.",
+  "answer": "This is workspace is about AI.",
   "audioUrl": "https://example.com/Answer_Audio_File.mp3",
-  "createdAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
+  "createdAt": Timestamp,
   "feedback": 0,
   "id": "<QUESTION_ID>",
   "question": "What is this workspace about?",
   "sensitive": false,
-  "updatedAt": {"_seconds": 1680559078, "_nanoseconds": 928000000},
+  "updatedAt": Timestamp,
   "visible": true,
   "workspaceId": "<WORKSPACE_ID>"
 }
@@ -666,7 +668,7 @@ const question = await client.getQuestion('<QUESTION_ID>')
 
 This endpoint retrieves a specific question.
 
-### HTTP Request (with ID)
+### HTTP Request
 
 `GET https://luk.az/getQuestion/<QUESTION_ID>`
 
@@ -693,7 +695,7 @@ const client = await lukaz.auth('<LUKAZ_API_KEY>')
 await client.showQuestion('<QUESTION_ID>')
 ```
 
-> The above endpoint returns JSON structured like this:
+> HTTP Response Body:
 
 ```json
 true
@@ -701,7 +703,7 @@ true
 
 This endpoint makes a specific question visible on its workspace.
 
-### HTTP Request (with ID)
+### HTTP Request
 
 `PUT https://luk.az/showQuestion/<QUESTION_ID>`
 
@@ -728,7 +730,7 @@ const client = await lukaz.auth('<LUKAZ_API_KEY>')
 await client.showQuestion('<QUESTION_ID>')
 ```
 
-> The above endpoint returns JSON structured like this:
+> HTTP Response Body:
 
 ```json
 true
@@ -736,7 +738,7 @@ true
 
 This endpoint makes a specific question invisible on its workspace.
 
-### HTTP Request (with ID)
+### HTTP Request
 
 `PUT https://luk.az/hideQuestion/<QUESTION_ID>`
 
@@ -764,7 +766,7 @@ const client = await lukaz.auth('<LUKAZ_API_KEY>')
 await client.saveQuestion('<QUESTION_ID>')
 ```
 
-> The above endpoint returns JSON structured like this:
+> HTTP Response Body:
 
 ```json
 true
@@ -772,7 +774,7 @@ true
 
 This endpoint saves a specific question as favourite.
 
-### HTTP Request (with ID)
+### HTTP Request
 
 `PUT https://luk.az/saveQuestion/<QUESTION_ID>`
 
@@ -800,7 +802,7 @@ const client = await lukaz.auth('<LUKAZ_API_KEY>')
 await client.removeQuestion('<QUESTION_ID>')
 ```
 
-> The above endpoint returns JSON structured like this:
+> HTTP Response Body:
 
 ```json
 true
@@ -808,7 +810,7 @@ true
 
 This endpoint removes a specific question from favourites.
 
-### HTTP Request (with ID)
+### HTTP Request
 
 `PUT https://luk.az/removeQuestion/<QUESTION_ID>`
 
@@ -837,7 +839,7 @@ const client = await lukaz.auth('<LUKAZ_API_KEY>')
 await client.rateAnswer('<QUESTION_ID>')
 ```
 
-> The above endpoint returns JSON structured like this:
+> HTTP Response Body:
 
 ```json
 true
@@ -845,7 +847,7 @@ true
 
 This endpoint rates the answer of a specific question.
 
-### HTTP Request (with ID)
+### HTTP Request
 
 `PUT https://luk.az/rateAnswer/<QUESTION_ID>`
 
