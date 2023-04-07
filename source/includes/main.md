@@ -23,9 +23,9 @@ curl "https://luk.az/getUser"
 ```
 
 ```javascript
-import { lukaz } from 'lukaz'
+import {lukaz as client} from 'lukaz'
 
-const client = await lukaz.authorize('<LUKAZ_API_KEY>')
+const lukaz = new client('<LUKAZ_API_KEY>')
 ```
 
 > Make sure to replace `<LUKAZ_API_KEY>` with your API key.
@@ -47,10 +47,10 @@ curl "https://luk.az/getUser"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client'
+import {lukaz as client} from '@lukaz/client'
 
-const client = await lukaz.auth('<LUKAZ_API_KEY>')
-const user = await client.getUser()
+const lukaz = new client('<LUKAZ_API_KEY>')
+const user = await lukaz.getUser()
 ```
 
 > HTTP Response Body:
@@ -93,10 +93,10 @@ curl "https://luk.az/getWorkspaces"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client'
+import {lukaz as client} from '@lukaz/client'
 
-const client = await lukaz.auth('<LUKAZ_API_KEY>')
-const workspaces = await client.getWorkspaces()
+const lukaz = new client('<LUKAZ_API_KEY>')
+const workspaces = await lukaz.getWorkspaces()
 ```
 
 > HTTP Response Body:
@@ -157,10 +157,10 @@ curl "https://luk.az/workspace/<WORKSPACE_ID>"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client'
+import {lukaz as client} from '@lukaz/client'
 
-const client = await lukaz.auth('<LUKAZ_API_KEY>')
-const workspace = await client.getWorkspace('<WORKSPACE_ID>')
+const lukaz = new client('<LUKAZ_API_KEY>')
+const workspace = await lukaz.getWorkspace('<WORKSPACE_ID>')
 ```
 
 > HTTP Response Body:
@@ -226,10 +226,10 @@ curl "https://luk.az/createWorkspace/<WORKSPACE_ID>"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client'
+import {lukaz as client} from '@lukaz/client'
 
-const client = await lukaz.auth('<LUKAZ_API_KEY>')
-await client.workspace('<WORKSPACE_ID>')
+const lukaz = new client('<LUKAZ_API_KEY>')
+await lukaz.workspace('<WORKSPACE_ID>')
 ```
 
 > HTTP Response Body:
@@ -262,10 +262,10 @@ curl "https://luk.az/updateWorkspace/<WORKSPACE_ID>"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client'
+import {lukaz as client} from '@lukaz/client'
 
-const client = await lukaz.auth('<LUKAZ_API_KEY>')
-await client.updateWorkspace('<WORKSPACE_ID>', {
+const lukaz = new client('<LUKAZ_API_KEY>')
+await lukaz.updateWorkspace('<WORKSPACE_ID>', {
     description: 'New description of my AI workspace.',
     options: {
         ask: true,
@@ -319,10 +319,10 @@ curl "https://luk.az/deleteWorkspace/<WORKSPACE_ID>"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client'
+import {lukaz as client} from '@lukaz/client'
 
-const client = await lukaz.auth('<LUKAZ_API_KEY>')
-await client.deleteWorkspace('<WORKSPACE_ID>')
+const lukaz = new client('<LUKAZ_API_KEY>')
+await lukaz.deleteWorkspace('<WORKSPACE_ID>')
 ```
 
 > HTTP Response Body:
@@ -356,10 +356,10 @@ curl "https://luk.az/upload/<WORKSPACE_ID>"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client'
+import {lukaz as client} from '@lukaz/client'
 
-const client = await lukaz.auth('<LUKAZ_API_KEY>')
-const workspace = await client.upload('<WORKSPACE_ID>', {
+const lukaz = new client('<LUKAZ_API_KEY>')
+const workspace = await lukaz.upload('<WORKSPACE_ID>', {
     file: File,
 })
 ```
@@ -395,10 +395,10 @@ curl "https://luk.az/deleteFile/<WORKSPACE_ID>"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client'
+import {lukaz as client} from '@lukaz/client'
 
-const client = await lukaz.auth('<LUKAZ_API_KEY>')
-const workspace = await client.deleteFile('<WORKSPACE_ID>', {
+const lukaz = new client('<LUKAZ_API_KEY>')
+const workspace = await lukaz.deleteFile('<WORKSPACE_ID>', {
     fileName: 'Test_File.pdf',
 })
 ```
@@ -443,10 +443,10 @@ curl "https://luk.az/getTranscript/<WORKSPACE_ID>"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client'
+import {lukaz as client} from '@lukaz/client'
 
-const client = await lukaz.auth('<LUKAZ_API_KEY>')
-const workspace = await client.deleteFile('<WORKSPACE_ID>', {
+const lukaz = new client('<LUKAZ_API_KEY>')
+const workspace = await lukaz.deleteFile('<WORKSPACE_ID>', {
     audioUrl: 'https://example.com/Audio_File.wav',
 })
 ```
@@ -492,10 +492,10 @@ curl "https://luk.az/ask/<WORKSPACE_ID>"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client'
+import {lukaz as client} from '@lukaz/client'
 
-const client = await lukaz.auth('<LUKAZ_API_KEY>')
-const answer = await client.ask('<WORKSPACE_ID>', {
+const lukaz = new client('<LUKAZ_API_KEY>')
+const answer = await lukaz.ask('<WORKSPACE_ID>', {
     question: 'What is this workspace about?',
     translateAnswer: false
 })
@@ -552,10 +552,10 @@ curl "https://luk.az/getAudio/<QUESTION_ID>"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client'
+import {lukaz as client} from '@lukaz/client'
 
-const client = await lukaz.auth('<LUKAZ_API_KEY>')
-const audioUrl = await client.getAudio('<QUESTION_ID>')
+const lukaz = new client('<LUKAZ_API_KEY>')
+const audioUrl = await lukaz.getAudio('<QUESTION_ID>')
 ```
 
 > HTTP Response Body:
@@ -597,10 +597,10 @@ curl "https://luk.az/questions"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client'
+import {lukaz as client} from '@lukaz/client'
 
-const client = await lukaz.auth('<LUKAZ_API_KEY>')
-const questions = await client.getQuestions()
+const lukaz = new client('<LUKAZ_API_KEY>')
+const questions = await lukaz.getQuestions()
 ```
 
 > HTTP Response Body:
@@ -643,10 +643,10 @@ curl "https://luk.az/getQuestion/<QUESTION_ID>"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client'
+import {lukaz as client} from '@lukaz/client'
 
-const client = await lukaz.auth('<LUKAZ_API_KEY>')
-const question = await client.getQuestion('<QUESTION_ID>')
+const lukaz = new client('<LUKAZ_API_KEY>')
+const question = await lukaz.getQuestion('<QUESTION_ID>')
 ```
 
 > HTTP Response Body:
@@ -689,10 +689,10 @@ curl "https://luk.az/showQuestion/<QUESTION_ID>"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client'
+import {lukaz as client} from '@lukaz/client'
 
-const client = await lukaz.auth('<LUKAZ_API_KEY>')
-await client.showQuestion('<QUESTION_ID>')
+const lukaz = new client('<LUKAZ_API_KEY>')
+await lukaz.showQuestion('<QUESTION_ID>')
 ```
 
 > HTTP Response Body:
@@ -724,10 +724,10 @@ curl "https://luk.az/hideQuestion/<QUESTION_ID>"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client'
+import {lukaz as client} from '@lukaz/client'
 
-const client = await lukaz.auth('<LUKAZ_API_KEY>')
-await client.showQuestion('<QUESTION_ID>')
+const lukaz = new client('<LUKAZ_API_KEY>')
+await lukaz.showQuestion('<QUESTION_ID>')
 ```
 
 > HTTP Response Body:
@@ -760,10 +760,10 @@ curl "https://luk.az/saveQuestion/<QUESTION_ID>"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client'
+import {lukaz as client} from '@lukaz/client'
 
-const client = await lukaz.auth('<LUKAZ_API_KEY>')
-await client.saveQuestion('<QUESTION_ID>')
+const lukaz = new client('<LUKAZ_API_KEY>')
+await lukaz.saveQuestion('<QUESTION_ID>')
 ```
 
 > HTTP Response Body:
@@ -796,10 +796,10 @@ curl "https://luk.az/removeQuestion/<QUESTION_ID>"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client'
+import {lukaz as client} from '@lukaz/client'
 
-const client = await lukaz.auth('<LUKAZ_API_KEY>')
-await client.removeQuestion('<QUESTION_ID>')
+const lukaz = new client('<LUKAZ_API_KEY>')
+await lukaz.removeQuestion('<QUESTION_ID>')
 ```
 
 > HTTP Response Body:
@@ -833,10 +833,10 @@ curl "https://luk.az/rateAnswer/<QUESTION_ID>"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client'
+import {lukaz as client} from '@lukaz/client'
 
-const client = await lukaz.auth('<LUKAZ_API_KEY>')
-await client.rateAnswer('<QUESTION_ID>')
+const lukaz = new client('<LUKAZ_API_KEY>')
+await lukaz.rateAnswer('<QUESTION_ID>')
 ```
 
 > HTTP Response Body:
