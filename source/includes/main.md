@@ -17,7 +17,7 @@ curl "api_endpoint_here"
 ```javascript
 import { lukaz } from 'lukaz'
 
-const client = await await lukaz.authorize('<LUKAZ_API_KEY>')
+const client = await lukaz.authorize('<LUKAZ_API_KEY>')
 ```
 
 > Make sure to replace `<LUKAZ_API_KEY>` with your API key.
@@ -32,10 +32,11 @@ lukaz expects for the API key to be included in all API requests to the server i
 
 
 
+
 ## Get All Workspaces
 
 ```bash
-curl "https://luk.az/workspaces"
+curl "https://luk.az/getWorkspaces"
   -H "Authorization: <LUKAZ_API_KEY>"
 ```
 
@@ -88,15 +89,11 @@ const workspaces = await client.workspaces()
 ]
 ```
 
-This endpoint retrieves all workspaces.
+This endpoint retrieves all workspaces that the authenticated user owns or has access to.
 
 ### HTTP Request
 
-`GET https://luk.az/workspaces`
-
-### Query Parameters
-
-There are no query params available at the moment.
+`GET https://luk.az/getWorkspaces`
 
 
 
@@ -155,13 +152,13 @@ const workspace = await client.workspace('<WORKSPACE_ID>')
 }
 ```
 
+This endpoint retrieves a specific workspace.
+
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
 ID        | The ID of the workspace to retrieve
-
-This endpoint retrieves a specific workspace.
 
 ### HTTP Request (with ID)
 
@@ -181,26 +178,29 @@ curl "https://luk.az/createWorkspace/<WORKSPACE_ID>"
 import { lukaz } from '@lukaz/client'
 
 const client = await lukaz.auth('<LUKAZ_API_KEY>')
-const workspace = await client.workspace('<WORKSPACE_ID>')
+await client.workspace('<WORKSPACE_ID>')
 ```
 
 > The above endpoint returns JSON structured like this:
 
 ```json
-null
+true
 ```
+
+This endpoint creates a new workspace.
 
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
-ID        | The ID of the workspace to retrieve
-
-This endpoint retrieves a specific workspace.
+ID        | The ID of the workspace to create
 
 ### HTTP Request (with ID)
 
-`POST https://luk.az/workspace/<WORKSPACE_ID>`
+`POST https://luk.az/createWorkspace/<WORKSPACE_ID>`
+
+
+
 
 ## Update Existing Workspace
 
@@ -213,7 +213,7 @@ curl "https://luk.az/updateWorkspace/<WORKSPACE_ID>"
 import { lukaz } from '@lukaz/client'
 
 const client = await lukaz.auth('<LUKAZ_API_KEY>')
-const workspace = await client.updateWorkspace('<WORKSPACE_ID>', {
+await client.updateWorkspace('<WORKSPACE_ID>', {
     
 })
 ```
@@ -221,20 +221,20 @@ const workspace = await client.updateWorkspace('<WORKSPACE_ID>', {
 > The above endpoint returns JSON structured like this:
 
 ```json
-null
+true
 ```
+
+This endpoint updates a specific workspace.
 
 ### HTTP Request (with ID)
 
-`POST https://luk.az/workspace/<WORKSPACE_ID>`
-
-This endpoint retrieves a specific workspace.
+`PUT https://luk.az/updateWorkspace/<WORKSPACE_ID>`
 
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
-ID        | The ID of the workspace to retrieve
+ID        | The ID of the workspace to update
 
 ### HTTP Request Body
 
@@ -260,28 +260,26 @@ curl "https://luk.az/deleteWorkspace/<WORKSPACE_ID>"
 import { lukaz } from '@lukaz/client'
 
 const client = await lukaz.auth('<LUKAZ_API_KEY>')
-const workspace = await client.deleteWorkspace('<WORKSPACE_ID>')
+await client.deleteWorkspace('<WORKSPACE_ID>')
 ```
 
 > The above endpoint returns JSON structured like this:
 
 ```json
-null
+true
 ```
+
+This endpoint deletes a specific workspace.
 
 ### HTTP Request (with ID)
 
 `DELETE https://luk.az/deleteWorkspace/<WORKSPACE_ID>`
 
-This endpoint deletes a specific workspace.
-
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
-ID        | The ID of the workspace to retrieve
-
-This endpoint retrieves a specific workspace.
+ID        | The ID of the workspace to delete
 
 
 
@@ -306,8 +304,10 @@ const workspace = await client.upload('<WORKSPACE_ID>', {
 > The above endpoint returns JSON structured like this:
 
 ```json
-null
+true
 ```
+
+This endpoint uploads a file onto a specific workspace.
 
 ### HTTP Request (with ID)
 
@@ -319,8 +319,6 @@ null
 Parameter | Description
 --------- | -----------
 ID        | The ID of the workspace to upload the file
-
-This endpoint uploads a file onto a specific workspace.
 
 ## Delete File from Workspace
 
@@ -341,14 +339,14 @@ const workspace = await client.deleteFile('<WORKSPACE_ID>', {
 > The above endpoint returns JSON structured like this:
 
 ```json
-null
+true
 ```
+
+This endpoint deletes a file from a specific workspace.
 
 ### HTTP Request (with ID)
 
 `DELETE https://luk.az/deleteFile/<WORKSPACE_ID>`
-
-This endpoint deletes a file from a specific workspace.
 
 ### URL Parameters
 
@@ -389,12 +387,11 @@ const workspace = await client.deleteFile('<WORKSPACE_ID>', {
 ```json
 "This is the text from the audio file."
 ```
+This endpoint transcripts the text from an audio file.
 
 ### HTTP Request (with ID)
 
 `POST https://luk.az/getTranscript/<WORKSPACE_ID>`
-
-This endpoint transcripts the text from an audio file.
 
 ### URL Parameters
 
@@ -446,11 +443,11 @@ const answer = await client.ask('<WORKSPACE_ID>', {
 }
 ```
 
+This endpoint asks a question to a specific workspace.
+
 ### HTTP Request (with ID)
 
 `POST https://luk.az/getTranscript/<WORKSPACE_ID>`
-
-This endpoint asks a question to a specific workspace.
 
 ### URL Parameters
 
@@ -498,11 +495,11 @@ const audioUrl = await client.getAudio('<QUESTION_ID>')
 "https://example.com/Answer_Audio_File.mp3"
 ```
 
+This endpoint generates an audio file from the answer.
+
 ### HTTP Request (with ID)
 
 `POST https://luk.az/getAudio/<QUESTION_ID>`
-
-This endpoint generates an audio file from the answer.
 
 ### URL Parameters
 
@@ -600,18 +597,17 @@ const question = await client.getQuestion('<QUESTION_ID>')
 }
 ```
 
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID        | The ID of the question to retrieve
-
 This endpoint retrieves a specific question.
 
 ### HTTP Request (with ID)
 
 `GET https://luk.az/getQuestion/<QUESTION_ID>`
 
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID        | The ID of the question to retrieve
 
 
 
@@ -636,18 +632,17 @@ await client.showQuestion('<QUESTION_ID>')
 true
 ```
 
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID        | The ID of the question to make visible
-
 This endpoint makes a specific question visible on its workspace.
 
 ### HTTP Request (with ID)
 
 `PUT https://luk.az/showQuestion/<QUESTION_ID>`
 
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID        | The ID of the question to make visible
 
 
 
@@ -672,17 +667,19 @@ await client.showQuestion('<QUESTION_ID>')
 true
 ```
 
+This endpoint makes a specific question invisible on its workspace.
+
+### HTTP Request (with ID)
+
+`PUT https://luk.az/hideQuestion/<QUESTION_ID>`
+
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
 ID        | The ID of the question to make invisible
 
-This endpoint makes a specific question invisible on its workspace.
 
-### HTTP Request (with ID)
-
-`PUT https://luk.az/hideQuestion/<QUESTION_ID>`
 
 
 
@@ -706,17 +703,17 @@ await client.saveQuestion('<QUESTION_ID>')
 true
 ```
 
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID        | The ID of the question to save in favourites list
-
 This endpoint saves a specific question as favourite.
 
 ### HTTP Request (with ID)
 
 `PUT https://luk.az/saveQuestion/<QUESTION_ID>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID        | The ID of the question to save in favourites list
 
 
 
@@ -742,17 +739,18 @@ await client.removeQuestion('<QUESTION_ID>')
 true
 ```
 
+This endpoint removes a specific question from favourites.
+
+### HTTP Request (with ID)
+
+`PUT https://luk.az/removeQuestion/<QUESTION_ID>`
+
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
 ID        | The ID of the question to remove from favourites list
 
-This endpoint removes a specific question from favourites.
-
-### HTTP Request (with ID)
-
-`PUT https://luk.az/removeQuestion/<QUESTION_ID>`
 
 
 
@@ -778,21 +776,23 @@ await client.rateAnswer('<QUESTION_ID>')
 true
 ```
 
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID        | The ID of the question to rate
-
 This endpoint rates the answer of a specific question.
 
 ### HTTP Request (with ID)
 
 `PUT https://luk.az/rateAnswer/<QUESTION_ID>`
 
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID        | The ID of the question to rate
 
 
 
+
+
+# Users
 
 ## Get Authenticated User
 
