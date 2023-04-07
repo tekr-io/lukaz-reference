@@ -15,9 +15,9 @@ curl "api_endpoint_here"
 ```
 
 ```javascript
-import { lukaz } from 'lukaz';
+import { lukaz } from 'lukaz'
 
-const client = await lukaz.authorize('<LUKAZ_API_KEY>');
+const client = await lukaz.authorize('<LUKAZ_API_KEY>')
 ```
 
 > Make sure to replace `<LUKAZ_API_KEY>` with your API key.
@@ -38,10 +38,10 @@ curl "https://luk.az/workspaces"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client';
+import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>');
-const workspaces = await client.workspaces();
+const client = lukaz.auth('<LUKAZ_API_KEY>')
+const workspaces = await client.workspaces()
 ```
 
 > The above endpoint returns JSON structured like this:
@@ -104,10 +104,10 @@ curl "https://luk.az/workspace/<ID>"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client';
+import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>');
-const workspace = await client.workspace('<WORKSPACE_ID>');
+const client = lukaz.auth('<LUKAZ_API_KEY>')
+const workspace = await client.workspace('<WORKSPACE_ID>')
 ```
 
 > The above endpoint returns JSON structured like this:
@@ -170,10 +170,10 @@ curl "https://luk.az/createWorkspace/<ID>"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client';
+import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>');
-const workspace = await client.workspace('<WORKSPACE_ID>');
+const client = lukaz.auth('<LUKAZ_API_KEY>')
+const workspace = await client.workspace('<WORKSPACE_ID>')
 ```
 
 > The above endpoint returns JSON structured like this:
@@ -202,10 +202,10 @@ curl "https://luk.az/updateWorkspace/<ID>"
 ```
 
 ```javascript
-import { lukaz } from '@lukaz/client';
+import { lukaz } from '@lukaz/client'
 
-const client = lukaz.auth('<LUKAZ_API_KEY>');
-const workspace = await client.workspace('<WORKSPACE_ID>');
+const client = lukaz.auth('<LUKAZ_API_KEY>')
+const workspace = await client.updateWorkspace('<WORKSPACE_ID>')
 ```
 
 > The above endpoint returns JSON structured like this:
@@ -225,4 +225,145 @@ This endpoint retrieves a specific workspace.
 ### HTTP Request (with ID)
 
 `POST https://luk.az/workspace/<ID>`
+
+### HTTP Request Body
+
+Property    | Description
+---------   | -----------
+description | (string) The descripton of the workspace
+notify      | (boolean) Notify new users
+options     | (object) Workspace options
+roles       | (object) User roles
+
+This endpoint updates a specific workspace.
+
+## Delete Existing Workspace
+
+```bash
+curl "https://luk.az/deleteWorkspace/<ID>"
+  -H "Authorization: <LUKAZ_API_KEY>"
+```
+
+```javascript
+import { lukaz } from '@lukaz/client'
+
+const client = lukaz.auth('<LUKAZ_API_KEY>')
+const workspace = await client.deleteWorkspace('<WORKSPACE_ID>')
+```
+
+> The above endpoint returns JSON structured like this:
+
+```json
+null
+```
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID        | The ID of the workspace to retrieve
+
+This endpoint retrieves a specific workspace.
+
+### HTTP Request (with ID)
+
+`POST https://luk.az/workspace/<ID>`
+
+### HTTP Request Body
+
+Property    | Description
+---------   | -----------
+description | (string) The descripton of the workspace
+notify      | (boolean) Notify new users
+options     | (object) Workspace options
+roles       | (object) User roles
+
+This endpoint updates a specific workspace.
+
+
+## Update Existing Workspace
+
+```bash
+curl "https://luk.az/updateWorkspace/<ID>"
+  -H "Authorization: <LUKAZ_API_KEY>"
+```
+
+```javascript
+import { lukaz } from '@lukaz/client'
+
+const client = lukaz.auth('<LUKAZ_API_KEY>')
+const workspace = await client.updateWorkspace('<WORKSPACE_ID>')
+```
+
+> The above endpoint returns JSON structured like this:
+
+```json
+null
+```
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID        | The ID of the workspace to retrieve
+
+This endpoint retrieves a specific workspace.
+
+### HTTP Request (with ID)
+
+`POST https://luk.az/workspace/<ID>`
+
+### HTTP Request Body
+
+Property    | Description
+---------   | -----------
+description | (string) The descripton of the workspace
+notify      | (boolean) Notify new users
+options     | (object) Workspace options
+roles       | (object) User roles
+
+This endpoint updates a specific workspace.
+
+## Delete Existing Workspace
+
+```bash
+curl "https://luk.az/deleteWorkspace/<ID>"
+  -H "Authorization: <LUKAZ_API_KEY>"
+```
+
+```javascript
+import { lukaz } from '@lukaz/client'
+
+const client = lukaz.auth('<LUKAZ_API_KEY>')
+const workspace = await client.deleteWorkspace('<WORKSPACE_ID>')
+```
+
+> The above endpoint returns JSON structured like this:
+
+```json
+null
+```
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID        | The ID of the workspace to retrieve
+
+This endpoint retrieves a specific workspace.
+
+### HTTP Request (with ID)
+
+`POST https://luk.az/workspace/<ID>`
+
+### HTTP Request Body
+
+Property    | Description
+---------   | -----------
+description | (string) The descripton of the workspace
+notify      | (boolean) Notify new users
+options     | (object) Workspace options
+roles       | (object) User roles
+
+This endpoint updates a specific workspace.
 
