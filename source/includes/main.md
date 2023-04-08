@@ -149,7 +149,7 @@ This endpoint retrieves all workspaces that the authenticated user owns or has a
 
 
 
-## Get a Specific Workspace
+## Get Workspace
 
 ```bash
 curl "https://luk.az/workspace/<ID>" \
@@ -200,7 +200,7 @@ const workspace = await lukaz.getWorkspace('<ID>')
 }
 ```
 
-This endpoint retrieves a specific workspace.
+This endpoint retrieves workspace.
 
 ### URL Parameters
 
@@ -286,7 +286,7 @@ await lukaz.updateWorkspace('<ID>', {
 true
 ```
 
-This endpoint updates a specific workspace.
+This endpoint updates workspace.
 
 ### HTTP Request
 
@@ -332,7 +332,7 @@ await lukaz.deleteWorkspace('<ID>')
 true
 ```
 
-This endpoint deletes a specific workspace.
+This endpoint deletes workspace.
 
 ### HTTP Request
 
@@ -637,7 +637,7 @@ const questions = await lukaz.getQuestions()
 ]
 ```
 
-This endpoint retrieves all user questions of a specific workspace.
+This endpoint retrieves all user questions of workspace.
 
 ### HTTP Request
 
@@ -647,7 +647,7 @@ This endpoint retrieves all user questions of a specific workspace.
 
 
 
-## Get a Specific Question
+## Get Question
 
 ```bash
 curl "https://luk.az/getQuestion/<ID>" \
@@ -679,7 +679,7 @@ const question = await lukaz.getQuestion('<ID>')
 }
 ```
 
-This endpoint retrieves a specific question.
+This endpoint retrieves question.
 
 ### HTTP Request
 
@@ -867,7 +867,7 @@ await lukaz.rateAnswer('<ID>', {
 true
 ```
 
-This endpoint rates the answer of a specific question.
+This endpoint rates the answer of question.
 
 ### HTTP Request
 
