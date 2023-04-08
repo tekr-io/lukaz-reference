@@ -2,7 +2,7 @@
 
 The lukaz API uses the following error codes:
 
-Error Code | Meaning
+Code       | Meaning
 ---------- | -------
 400        | Bad Request -- The request could not be understood by the server due to malformed syntax.
 401        | Unauthorized -- Your API key is wrong.

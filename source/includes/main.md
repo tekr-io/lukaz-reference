@@ -19,16 +19,16 @@ You can install lukaz with the following command:
 
 ```bash
 curl "https://luk.az/getUser"
-  -H "x-api-key: <LUKAZ_API_KEY>"
+  -H "x-api-key: <API_KEY>"
 ```
 
 ```javascript
 import {lukaz as client} from 'lukaz'
 
-const lukaz = new client('<LUKAZ_API_KEY>')
+const lukaz = new client('<API_KEY>')
 ```
 
-> Make sure to replace `<LUKAZ_API_KEY>` with your API key.
+> Make sure to replace `<API_KEY>` with your API key.
 
 
 <aside>
@@ -37,7 +37,7 @@ lukaz uses API keys to allow access to the API. You can create a new API key on 
 
 lukaz expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
-`x-api-key: <LUKAZ_API_KEY>`
+`x-api-key: <API_KEY>`
 
 
 
@@ -46,13 +46,13 @@ lukaz expects for the API key to be included in all API requests to the server i
 
 ```bash
 curl "https://luk.az/getUser"
-  -H "x-api-key: <LUKAZ_API_KEY>"
+  -H "x-api-key: <API_KEY>"
 ```
 
 ```javascript
 import {lukaz as client} from '@lukaz/client'
 
-const lukaz = new client('<LUKAZ_API_KEY>')
+const lukaz = new client('<API_KEY>')
 const user = await lukaz.getUser()
 ```
 
@@ -62,12 +62,12 @@ const user = await lukaz.getUser()
 {
   "displayName": "Example User",
   "email": "user@example.com",
-  "photoURL": "https://example.com/User_Photo.jpg",
+  "photoURL": "https://example.com/Photo.jpg",
   "quota": {
     "questions": 1000,
     "workspaces": 10
   },
-  "savedQuestions": ["<QUESTION_ID>", "<QUESTION_ID>"],
+  "savedQuestions": ["<ID>", "<ID>"],
   "usage": {
     "questions": 834,
     "workspaces": 7
@@ -91,14 +91,14 @@ This endpoint reads the user data related to the API key in use.
 
 ```bash
 curl "https://luk.az/getWorkspaces"
-  -H "x-api-key: <LUKAZ_API_KEY>"
+  -H "x-api-key: <API_KEY>"
   
 ```
 
 ```javascript
 import {lukaz as client} from '@lukaz/client'
 
-const lukaz = new client('<LUKAZ_API_KEY>')
+const lukaz = new client('<API_KEY>')
 const workspaces = await lukaz.getWorkspaces()
 ```
 
@@ -107,17 +107,15 @@ const workspaces = await lukaz.getWorkspaces()
 ```json
 [
   {
-    "id": "<WORKSPACE_ID>",
-    "createdAt": timestamp,
+    "id": "<ID>",
+    "createdAt": "2023-01-01T18:10:54.376Z",
     "description": "This my AI workspace on lukaz.",
     "documents": [
       {
-        "createdAt": timestamp,
+        "createdAt": "2023-01-01T18:10:54.376Z",
         "extension": "pdf",
         "name": "File_Name.pdf",
-        "processed": true,
-        "updatedAt": timestamp,
-        "workspaceId": "<WORKSPACE_ID>"
+        "processed": true
       }
     ],
     "email": "owner@example.com",
@@ -128,7 +126,6 @@ const workspaces = await lukaz.getWorkspaces()
       "upload": true
     },
     "processing": false,
-    "processedAt": timestamp,
     "roles": {
       "owner@example.com": 5,
       "user@example.com": 4
@@ -138,7 +135,7 @@ const workspaces = await lukaz.getWorkspaces()
       "docs": 2,
       "questions": 7
     },
-    "updatedAt": timestamp
+    "updatedAt": "2023-01-01T18:10:54.376Z"
   }
 ]
 ```
@@ -155,32 +152,30 @@ This endpoint retrieves all workspaces that the authenticated user owns or has a
 ## Get a Specific Workspace
 
 ```bash
-curl "https://luk.az/workspace/<WORKSPACE_ID>"
-  -H "x-api-key: <LUKAZ_API_KEY>"
+curl "https://luk.az/workspace/<ID>"
+  -H "x-api-key: <API_KEY>"
 ```
 
 ```javascript
 import {lukaz as client} from '@lukaz/client'
 
-const lukaz = new client('<LUKAZ_API_KEY>')
-const workspace = await lukaz.getWorkspace('<WORKSPACE_ID>')
+const lukaz = new client('<API_KEY>')
+const workspace = await lukaz.getWorkspace('<ID>')
 ```
 
 > HTTP Response Body:
 
 ```json
 {
-  "id": "<WORKSPACE_ID>",
-  "createdAt": timestamp,
+  "id": "<ID>",
+  "createdAt": "2023-01-01T18:10:54.376Z",
   "description": "This is my AI workspace on lukaz.",
   "documents": [
     {
-      "createdAt": timestamp,
+      "createdAt": "2023-01-01T18:10:54.376Z",
       "extension": "pdf",
       "name": "File_Name.pdf",
-      "processed": true,
-      "updatedAt": timestamp,
-      "workspaceId": "<WORKSPACE_ID>"
+      "processed": true
     }
   ],
   "email": "owner@example.com",
@@ -191,7 +186,6 @@ const workspace = await lukaz.getWorkspace('<WORKSPACE_ID>')
     "upload": true
   },
   "processing": false,
-  "processedAt": timestamp,
   "roles": {
     "owner@example.com": 5,
     "user@example.com": 4
@@ -201,7 +195,7 @@ const workspace = await lukaz.getWorkspace('<WORKSPACE_ID>')
     "docs": 2,
     "questions": 7
   },
-  "updatedAt": timestamp
+  "updatedAt": "2023-01-01T18:10:54.376Z"
 }
 ```
 
@@ -215,7 +209,7 @@ ID        | The ID of the workspace to retrieve
 
 ### HTTP Request
 
-`GET https://luk.az/getWorkspace/<WORKSPACE_ID>`
+`GET https://luk.az/getWorkspace/<ID>`
 
 
 
@@ -223,16 +217,16 @@ ID        | The ID of the workspace to retrieve
 ## Create New Workspace
 
 ```bash
-curl "https://luk.az/createWorkspace/<WORKSPACE_ID>"
-  -H "x-api-key: <LUKAZ_API_KEY>"
+curl "https://luk.az/createWorkspace/<ID>"
+  -H "x-api-key: <API_KEY>"
   -d '{"description": "Nice workspace description"}'
 ```
 
 ```javascript
 import {lukaz as client} from '@lukaz/client'
 
-const lukaz = new client('<LUKAZ_API_KEY>')
-await lukaz.workspace('<WORKSPACE_ID>')
+const lukaz = new client('<API_KEY>')
+await lukaz.workspace('<ID>')
 ```
 
 > HTTP Response Body:
@@ -251,7 +245,7 @@ ID        | The ID of the workspace to create
 
 ### HTTP Request
 
-`POST https://luk.az/createWorkspace/<WORKSPACE_ID>`
+`POST https://luk.az/createWorkspace/<ID>`
 
 
 
@@ -259,16 +253,16 @@ ID        | The ID of the workspace to create
 ## Update Workspace
 
 ```bash
-curl "https://luk.az/updateWorkspace/<WORKSPACE_ID>"
-  -H "x-api-key: <LUKAZ_API_KEY>"
+curl "https://luk.az/updateWorkspace/<ID>"
+  -H "x-api-key: <API_KEY>"
   -d '{"options": {"ask": false, "upload": false}'
 ```
 
 ```javascript
 import {lukaz as client} from '@lukaz/client'
 
-const lukaz = new client('<LUKAZ_API_KEY>')
-await lukaz.updateWorkspace('<WORKSPACE_ID>', {
+const lukaz = new client('<API_KEY>')
+await lukaz.updateWorkspace('<ID>', {
     description: 'New description of my AI workspace.',
     options: {
         ask: true,
@@ -293,7 +287,7 @@ This endpoint updates a specific workspace.
 
 ### HTTP Request
 
-`PUT https://luk.az/updateWorkspace/<WORKSPACE_ID>`
+`PUT https://luk.az/updateWorkspace/<ID>`
 
 ### URL Parameters
 
@@ -317,15 +311,15 @@ roles       | User roles
 ## Delete Workspace
 
 ```bash
-curl "https://luk.az/deleteWorkspace/<WORKSPACE_ID>"
-  -H "x-api-key: <LUKAZ_API_KEY>"
+curl "https://luk.az/deleteWorkspace/<ID>"
+  -H "x-api-key: <API_KEY>"
 ```
 
 ```javascript
 import {lukaz as client} from '@lukaz/client'
 
-const lukaz = new client('<LUKAZ_API_KEY>')
-await lukaz.deleteWorkspace('<WORKSPACE_ID>')
+const lukaz = new client('<API_KEY>')
+await lukaz.deleteWorkspace('<ID>')
 ```
 
 > HTTP Response Body:
@@ -338,7 +332,7 @@ This endpoint deletes a specific workspace.
 
 ### HTTP Request
 
-`DELETE https://luk.az/deleteWorkspace/<WORKSPACE_ID>`
+`DELETE https://luk.az/deleteWorkspace/<ID>`
 
 ### URL Parameters
 
@@ -353,16 +347,16 @@ ID        | The ID of the workspace to delete
 ## Upload File onto Workspace
 
 ```bash
-curl "https://luk.az/upload/<WORKSPACE_ID>"
-  -H "x-api-key: <LUKAZ_API_KEY>"
+curl "https://luk.az/upload/<ID>"
+  -H "x-api-key: <API_KEY>"
   -d '{"file": "<FILE_BLOB>"}'
 ```
 
 ```javascript
 import {lukaz as client} from '@lukaz/client'
 
-const lukaz = new client('<LUKAZ_API_KEY>')
-const workspace = await lukaz.upload('<WORKSPACE_ID>', {
+const lukaz = new client('<API_KEY>')
+const workspace = await lukaz.upload('<ID>', {
     file: File,
 })
 ```
@@ -373,11 +367,11 @@ const workspace = await lukaz.upload('<WORKSPACE_ID>', {
 true
 ```
 
-This endpoint uploads a file onto a specific workspace.
+This endpoint uploads a file onto a workspace.
 
 ### HTTP Request
 
-`POST https://luk.az/upload/<WORKSPACE_ID>`
+`POST https://luk.az/upload/<ID>`
 
 
 ### URL Parameters
@@ -393,16 +387,16 @@ ID        | The ID of the workspace to upload the file
 ## Delete File from Workspace
 
 ```bash
-curl "https://luk.az/deleteFile/<WORKSPACE_ID>"
-  -H "x-api-key: <LUKAZ_API_KEY>"
+curl "https://luk.az/deleteFile/<ID>"
+  -H "x-api-key: <API_KEY>"
   -d '{"fileName": "<FILE_NAME>"}'
 ```
 
 ```javascript
 import {lukaz as client} from '@lukaz/client'
 
-const lukaz = new client('<LUKAZ_API_KEY>')
-const workspace = await lukaz.deleteFile('<WORKSPACE_ID>', {
+const lukaz = new client('<API_KEY>')
+const workspace = await lukaz.deleteFile('<ID>', {
     fileName: '<FILE_NAME>',
 })
 ```
@@ -413,11 +407,11 @@ const workspace = await lukaz.deleteFile('<WORKSPACE_ID>', {
 true
 ```
 
-This endpoint deletes a file from a specific workspace.
+This endpoint deletes a file from a workspace.
 
 ### HTTP Request
 
-`PUT https://luk.az/deleteFile/<WORKSPACE_ID>`
+`PUT https://luk.az/deleteFile/<ID>`
 
 ### URL Parameters
 
@@ -442,17 +436,17 @@ fileName    | The name of the file to be deleted
 ## Get Question Transcript
 
 ```bash
-curl "https://luk.az/getTranscript/<WORKSPACE_ID>"
-  -H "x-api-key: <LUKAZ_API_KEY>"
-  -d '{"audioUrl": "https://example.com/Audio_File.wav"}'
+curl "https://luk.az/getTranscript/<ID>"
+  -H "x-api-key: <API_KEY>"
+  -d '{"audioUrl": "https://example.com/Audio.wav"}'
 ```
 
 ```javascript
 import {lukaz as client} from '@lukaz/client'
 
-const lukaz = new client('<LUKAZ_API_KEY>')
-const workspace = await lukaz.deleteFile('<WORKSPACE_ID>', {
-    audioUrl: 'https://example.com/Audio_File.wav',
+const lukaz = new client('<API_KEY>')
+const workspace = await lukaz.getTranscript('<ID>', {
+    audioUrl: 'https://example.com/Audio.wav',
 })
 ```
 
@@ -467,7 +461,7 @@ This endpoint transcripts the text from an audio file.
 
 ### HTTP Request
 
-`POST https://luk.az/getTranscript/<WORKSPACE_ID>`
+`POST https://luk.az/getTranscript/<ID>`
 
 ### URL Parameters
 
@@ -494,16 +488,16 @@ transcript  | The text extracted from the audio file
 ## Ask Question to Workspace
 
 ```bash
-curl "https://luk.az/ask/<WORKSPACE_ID>"
-  -H "x-api-key: <LUKAZ_API_KEY>"
+curl "https://luk.az/ask/<ID>"
+  -H "x-api-key: <API_KEY>"
   -d '{"question": "What is this workspace about?"}'
 ```
 
 ```javascript
 import {lukaz as client} from '@lukaz/client'
 
-const lukaz = new client('<LUKAZ_API_KEY>')
-const answer = await lukaz.ask('<WORKSPACE_ID>', {
+const lukaz = new client('<API_KEY>')
+const answer = await lukaz.ask('<ID>', {
     question: 'What is this workspace about?',
     translateAnswer: false
 })
@@ -520,11 +514,11 @@ const answer = await lukaz.ask('<WORKSPACE_ID>', {
 }
 ```
 
-This endpoint asks a question to a specific workspace.
+This endpoint asks a question to a workspace.
 
 ### HTTP Request
 
-`POST https://luk.az/ask/<WORKSPACE_ID>`
+`POST https://luk.az/ask/<ID>`
 
 ### URL Parameters
 
@@ -545,7 +539,7 @@ Property    | Description
 ---------   | -----------
 answer      | The answer generate for the question asked
 question    | The question asked to the workspace
-questionId  | The unique id of the question asked
+questionId  | The unique ID of the question asked
 sensitive   | If question context is sensitive or not
 
 
@@ -555,22 +549,22 @@ sensitive   | If question context is sensitive or not
 ## Get Answer Audio
 
 ```bash
-curl "https://luk.az/getAudio/<QUESTION_ID>"
-  -H "x-api-key: <LUKAZ_API_KEY>"
+curl "https://luk.az/getAudio/<ID>"
+  -H "x-api-key: <API_KEY>"
 ```
 
 ```javascript
 import {lukaz as client} from '@lukaz/client'
 
-const lukaz = new client('<LUKAZ_API_KEY>')
-const audioUrl = await lukaz.getAudio('<QUESTION_ID>')
+const lukaz = new client('<API_KEY>')
+const audioUrl = await lukaz.getAudio('<ID>')
 ```
 
 > HTTP Response Body:
 
 ```json
 {
-  "audioUrl": "https://example.com/Answer_Audio.mp3"
+  "audioUrl": "https://example.com/Audio.mp3"
 }
 ```
 
@@ -578,7 +572,7 @@ This endpoint generates an audio file from the answer.
 
 ### HTTP Request
 
-`POST https://luk.az/getAudio/<QUESTION_ID>`
+`POST https://luk.az/getAudio/<ID>`
 
 ### URL Parameters
 
@@ -603,13 +597,13 @@ audioUrl    | The file URL of the generated audio
 
 ```bash
 curl "https://luk.az/questions"
-  -H "x-api-key: <LUKAZ_API_KEY>"
+  -H "x-api-key: <API_KEY>"
 ```
 
 ```javascript
 import {lukaz as client} from '@lukaz/client'
 
-const lukaz = new client('<LUKAZ_API_KEY>')
+const lukaz = new client('<API_KEY>')
 const questions = await lukaz.getQuestions()
 ```
 
@@ -619,13 +613,13 @@ const questions = await lukaz.getQuestions()
 [
   {
     "answer": "This is workspace is about AI.",
-    "audioUrl": "https://example.com/Answer_Audio.mp3",
-    "createdAt": timestamp,
+    "audioUrl": "https://example.com/Audio.mp3",
+    "createdAt": "2023-01-01T18:10:54.376Z",
     "feedback": 0,
-    "id": "<QUESTION_ID>",
+    "id": "<ID>",
     "question": "What is this workspace about?",
     "sensitive": false,
-    "updatedAt": timestamp,
+    "updatedAt": "2023-01-01T18:10:54.376Z",
     "visible": true,
     "workspaceId": "<WORKSPACE_ID>"
   }
@@ -638,25 +632,21 @@ This endpoint retrieves all user questions of a specific workspace.
 
 `GET https://luk.az/getQuestions`
 
-### Query Parameters
-
-There are no query params available at the moment.
-
 
 
 
 ## Get a Specific Question
 
 ```bash
-curl "https://luk.az/getQuestion/<QUESTION_ID>"
-  -H "x-api-key: <LUKAZ_API_KEY>"
+curl "https://luk.az/getQuestion/<ID>"
+  -H "x-api-key: <API_KEY>"
 ```
 
 ```javascript
 import {lukaz as client} from '@lukaz/client'
 
-const lukaz = new client('<LUKAZ_API_KEY>')
-const question = await lukaz.getQuestion('<QUESTION_ID>')
+const lukaz = new client('<API_KEY>')
+const question = await lukaz.getQuestion('<ID>')
 ```
 
 > HTTP Response Body:
@@ -664,13 +654,13 @@ const question = await lukaz.getQuestion('<QUESTION_ID>')
 ```json
 {
   "answer": "This is workspace is about AI.",
-  "audioUrl": "https://example.com/Answer_Audio.mp3",
-  "createdAt": timestamp,
+  "audioUrl": "https://example.com/Audio.mp3",
+  "createdAt": "2023-01-01T18:10:54.376Z",
   "feedback": 0,
-  "id": "<QUESTION_ID>",
+  "id": "<ID>",
   "question": "What is this workspace about?",
   "sensitive": false,
-  "updatedAt": timestamp,
+  "updatedAt": "2023-01-01T18:10:54.376Z",
   "visible": true,
   "workspaceId": "<WORKSPACE_ID>"
 }
@@ -680,7 +670,7 @@ This endpoint retrieves a specific question.
 
 ### HTTP Request
 
-`GET https://luk.az/getQuestion/<QUESTION_ID>`
+`GET https://luk.az/getQuestion/<ID>`
 
 ### URL Parameters
 
@@ -694,15 +684,15 @@ ID        | The ID of the question to retrieve
 ## Make Question Visible
 
 ```bash
-curl "https://luk.az/showQuestion/<QUESTION_ID>"
-  -H "x-api-key: <LUKAZ_API_KEY>"
+curl "https://luk.az/showQuestion/<ID>"
+  -H "x-api-key: <API_KEY>"
 ```
 
 ```javascript
 import {lukaz as client} from '@lukaz/client'
 
-const lukaz = new client('<LUKAZ_API_KEY>')
-await lukaz.showQuestion('<QUESTION_ID>')
+const lukaz = new client('<API_KEY>')
+await lukaz.showQuestion('<ID>')
 ```
 
 > HTTP Response Body:
@@ -711,11 +701,11 @@ await lukaz.showQuestion('<QUESTION_ID>')
 true
 ```
 
-This endpoint makes a specific question visible on its workspace.
+This endpoint makes a question visible on its workspace.
 
 ### HTTP Request
 
-`PUT https://luk.az/showQuestion/<QUESTION_ID>`
+`PUT https://luk.az/showQuestion/<ID>`
 
 ### URL Parameters
 
@@ -729,15 +719,15 @@ ID        | The ID of the question to make visible
 ## Make Question Invisible
 
 ```bash
-curl "https://luk.az/hideQuestion/<QUESTION_ID>"
-  -H "x-api-key: <LUKAZ_API_KEY>"
+curl "https://luk.az/hideQuestion/<ID>"
+  -H "x-api-key: <API_KEY>"
 ```
 
 ```javascript
 import {lukaz as client} from '@lukaz/client'
 
-const lukaz = new client('<LUKAZ_API_KEY>')
-await lukaz.showQuestion('<QUESTION_ID>')
+const lukaz = new client('<API_KEY>')
+await lukaz.showQuestion('<ID>')
 ```
 
 > HTTP Response Body:
@@ -746,11 +736,11 @@ await lukaz.showQuestion('<QUESTION_ID>')
 true
 ```
 
-This endpoint makes a specific question invisible on its workspace.
+This endpoint makes a question invisible on its workspace.
 
 ### HTTP Request
 
-`PUT https://luk.az/hideQuestion/<QUESTION_ID>`
+`PUT https://luk.az/hideQuestion/<ID>`
 
 ### URL Parameters
 
@@ -765,15 +755,15 @@ ID        | The ID of the question to make invisible
 ## Save Question to Favourites
 
 ```bash
-curl "https://luk.az/saveQuestion/<QUESTION_ID>"
-  -H "x-api-key: <LUKAZ_API_KEY>"
+curl "https://luk.az/saveQuestion/<ID>"
+  -H "x-api-key: <API_KEY>"
 ```
 
 ```javascript
 import {lukaz as client} from '@lukaz/client'
 
-const lukaz = new client('<LUKAZ_API_KEY>')
-await lukaz.saveQuestion('<QUESTION_ID>')
+const lukaz = new client('<API_KEY>')
+await lukaz.saveQuestion('<ID>')
 ```
 
 > HTTP Response Body:
@@ -782,17 +772,17 @@ await lukaz.saveQuestion('<QUESTION_ID>')
 true
 ```
 
-This endpoint saves a specific question as favourite.
+This endpoint saves a question on user's favourites.
 
 ### HTTP Request
 
-`PUT https://luk.az/saveQuestion/<QUESTION_ID>`
+`PUT https://luk.az/saveQuestion/<ID>`
 
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
-ID        | The ID of the question to save in favourites list
+ID        | The ID of the question to save
 
 
 
@@ -801,15 +791,15 @@ ID        | The ID of the question to save in favourites list
 ## Remove Question from Favourites
 
 ```bash
-curl "https://luk.az/removeQuestion/<QUESTION_ID>"
-  -H "x-api-key: <LUKAZ_API_KEY>"
+curl "https://luk.az/removeQuestion/<ID>"
+  -H "x-api-key: <API_KEY>"
 ```
 
 ```javascript
 import {lukaz as client} from '@lukaz/client'
 
-const lukaz = new client('<LUKAZ_API_KEY>')
-await lukaz.removeQuestion('<QUESTION_ID>')
+const lukaz = new client('<API_KEY>')
+await lukaz.removeQuestion('<ID>')
 ```
 
 > HTTP Response Body:
@@ -818,36 +808,36 @@ await lukaz.removeQuestion('<QUESTION_ID>')
 true
 ```
 
-This endpoint removes a specific question from favourites.
+This endpoint removes a question from user's favourites.
 
 ### HTTP Request
 
-`PUT https://luk.az/removeQuestion/<QUESTION_ID>`
+`PUT https://luk.az/removeQuestion/<ID>`
 
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
-ID        | The ID of the question to remove from favourites list
+ID        | The ID of the question to remove
 
 
 
 
 
 
-## Rate Question Answer
+## Rate Answer
 
 ```bash
-curl "https://luk.az/rateAnswer/<QUESTION_ID>"
-  -H "x-api-key: <LUKAZ_API_KEY>"
+curl "https://luk.az/rateAnswer/<ID>"
+  -H "x-api-key: <API_KEY>"
   -d '{"feedback": 1}'
 ```
 
 ```javascript
 import {lukaz as client} from '@lukaz/client'
 
-const lukaz = new client('<LUKAZ_API_KEY>')
-await lukaz.rateAnswer('<QUESTION_ID>', {
+const lukaz = new client('<API_KEY>')
+await lukaz.rateAnswer('<ID>', {
     feedback: 1
 })
 ```
@@ -862,7 +852,7 @@ This endpoint rates the answer of a specific question.
 
 ### HTTP Request
 
-`PUT https://luk.az/rateAnswer/<QUESTION_ID>`
+`PUT https://luk.az/rateAnswer/<ID>`
 
 ### URL Parameters
 
