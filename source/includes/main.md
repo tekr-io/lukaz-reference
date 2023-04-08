@@ -18,7 +18,7 @@ You can install lukaz with the following command:
 > Send a valid API key in the Authorization header for every request:
 
 ```bash
-curl "https://luk.az/getUser"
+curl "https://luk.az/getUser" \
   -H "x-api-key: <API_KEY>"
 ```
 
@@ -45,7 +45,7 @@ lukaz expects for the API key to be included in all API requests to the server i
 ## Get Authenticated User
 
 ```bash
-curl "https://luk.az/getUser"
+curl "https://luk.az/getUser" \
   -H "x-api-key: <API_KEY>"
 ```
 
@@ -91,8 +91,8 @@ This endpoint reads the user data related to the API key in use.
 
 ```bash
 curl "https://luk.az/getWorkspaces"
-  -H "x-api-key: <API_KEY>"
-  
+  -H "x-api-key: <API_KEY>" \ 
+  -X POST
 ```
 
 ```javascript
@@ -144,7 +144,7 @@ This endpoint retrieves all workspaces that the authenticated user owns or has a
 
 ### HTTP Request
 
-`GET https://luk.az/getWorkspaces`
+`POST https://luk.az/getWorkspaces`
 
 
 
@@ -152,8 +152,9 @@ This endpoint retrieves all workspaces that the authenticated user owns or has a
 ## Get a Specific Workspace
 
 ```bash
-curl "https://luk.az/workspace/<ID>"
-  -H "x-api-key: <API_KEY>"
+curl "https://luk.az/workspace/<ID>" \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 ```javascript
@@ -209,7 +210,7 @@ ID        | The ID of the workspace to retrieve
 
 ### HTTP Request
 
-`GET https://luk.az/getWorkspace/<ID>`
+`POST https://luk.az/getWorkspace/<ID>`
 
 
 
@@ -217,9 +218,10 @@ ID        | The ID of the workspace to retrieve
 ## Create New Workspace
 
 ```bash
-curl "https://luk.az/createWorkspace/<ID>"
-  -H "x-api-key: <API_KEY>"
-  -d '{"description": "Nice workspace description"}'
+curl "https://luk.az/createWorkspace/<ID>" \
+  -d '{"description": "Nice workspace description"}' \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 ```javascript
@@ -253,9 +255,10 @@ ID        | The ID of the workspace to create
 ## Update Workspace
 
 ```bash
-curl "https://luk.az/updateWorkspace/<ID>"
-  -H "x-api-key: <API_KEY>"
-  -d '{"options": {"ask": false, "upload": false}'
+curl "https://luk.az/updateWorkspace/<ID>" \
+  -d '{"options": {"ask": false, "upload": false}' \
+  -H "x-api-key: <API_KEY>" \
+  -X PUT
 ```
 
 ```javascript
@@ -311,8 +314,9 @@ roles       | User roles
 ## Delete Workspace
 
 ```bash
-curl "https://luk.az/deleteWorkspace/<ID>"
-  -H "x-api-key: <API_KEY>"
+curl "https://luk.az/deleteWorkspace/<ID>" \
+  -H "x-api-key: <API_KEY>" \
+  -X DELETE
 ```
 
 ```javascript
@@ -347,9 +351,10 @@ ID        | The ID of the workspace to delete
 ## Upload File onto Workspace
 
 ```bash
-curl "https://luk.az/upload/<ID>"
-  -H "x-api-key: <API_KEY>"
-  -d '{"file": "<FILE_BLOB>"}'
+curl "https://luk.az/upload/<ID>" \
+  -d '{"file": "<FILE_BLOB>"}' \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 ```javascript
@@ -387,9 +392,10 @@ ID        | The ID of the workspace to upload the file
 ## Delete File from Workspace
 
 ```bash
-curl "https://luk.az/deleteFile/<ID>"
-  -H "x-api-key: <API_KEY>"
-  -d '{"fileName": "<FILE_NAME>"}'
+curl "https://luk.az/deleteFile/<ID>" \
+  -d '{"fileName": "<FILE_NAME>"}' \
+  -H "x-api-key: <API_KEY>" \
+  -X DELETE
 ```
 
 ```javascript
@@ -436,9 +442,10 @@ fileName    | The name of the file to be deleted
 ## Get Question Transcript
 
 ```bash
-curl "https://luk.az/getTranscript/<ID>"
-  -H "x-api-key: <API_KEY>"
-  -d '{"audioUrl": "https://example.com/Audio.wav"}'
+curl "https://luk.az/getTranscript/<ID>" \
+  -d '{"audioUrl": "https://example.com/Audio.wav"}' \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 ```javascript
@@ -488,9 +495,10 @@ transcript  | The text extracted from the audio file
 ## Ask Question to Workspace
 
 ```bash
-curl "https://luk.az/ask/<ID>"
-  -H "x-api-key: <API_KEY>"
-  -d '{"question": "What is this workspace about?"}'
+curl "https://luk.az/ask/<ID>" \
+  -d '{"question": "What is this workspace about?"}' \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 ```javascript
@@ -549,8 +557,9 @@ sensitive   | Question context is sensitive or not
 ## Get Answer Audio
 
 ```bash
-curl "https://luk.az/getAudio/<ID>"
-  -H "x-api-key: <API_KEY>"
+curl "https://luk.az/getAudio/<ID>" \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 ```javascript
@@ -593,11 +602,13 @@ audioUrl    | The file URL of the generated audio
 
 
 
+
 ## Get All Questions
 
 ```bash
-curl "https://luk.az/questions"
-  -H "x-api-key: <API_KEY>"
+curl "https://luk.az/questions" \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 ```javascript
@@ -612,7 +623,7 @@ const questions = await lukaz.getQuestions()
 ```json
 [
   {
-    "answer": "This is workspace is about AI.",
+    "answer": "This workspace is about AI.",
     "audioUrl": "https://example.com/Audio.mp3",
     "createdAt": "2023-01-01T18:10:54.376Z",
     "feedback": 0,
@@ -630,7 +641,8 @@ This endpoint retrieves all user questions of a specific workspace.
 
 ### HTTP Request
 
-`GET https://luk.az/getQuestions`
+`POST https://luk.az/getQuestions`
+
 
 
 
@@ -638,8 +650,9 @@ This endpoint retrieves all user questions of a specific workspace.
 ## Get a Specific Question
 
 ```bash
-curl "https://luk.az/getQuestion/<ID>"
-  -H "x-api-key: <API_KEY>"
+curl "https://luk.az/getQuestion/<ID>" \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 ```javascript
@@ -653,7 +666,7 @@ const question = await lukaz.getQuestion('<ID>')
 
 ```json
 {
-  "answer": "This is workspace is about AI.",
+  "answer": "This workspace is about AI.",
   "audioUrl": "https://example.com/Audio.mp3",
   "createdAt": "2023-01-01T18:10:54.376Z",
   "feedback": 0,
@@ -670,7 +683,7 @@ This endpoint retrieves a specific question.
 
 ### HTTP Request
 
-`GET https://luk.az/getQuestion/<ID>`
+`POST https://luk.az/getQuestion/<ID>`
 
 ### URL Parameters
 
@@ -681,11 +694,13 @@ ID        | The ID of the question to retrieve
 
 
 
+
 ## Make Question Visible
 
 ```bash
-curl "https://luk.az/showQuestion/<ID>"
-  -H "x-api-key: <API_KEY>"
+curl "https://luk.az/showQuestion/<ID>" \
+  -H "x-api-key: <API_KEY>" \
+  -X PUT
 ```
 
 ```javascript
@@ -719,8 +734,9 @@ ID        | The ID of the question to make visible
 ## Make Question Invisible
 
 ```bash
-curl "https://luk.az/hideQuestion/<ID>"
-  -H "x-api-key: <API_KEY>"
+curl "https://luk.az/hideQuestion/<ID>" \
+  -H "x-api-key: <API_KEY>" \
+  -X PUT
 ```
 
 ```javascript
@@ -755,8 +771,9 @@ ID        | The ID of the question to make invisible
 ## Save Question to Favourites
 
 ```bash
-curl "https://luk.az/saveQuestion/<ID>"
-  -H "x-api-key: <API_KEY>"
+curl "https://luk.az/saveQuestion/<ID>" \
+  -H "x-api-key: <API_KEY>" \
+  -X PUT
 ```
 
 ```javascript
@@ -791,8 +808,9 @@ ID        | The ID of the question to save
 ## Remove Question from Favourites
 
 ```bash
-curl "https://luk.az/removeQuestion/<ID>"
-  -H "x-api-key: <API_KEY>"
+curl "https://luk.az/removeQuestion/<ID>" \
+  -H "x-api-key: <API_KEY>" \
+  -X PUT
 ```
 
 ```javascript
@@ -828,9 +846,10 @@ ID        | The ID of the question to remove
 ## Rate Answer
 
 ```bash
-curl "https://luk.az/rateAnswer/<ID>"
-  -H "x-api-key: <API_KEY>"
-  -d '{"feedback": 1}'
+curl "https://luk.az/rateAnswer/<ID>" \
+  -d '{"feedback": 1}' \
+  -H "x-api-key: <API_KEY>" \
+  -X PUT
 ```
 
 ```javascript
