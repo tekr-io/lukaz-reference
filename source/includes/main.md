@@ -263,7 +263,7 @@ import {lukaz as client} from '@lukaz/client'
 
 const lukaz = new client('<API_KEY>')
 await lukaz.updateWorkspace('<ID>', {
-    description: 'New description of my AI workspace.',
+    description: 'Description of my AI workspace.',
     options: {
         ask: true,
         free: false,
