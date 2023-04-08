@@ -24,8 +24,8 @@ curl "https://luk.az/getUser"
 
 ```javascript
 import {lukaz as client} from 'lukaz'
-
 const lukaz = new client('<API_KEY>')
+
 ```
 
 > Make sure to replace `<API_KEY>` with your API key.
@@ -50,9 +50,9 @@ curl "https://luk.az/getUser"
 ```
 
 ```javascript
-import {lukaz as client} from '@lukaz/client'
-
+import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
+
 const user = await lukaz.getUser()
 ```
 
@@ -96,9 +96,9 @@ curl "https://luk.az/getWorkspaces"
 ```
 
 ```javascript
-import {lukaz as client} from '@lukaz/client'
-
+import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
+
 const workspaces = await lukaz.getWorkspaces()
 ```
 
@@ -157,9 +157,9 @@ curl "https://luk.az/workspace/<ID>"
 ```
 
 ```javascript
-import {lukaz as client} from '@lukaz/client'
-
+import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
+
 const workspace = await lukaz.getWorkspace('<ID>')
 ```
 
@@ -223,9 +223,9 @@ curl "https://luk.az/createWorkspace/<ID>"
 ```
 
 ```javascript
-import {lukaz as client} from '@lukaz/client'
-
+import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
+
 await lukaz.workspace('<ID>')
 ```
 
@@ -259,9 +259,9 @@ curl "https://luk.az/updateWorkspace/<ID>"
 ```
 
 ```javascript
-import {lukaz as client} from '@lukaz/client'
-
+import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
+
 await lukaz.updateWorkspace('<ID>', {
     description: 'Description of my AI workspace.',
     options: {
@@ -316,9 +316,9 @@ curl "https://luk.az/deleteWorkspace/<ID>"
 ```
 
 ```javascript
-import {lukaz as client} from '@lukaz/client'
-
+import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
+
 await lukaz.deleteWorkspace('<ID>')
 ```
 
@@ -353,9 +353,9 @@ curl "https://luk.az/upload/<ID>"
 ```
 
 ```javascript
-import {lukaz as client} from '@lukaz/client'
-
+import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
+
 const workspace = await lukaz.upload('<ID>', {
     file: File,
 })
@@ -393,9 +393,9 @@ curl "https://luk.az/deleteFile/<ID>"
 ```
 
 ```javascript
-import {lukaz as client} from '@lukaz/client'
-
+import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
+
 const workspace = await lukaz.deleteFile('<ID>', {
     fileName: '<FILE_NAME>',
 })
@@ -442,9 +442,9 @@ curl "https://luk.az/getTranscript/<ID>"
 ```
 
 ```javascript
-import {lukaz as client} from '@lukaz/client'
-
+import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
+
 const workspace = await lukaz.getTranscript('<ID>', {
     audioUrl: 'https://example.com/Audio.wav',
 })
@@ -494,9 +494,9 @@ curl "https://luk.az/ask/<ID>"
 ```
 
 ```javascript
-import {lukaz as client} from '@lukaz/client'
-
+import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
+
 const answer = await lukaz.ask('<ID>', {
     question: 'What is this workspace about?',
     translateAnswer: false
@@ -531,16 +531,16 @@ ID        | The ID of the workspace to ask a questionn
 Property         | Description
 ---------        | -----------
 question         | The natural question to ask
-translateAnswer  | Answer language should be same as question
+translateAnswer  | Answer language same as question
 
 ### HTTP Response Body
 
 Property    | Description
 ---------   | -----------
-answer      | The answer generate for the question asked
+answer      | The answer generated for the question asked
 question    | The question asked to the workspace
 questionId  | The unique ID of the question asked
-sensitive   | If question context is sensitive or not
+sensitive   | Question context is sensitive or not
 
 
 
@@ -554,9 +554,9 @@ curl "https://luk.az/getAudio/<ID>"
 ```
 
 ```javascript
-import {lukaz as client} from '@lukaz/client'
-
+import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
+
 const audioUrl = await lukaz.getAudio('<ID>')
 ```
 
@@ -601,9 +601,9 @@ curl "https://luk.az/questions"
 ```
 
 ```javascript
-import {lukaz as client} from '@lukaz/client'
-
+import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
+
 const questions = await lukaz.getQuestions()
 ```
 
@@ -643,9 +643,9 @@ curl "https://luk.az/getQuestion/<ID>"
 ```
 
 ```javascript
-import {lukaz as client} from '@lukaz/client'
-
+import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
+
 const question = await lukaz.getQuestion('<ID>')
 ```
 
@@ -689,9 +689,9 @@ curl "https://luk.az/showQuestion/<ID>"
 ```
 
 ```javascript
-import {lukaz as client} from '@lukaz/client'
-
+import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
+
 await lukaz.showQuestion('<ID>')
 ```
 
@@ -724,9 +724,9 @@ curl "https://luk.az/hideQuestion/<ID>"
 ```
 
 ```javascript
-import {lukaz as client} from '@lukaz/client'
-
+import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
+
 await lukaz.showQuestion('<ID>')
 ```
 
@@ -760,9 +760,9 @@ curl "https://luk.az/saveQuestion/<ID>"
 ```
 
 ```javascript
-import {lukaz as client} from '@lukaz/client'
-
+import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
+
 await lukaz.saveQuestion('<ID>')
 ```
 
@@ -796,9 +796,9 @@ curl "https://luk.az/removeQuestion/<ID>"
 ```
 
 ```javascript
-import {lukaz as client} from '@lukaz/client'
-
+import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
+
 await lukaz.removeQuestion('<ID>')
 ```
 
@@ -834,9 +834,9 @@ curl "https://luk.az/rateAnswer/<ID>"
 ```
 
 ```javascript
-import {lukaz as client} from '@lukaz/client'
-
+import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
+
 await lukaz.rateAnswer('<ID>', {
     feedback: 1
 })
