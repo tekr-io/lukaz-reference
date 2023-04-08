@@ -410,6 +410,9 @@ html, body {
       background-color: transparent;
       padding: 0;
       }
+   aside::before {
+      padding-right: 0;
+   }
    aside {
       @extend %icon-info-sign;
       padding-top: 1em;
@@ -478,8 +481,8 @@ html, body {
          border-radius: 5px;
          padding: $code-annotation-padding $main-padding;
          color: lightgray;
-         border-top: 1px solid black;
-         border-bottom: 1px solid #404040;
+         //border-top: 1px solid black;
+         //border-bottom: 1px solid #404040;
          }
       }
    }
