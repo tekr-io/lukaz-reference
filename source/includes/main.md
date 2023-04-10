@@ -147,6 +147,14 @@ This endpoint retrieves all workspaces that the authenticated user owns or has a
 `POST https://luk.az/getWorkspaces`
 
 
+### HTTP Response Body
+
+Property     | Description
+---------    | -----------
+Workspace[]  | The array of workspaces
+
+
+
 
 
 ## Get Workspace
@@ -211,6 +219,22 @@ ID        | The ID of the workspace to retrieve
 ### HTTP Request
 
 `POST https://luk.az/getWorkspace/<WORKSPACE_ID>`
+
+
+### HTTP Response Body
+
+Property     | Description
+---------    | -----------
+createdAt    | The timestamp of the creation
+description  | The description of the workspace
+documents    | The files uploaded to the workspace
+id           | The id of the workspace
+ownerEmail   | The email address of the owner
+options      | The options of the workspace
+processing   | The status of its documents
+roles        | The users emails with their roles
+stats        | The statistics of the workspace
+updatedAt    | The timestamp of the last update
 
 
 
@@ -294,9 +318,9 @@ This endpoint updates workspace.
 
 ### URL Parameters
 
-Parameter | Description
---------- | -----------
-ID        | The ID of the workspace to update
+Parameter           | Description
+---------           | -----------
+WORKSPACE_ID        | The ID of the workspace to update
 
 ### HTTP Request Body
 
@@ -304,8 +328,8 @@ Property    | Description
 ---------   | -----------
 description | The descripton of the workspace
 notify      | Send invite email for new user roles
-options     | Workspace options
-roles       | User roles
+options     | The options of the workspace
+roles       | The users emails with their roles
 
 
 
@@ -497,7 +521,7 @@ transcript  | The text extracted from the audio file
 
 ```bash
 curl "https://luk.az/ask/<WORKSPACE_ID>" \
-  -d '{"question": "What is this workspace about?"}' \
+  -d '{"question": "What is this workspace about?", "translateAnswer": false}' \
   -H "x-api-key: <API_KEY>" \
   -X POST
 ```
@@ -644,6 +668,12 @@ This endpoint retrieves all user questions of workspace.
 
 `POST https://luk.az/getQuestions/<WORKSPACE_ID>`
 
+### HTTP Response Body
+
+Property     | Description
+---------    | -----------
+Question []  | The array of questions
+
 
 
 
@@ -692,7 +722,20 @@ Parameter           | Description
 ---------           | -----------
 QUESTION_ID         | The ID of the question to retrieve
 
+### HTTP Response Body
 
+Property     | Description
+---------    | -----------
+answer       | The answer to the question
+audioUrl     | The file URL of the answer audio
+createdAt    | The timestamp of the creation
+feedback     | The feedback of the question
+id           | The id of the question
+question     | The question text
+sensitive    | The sensitiveness of the question
+updatedAt    | The timestamp of the last update
+visible      | The status of the question
+workspaceId  | The id of the question's workspace
 
 
 
