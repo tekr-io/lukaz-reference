@@ -108,11 +108,11 @@ const workspaces = await lukaz.getWorkspaces()
 [
   {
     "id": "<ID>",
-    "createdAt": "2023-01-01T18:10:54.376Z",
+    "createdAt": "2023-01-31T18:10:54.376Z",
     "description": "This my AI workspace on lukaz.",
     "documents": [
       {
-        "createdAt": "2023-01-01T18:10:54.376Z",
+        "createdAt": "2023-01-31T18:10:54.376Z",
         "extension": "pdf",
         "name": "File_Name.pdf",
         "processed": true
@@ -135,7 +135,7 @@ const workspaces = await lukaz.getWorkspaces()
       "docs": 2,
       "questions": 7
     },
-    "updatedAt": "2023-01-01T18:10:54.376Z"
+    "updatedAt": "2023-01-31T18:10:54.376Z"
   }
 ]
 ```
@@ -169,11 +169,11 @@ const workspace = await lukaz.getWorkspace('<ID>')
 ```json
 {
   "id": "<ID>",
-  "createdAt": "2023-01-01T18:10:54.376Z",
+  "createdAt": "2023-01-31T18:10:54.376Z",
   "description": "This is my AI workspace on lukaz.",
   "documents": [
     {
-      "createdAt": "2023-01-01T18:10:54.376Z",
+      "createdAt": "2023-01-31T18:10:54.376Z",
       "extension": "pdf",
       "name": "File_Name.pdf",
       "processed": true
@@ -196,7 +196,7 @@ const workspace = await lukaz.getWorkspace('<ID>')
     "docs": 2,
     "questions": 7
   },
-  "updatedAt": "2023-01-01T18:10:54.376Z"
+  "updatedAt": "2023-01-31T18:10:54.376Z"
 }
 ```
 
@@ -625,12 +625,12 @@ const questions = await lukaz.getQuestions()
   {
     "answer": "This workspace is about AI.",
     "audioUrl": "https://example.com/Audio.mp3",
-    "createdAt": "2023-01-01T18:10:54.376Z",
+    "createdAt": "2023-01-31T18:10:54.376Z",
     "feedback": 0,
     "id": "<ID>",
     "question": "What is this workspace about?",
     "sensitive": false,
-    "updatedAt": "2023-01-01T18:10:54.376Z",
+    "updatedAt": "2023-01-31T18:10:54.376Z",
     "visible": true,
     "workspaceId": "<WORKSPACE_ID>"
   }
@@ -668,12 +668,12 @@ const question = await lukaz.getQuestion('<ID>')
 {
   "answer": "This workspace is about AI.",
   "audioUrl": "https://example.com/Audio.mp3",
-  "createdAt": "2023-01-01T18:10:54.376Z",
+  "createdAt": "2023-01-31T18:10:54.376Z",
   "feedback": 0,
   "id": "<ID>",
   "question": "What is this workspace about?",
   "sensitive": false,
-  "updatedAt": "2023-01-01T18:10:54.376Z",
+  "updatedAt": "2023-01-31T18:10:54.376Z",
   "visible": true,
   "workspaceId": "<WORKSPACE_ID>"
 }
