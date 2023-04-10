@@ -606,7 +606,7 @@ audioUrl    | The file URL of the generated audio
 ## Get All Questions
 
 ```bash
-curl "https://luk.az/questions" \
+curl "https://luk.az/getQuestions/<ID>" \
   -H "x-api-key: <API_KEY>" \
   -X POST
 ```
@@ -615,7 +615,7 @@ curl "https://luk.az/questions" \
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
 
-const questions = await lukaz.getQuestions()
+const questions = await lukaz.getQuestions('<ID>')
 ```
 
 > HTTP Response Body:
@@ -627,12 +627,12 @@ const questions = await lukaz.getQuestions()
     "audioUrl": "https://example.com/Audio.mp3",
     "createdAt": "2023-01-31T18:10:54.376Z",
     "feedback": 0,
-    "id": "<ID>",
+    "id": "<QUESTION_ID>",
     "question": "What is this workspace about?",
     "sensitive": false,
     "updatedAt": "2023-01-31T18:10:54.376Z",
     "visible": true,
-    "workspaceId": "<WORKSPACE_ID>"
+    "workspaceId": "<ID>"
   }
 ]
 ```
@@ -641,7 +641,7 @@ This endpoint retrieves all user questions of workspace.
 
 ### HTTP Request
 
-`POST https://luk.az/getQuestions`
+`POST https://luk.az/getQuestions/<ID>`
 
 
 
