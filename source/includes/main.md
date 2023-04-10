@@ -152,7 +152,7 @@ This endpoint retrieves all workspaces that the authenticated user owns or has a
 ## Get Workspace
 
 ```bash
-curl "https://luk.az/workspace/<ID>" \
+curl "https://luk.az/getWorkspace/<ID>" \
   -H "x-api-key: <API_KEY>" \
   -X POST
 ```
@@ -316,7 +316,7 @@ roles       | User roles
 ```bash
 curl "https://luk.az/deleteWorkspace/<ID>" \
   -H "x-api-key: <API_KEY>" \
-  -X DELETE
+  -X POST
 ```
 
 ```javascript
@@ -336,7 +336,7 @@ This endpoint deletes workspace.
 
 ### HTTP Request
 
-`DELETE https://luk.az/deleteWorkspace/<ID>`
+`POST https://luk.az/deleteWorkspace/<ID>`
 
 ### URL Parameters
 
@@ -395,7 +395,7 @@ ID        | The ID of the workspace to upload the file
 curl "https://luk.az/deleteFile/<ID>" \
   -d '{"fileName": "<FILE_NAME>"}' \
   -H "x-api-key: <API_KEY>" \
-  -X DELETE
+  -X POST
 ```
 
 ```javascript
@@ -417,7 +417,7 @@ This endpoint deletes a file from a workspace.
 
 ### HTTP Request
 
-`PUT https://luk.az/deleteFile/<ID>`
+`POST https://luk.az/deleteFile/<ID>`
 
 ### URL Parameters
 
