@@ -118,7 +118,7 @@ const workspaces = await lukaz.getWorkspaces()
         "processed": true
       }
     ],
-    "email": "owner@example.com",
+    "ownerEmail": "owner@example.com",
     "options": {
       "ask": true,
       "free": false,
@@ -179,7 +179,7 @@ const workspace = await lukaz.getWorkspace('<ID>')
       "processed": true
     }
   ],
-  "email": "owner@example.com",
+  "ownerEmail": "owner@example.com",
   "options": {
     "ask": true,
     "free": false,
