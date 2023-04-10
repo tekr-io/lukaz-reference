@@ -352,7 +352,7 @@ ID        | The ID of the workspace to delete
 
 ```bash
 curl "https://luk.az/upload/<ID>" \
-  -d '{"file": "<FILE_BLOB>"}' \
+  -F file=@Test_File.pdf \
   -H "x-api-key: <API_KEY>" \
   -X POST
 ```
