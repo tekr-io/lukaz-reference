@@ -10,6 +10,7 @@ Code       | Meaning
 403        | Forbidden -- You don't have access to the requested resource.
 404        | Not Found -- The specified resource could not be found.
 405        | Method Not Allowed -- You tried to access a resource with an invalid method.
+415        | Unsupported Media Type -- The file extension is not supported.
 429        | Too Many Requests -- You're requesting too many resources at the same time.
 500        | Internal Server Error -- We had a problem with our server.
 503        | Service Unavailable -- We're temporarily offline for maintenance.

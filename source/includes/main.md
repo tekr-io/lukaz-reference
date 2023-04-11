@@ -890,7 +890,7 @@ QUESTION_ID         | The ID of the question to remove
 ## Rate Answer
 
 ```bash
-curl "https://luk.az/rateAnswer/<ID>" \
+curl "https://luk.az/rateAnswer/<QUESTION_ID>" \
   -d '{"feedback": 1}' \
   -H "x-api-key: <API_KEY>" \
   -X PUT
@@ -900,7 +900,7 @@ curl "https://luk.az/rateAnswer/<ID>" \
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
 
-await lukaz.rateAnswer('<ID>', {
+await lukaz.rateAnswer('<QUESTION_ID>', {
     feedback: 1
 })
 ```
@@ -915,10 +915,10 @@ This endpoint rates the answer of question.
 
 ### HTTP Request
 
-`PUT https://luk.az/rateAnswer/<ID>`
+`PUT https://luk.az/rateAnswer/<QUESTION_ID>`
 
 ### URL Parameters
 
-Parameter | Description
---------- | -----------
-ID        | The ID of the question to rate
+Parameter          | Description
+---------          | -----------
+QUESTION_ID        | The ID of the question to rate
