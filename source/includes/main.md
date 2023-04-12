@@ -617,10 +617,6 @@ Parameter           | Description
 ---------           | -----------
 QUESTION_ID         | The ID of the question to generate the audio
 
-### HTTP Request Body
-
-The request body must be empty.
-
 ### HTTP Response Body
 
 Property    | Description
@@ -743,7 +739,7 @@ Question[]  | The array of retrieved questions
 
 
 
-## Make Question Visible
+## Show Question on Workspace
 
 This endpoint makes a question visible on its workspace.
 
@@ -779,7 +775,7 @@ QUESTION_ID         | The ID of the question to make visible
 
 
 
-## Make Question Invisible
+## Hide Question from Workspace
 
 This endpoint makes a question invisible on its workspace.
 
@@ -893,7 +889,7 @@ QUESTION_ID         | The ID of the question to remove
 
 ## Rate Answer
 
-This endpoint rates the answer of question.
+This endpoint rates the answer of the question.
 
 ```bash
 curl "https://<BASE_URL>/rateAnswer/<QUESTION_ID>" \
