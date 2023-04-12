@@ -19,17 +19,16 @@ You can install lukaz with the following command:
 
 ```bash
 curl "https://luk.az/getUser" \
-  -H "x-api-key: <API_KEY>"
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 ```javascript
 import {lukaz as client} from 'lukaz'
 const lukaz = new client('<API_KEY>')
-
 ```
 
 > Make sure to replace `<API_KEY>` with your API key.
-
 
 <aside>
 lukaz uses API keys to allow access to the API. You can create a new API key on the <a href="https://lukaz.ai/settings" target="_blank">settings</a> page under security options.
@@ -46,7 +45,8 @@ lukaz expects for the API key to be included in all API requests to the server i
 
 ```bash
 curl "https://luk.az/getUser" \
-  -H "x-api-key: <API_KEY>"
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 ```javascript
@@ -79,7 +79,7 @@ This endpoint reads the user data related to the API key in use.
 
 ### HTTP Request
 
-`GET https://luk.az/getUser`
+`POST https://luk.az/getUser`
 
 
 
