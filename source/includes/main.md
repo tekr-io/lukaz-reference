@@ -19,10 +19,13 @@ Development environment `BASE_URL`:
 
 # Authentication
 
+lukaz uses API keys to allow access to the API. You can create a new API key on the <a href="https://lukaz.ai/settings" target="_blank">settings</a> page under security options.
 
-## Authenticate User
+lukaz expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
-> Send a valid API key in the Authorization header for every request:
+`x-api-key: <API_KEY>`
+
+> Send a valid API key in the header for every request:
 
 ```bash
 curl "https://<BASE_URL>/getUser" \
@@ -37,18 +40,13 @@ const lukaz = new client('<API_KEY>')
 
 > Make sure to replace `<API_KEY>` with your API key.
 
-<aside>
-lukaz uses API keys to allow access to the API. You can create a new API key on the <a href="https://lukaz.ai/settings" target="_blank">settings</a> page under security options.
-</aside>
-
-lukaz expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`x-api-key: <API_KEY>`
-
 
 
 
 ## Get Authenticated User
+
+This endpoint retrieves the user data related to the API key in use.
+Currently only available on the dev environment.
 
 ```bash
 curl "https://<BASE_URL>/getUser" \
@@ -82,7 +80,6 @@ const user = await lukaz.getUser()
 }
 ```
 
-This endpoint reads the user data related to the API key in use.
 
 ### HTTP Request
 
@@ -93,8 +90,132 @@ This endpoint reads the user data related to the API key in use.
 
 # Workspaces
 
+## Create New Workspace
+
+This endpoint creates a new workspace.
+
+```bash
+curl "https://<BASE_URL>/createWorkspace/<WORKSPACE_ID>" \
+  -d '{"description": "My custom AI workspace."}' \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
+```
+
+```javascript
+import client from '@lukaz/client'
+const lukaz = new client('<API_KEY>')
+
+await lukaz.workspace('<WORKSPACE_ID>')
+```
+
+> HTTP Response Body:
+
+```json
+true
+```
+
+### HTTP Request
+
+`POST https://<BASE_URL>/createWorkspace/<WORKSPACE_ID>`
+
+### URL Parameters
+
+Parameter           | Description
+---------           | -----------
+WORKSPACE_ID        | The ID of the workspace to create
+
+### HTTP Request Body
+
+Property    | Description
+---------   | -----------
+description | Descripton of the workspace
+
+
+
+
+
+## Get Workspace
+
+This endpoint retrieves a workspace.
+
+```bash
+curl "https://<BASE_URL>/getWorkspace/<WORKSPACE_ID>" \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
+```
+
+```javascript
+import client from '@lukaz/client'
+const lukaz = new client('<API_KEY>')
+
+const workspace = await lukaz.getWorkspace('<WORKSPACE_ID>')
+```
+
+> HTTP Response Body:
+
+```json
+{
+  "createdAt": "2023-01-31T18:10:54.376Z",
+  "description": "This is my AI workspace on lukaz.",
+  "documents": [
+    {
+      "createdAt": "2023-01-31T18:10:54.376Z",
+      "extension": "pdf",
+      "name": "Text_File.pdf",
+      "processed": true
+    }
+  ],
+  "id": "<WORKSPACE_ID>",
+  "ownerEmail": "owner@example.com",
+  "options": {
+    "ask": true,
+    "free": false,
+    "public": false,
+    "upload": true
+  },
+  "processing": false,
+  "roles": {
+    "owner@example.com": 5,
+    "user@example.com": 4
+  },
+  "stats": {
+    "answers": 5,
+    "docs": 2,
+    "questions": 7
+  },
+  "updatedAt": "2023-01-31T18:10:54.376Z"
+}
+```
+
+### URL Parameters
+
+Parameter           | Description
+---------           | -----------
+WORKSPACE_ID        | The ID of the workspace to retrieve
+
+### HTTP Request
+
+`POST https://<BASE_URL>/getWorkspace/<WORKSPACE_ID>`
+
+### HTTP Response Body
+
+Property     | Description
+---------    | -----------
+createdAt    | Timestamp of the creation
+description  | Description of the workspace
+documents    | Documents uploaded to the workspace
+id           | The ID of the workspace
+ownerEmail   | Email address of the workspace's owner
+options      | Options of the workspace
+processing   | Status of its documents
+roles        | Users emails with their roles
+stats        | Statistics of the workspace
+updatedAt    | Timestamp of the last update
 
 ## Get All Workspaces
+
+This endpoint retrieves all workspaces that the authenticated user owns or has access to.
+See `getWorkspaces` for a detailed description of a workspace structure.
 
 ```bash
 curl "https://<BASE_URL>/getWorkspaces"
@@ -147,143 +268,22 @@ const workspaces = await lukaz.getWorkspaces()
 ]
 ```
 
-This endpoint retrieves all workspaces that the authenticated user owns or has access to.
-
 ### HTTP Request
 
 `POST https://<BASE_URL>/getWorkspaces`
 
-
 ### HTTP Response Body
 
 Property     | Description
 ---------    | -----------
-Workspace[]  | The array of workspaces
-
-
-
-
-
-## Get Workspace
-
-```bash
-curl "https://<BASE_URL>/getWorkspace/<WORKSPACE_ID>" \
-  -H "x-api-key: <API_KEY>" \
-  -X POST
-```
-
-```javascript
-import client from '@lukaz/client'
-const lukaz = new client('<API_KEY>')
-
-const workspace = await lukaz.getWorkspace('<WORKSPACE_ID>')
-```
-
-> HTTP Response Body:
-
-```json
-{
-  "createdAt": "2023-01-31T18:10:54.376Z",
-  "description": "This is my AI workspace on lukaz.",
-  "documents": [
-    {
-      "createdAt": "2023-01-31T18:10:54.376Z",
-      "extension": "pdf",
-      "name": "Text_File.pdf",
-      "processed": true
-    }
-  ],
-  "id": "<WORKSPACE_ID>",
-  "ownerEmail": "owner@example.com",
-  "options": {
-    "ask": true,
-    "free": false,
-    "public": false,
-    "upload": true
-  },
-  "processing": false,
-  "roles": {
-    "owner@example.com": 5,
-    "user@example.com": 4
-  },
-  "stats": {
-    "answers": 5,
-    "docs": 2,
-    "questions": 7
-  },
-  "updatedAt": "2023-01-31T18:10:54.376Z"
-}
-```
-
-This endpoint retrieves workspace.
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID        | The ID of the workspace to retrieve
-
-### HTTP Request
-
-`POST https://<BASE_URL>/getWorkspace/<WORKSPACE_ID>`
-
-
-### HTTP Response Body
-
-Property     | Description
----------    | -----------
-createdAt    | The timestamp of the creation
-description  | The description of the workspace
-documents    | The files uploaded to the workspace
-id           | The id of the workspace
-ownerEmail   | The email address of the owner
-options      | The options of the workspace
-processing   | The status of its documents
-roles        | The users emails with their roles
-stats        | The statistics of the workspace
-updatedAt    | The timestamp of the last update
-
-
-
-
-## Create New Workspace
-
-```bash
-curl "https://<BASE_URL>/createWorkspace/<WORKSPACE_ID>" \
-  -d '{"description": "Nice workspace description"}' \
-  -H "x-api-key: <API_KEY>" \
-  -X POST
-```
-
-```javascript
-import client from '@lukaz/client'
-const lukaz = new client('<API_KEY>')
-
-await lukaz.workspace('<WORKSPACE_ID>')
-```
-
-> HTTP Response Body:
-
-```json
-true
-```
-
-This endpoint creates a new workspace.
-
-### URL Parameters
-
-Parameter           | Description
----------           | -----------
-WORKSPACE_ID        | The ID of the workspace to create
-
-### HTTP Request
-
-`POST https://<BASE_URL>/createWorkspace/<WORKSPACE_ID>`
+Workspace[]  | The array of retrieved workspaces
 
 
 
 
 ## Update Workspace
+
+This endpoint updates a workspace.
 
 ```bash
 curl "https://<BASE_URL>/updateWorkspace/<WORKSPACE_ID>" \
@@ -317,8 +317,6 @@ await lukaz.updateWorkspace('<WORKSPACE_ID>', {
 true
 ```
 
-This endpoint updates workspace.
-
 ### HTTP Request
 
 `PUT https://<BASE_URL>/updateWorkspace/<WORKSPACE_ID>`
@@ -333,16 +331,18 @@ WORKSPACE_ID        | The ID of the workspace to update
 
 Property    | Description
 ---------   | -----------
-description | The descripton of the workspace
-notify      | Send invite email for new user roles
-options     | The options of the workspace
-roles       | The users emails with their roles
+description | Descripton of the workspace
+notify      | Send invite email for new users
+options     | Options of the workspace
+roles       | Email addresses with their roles
 
 
 
 
 
 ## Delete Workspace
+
+This endpoint deletes a workspace.
 
 ```bash
 curl "https://<BASE_URL>/deleteWorkspace/<WORKSPACE_ID>" \
@@ -363,8 +363,6 @@ await lukaz.deleteWorkspace('<WORKSPACE_ID>')
 true
 ```
 
-This endpoint deletes workspace.
-
 ### HTTP Request
 
 `POST https://<BASE_URL>/deleteWorkspace/<WORKSPACE_ID>`
@@ -380,6 +378,8 @@ WORKSPACE_ID        | The ID of the workspace to delete
 
 
 ## Upload File onto Workspace
+
+This endpoint uploads a file onto a workspace.
 
 ```bash
 curl "https://<BASE_URL>/upload/<WORKSPACE_ID>" \
@@ -404,12 +404,9 @@ await lukaz.upload('<WORKSPACE_ID>', {
 true
 ```
 
-This endpoint uploads a file onto a workspace.
-
 ### HTTP Request
 
 `POST https://<BASE_URL>/upload/<WORKSPACE_ID>`
-
 
 ### URL Parameters
 
@@ -422,6 +419,8 @@ WORKSPACE_ID        | The ID of the workspace to upload the file
 
 
 ## Delete File from Workspace
+
+This endpoint deletes a file from a workspace.
 
 ```bash
 curl "https://<BASE_URL>/deleteFile/<WORKSPACE_ID>" \
@@ -445,8 +444,6 @@ await lukaz.deleteFile('<WORKSPACE_ID>', {
 true
 ```
 
-This endpoint deletes a file from a workspace.
-
 ### HTTP Request
 
 `POST https://<BASE_URL>/deleteFile/<WORKSPACE_ID>`
@@ -469,9 +466,9 @@ fileName    | The name of the file to be deleted
 
 # Questions
 
-
-
 ## Get Question Transcript
+
+This endpoint transcripts the text from an audio file.
 
 ```bash
 curl "https://<BASE_URL>/getTranscript/<WORKSPACE_ID>" \
@@ -496,7 +493,6 @@ const {transcript} = await lukaz.getTranscript('<WORKSPACE_ID>', {
   "transcript": "This is the text from the audio file."
 }
 ```
-This endpoint transcripts the text from an audio file.
 
 ### HTTP Request
 
@@ -512,19 +508,21 @@ WORKSPACE_ID        | The ID of the workspace to ask a questionn
 
 Property    | Description
 ---------   | -----------
-audioUrl    | The URL of a .wav audio file
+audioUrl    | The URL of a audio file
 
 ### HTTP Response Body
 
 Property    | Description
 ---------   | -----------
-transcript  | The text extracted from the audio file
+transcript  | The text extracted from the audio
 
 
 
 
 
 ## Ask Question to Workspace
+
+This endpoint asks a question to a workspace.
 
 ```bash
 curl "https://<BASE_URL>/ask/<WORKSPACE_ID>" \
@@ -554,8 +552,6 @@ const answer = await lukaz.ask('<WORKSPACE_ID>', {
 }
 ```
 
-This endpoint asks a question to a workspace.
-
 ### HTTP Request
 
 `POST https://<BASE_URL>/ask/<WORKSPACE_ID>`
@@ -571,22 +567,24 @@ WORKSPACE_ID        | The ID of the workspace to ask a questionn
 Property         | Description
 ---------        | -----------
 question         | The natural question to ask
-translateAnswer  | Answer language same as question
+translateAnswer  | Answer language same as question's
 
 ### HTTP Response Body
 
 Property    | Description
 ---------   | -----------
-answer      | The answer generated for the question asked
-question    | The question asked to the workspace
-questionId  | The unique ID of the question asked
-sensitive   | Question context is sensitive or not
+answer      | Answer generated for the question asked
+question    | Question asked to the workspace
+questionId  | Unique ID of the question asked
+sensitive   | Sensitiveness of the question's context
 
 
 
 
 
 ## Get Answer Audio
+
+This endpoint generates an audio file from the answer.
 
 ```bash
 curl "https://<BASE_URL>/getAudio/<QUESTION_ID>" \
@@ -608,8 +606,6 @@ const {audioUrl} = await lukaz.getAudio('<QUESTION_ID>')
   "audioUrl": "https://example.com/Audio.mp3"
 }
 ```
-
-This endpoint generates an audio file from the answer.
 
 ### HTTP Request
 
@@ -634,8 +630,72 @@ audioUrl    | The file URL of the generated audio
 
 
 
+## Get Question
+
+This endpoint retrieves a question.
+
+```bash
+curl "https://<BASE_URL>/getQuestion/<QUESTION_ID>" \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
+```
+
+```javascript
+import client from '@lukaz/client'
+const lukaz = new client('<API_KEY>')
+
+const question = await lukaz.getQuestion('<QUESTION_ID>')
+```
+
+> HTTP Response Body:
+
+```json
+{
+  "answer": "This workspace is about AI.",
+  "audioUrl": "https://example.com/Audio.mp3",
+  "createdAt": "2023-01-31T18:10:54.376Z",
+  "feedback": 0,
+  "id": "<QUESTION_ID>",
+  "question": "What is this workspace about?",
+  "sensitive": false,
+  "updatedAt": "2023-01-31T18:10:54.376Z",
+  "visible": true,
+  "workspaceId": "<WORKSPACE_ID>"
+}
+```
+
+### HTTP Request
+
+`POST https://<BASE_URL>/getQuestion/<QUESTION_ID>`
+
+### URL Parameters
+
+Parameter           | Description
+---------           | -----------
+QUESTION_ID         | The ID of the question to retrieve
+
+### HTTP Response Body
+
+Property     | Description
+---------    | -----------
+answer       | Answer generated for the question
+audioUrl     | File URL of the answer's audio
+createdAt    | Timestamp of the creation
+feedback     | Feedback from the asker
+id           | Unique ID of the question
+question     | Question text that was asked
+sensitive    | Sensitiveness of the question
+updatedAt    | Ttimestamp of the last update
+visible      | Status of the question on workspace
+workspaceId  | ID of the question's workspace
+
+
+
 
 ## Get All Questions
+
+This endpoint retrieves all questions of a workspace.
+See `getQuestion` for a detailed description of a question structure.
 
 ```bash
 curl "https://<BASE_URL>/getQuestions/<WORKSPACE_ID>" \
@@ -669,8 +729,6 @@ const questions = await lukaz.getQuestions('<WORKSPACE_ID>')
 ]
 ```
 
-This endpoint retrieves all user questions of workspace.
-
 ### HTTP Request
 
 `POST https://<BASE_URL>/getQuestions/<WORKSPACE_ID>`
@@ -679,74 +737,15 @@ This endpoint retrieves all user questions of workspace.
 
 Property     | Description
 ---------    | -----------
-Question []  | The array of questions
+Question[]  | The array of retrieved questions
 
 
-
-
-
-## Get Question
-
-```bash
-curl "https://<BASE_URL>/getQuestion/<QUESTION_ID>" \
-  -H "x-api-key: <API_KEY>" \
-  -X POST
-```
-
-```javascript
-import client from '@lukaz/client'
-const lukaz = new client('<API_KEY>')
-
-const question = await lukaz.getQuestion('<QUESTION_ID>')
-```
-
-> HTTP Response Body:
-
-```json
-{
-  "answer": "This workspace is about AI.",
-  "audioUrl": "https://example.com/Audio.mp3",
-  "createdAt": "2023-01-31T18:10:54.376Z",
-  "feedback": 0,
-  "id": "<QUESTION_ID>",
-  "question": "What is this workspace about?",
-  "sensitive": false,
-  "updatedAt": "2023-01-31T18:10:54.376Z",
-  "visible": true,
-  "workspaceId": "<WORKSPACE_ID>"
-}
-```
-
-This endpoint retrieves question.
-
-### HTTP Request
-
-`POST https://<BASE_URL>/getQuestion/<QUESTION_ID>`
-
-### URL Parameters
-
-Parameter           | Description
----------           | -----------
-QUESTION_ID         | The ID of the question to retrieve
-
-### HTTP Response Body
-
-Property     | Description
----------    | -----------
-answer       | The answer to the question
-audioUrl     | The file URL of the answer audio
-createdAt    | The timestamp of the creation
-feedback     | The feedback of the question
-id           | The id of the question
-question     | The question text
-sensitive    | The sensitiveness of the question
-updatedAt    | The timestamp of the last update
-visible      | The status of the question
-workspaceId  | The id of the question's workspace
 
 
 
 ## Make Question Visible
+
+This endpoint makes a question visible on its workspace.
 
 ```bash
 curl "https://<BASE_URL>/showQuestion/<QUESTION_ID>" \
@@ -767,8 +766,6 @@ await lukaz.showQuestion('<QUESTION_ID>')
 true
 ```
 
-This endpoint makes a question visible on its workspace.
-
 ### HTTP Request
 
 `PUT https://<BASE_URL>/showQuestion/<QUESTION_ID>`
@@ -783,6 +780,8 @@ QUESTION_ID         | The ID of the question to make visible
 
 
 ## Make Question Invisible
+
+This endpoint makes a question invisible on its workspace.
 
 ```bash
 curl "https://<BASE_URL>/hideQuestion/<QUESTION_ID>" \
@@ -803,8 +802,6 @@ await lukaz.showQuestion('<QUESTION_ID>')
 true
 ```
 
-This endpoint makes a question invisible on its workspace.
-
 ### HTTP Request
 
 `PUT https://<BASE_URL>/hideQuestion/<QUESTION_ID>`
@@ -820,6 +817,8 @@ QUESTION_ID         | The ID of the question to make invisible
 
 
 ## Save Question to Favourites
+
+This endpoint saves a question on user's favourites.
 
 ```bash
 curl "https://<BASE_URL>/saveQuestion/<QUESTION_ID>" \
@@ -840,8 +839,6 @@ await lukaz.saveQuestion('<QUESTION_ID>')
 true
 ```
 
-This endpoint saves a question on user's favourites.
-
 ### HTTP Request
 
 `PUT https://<BASE_URL>/saveQuestion/<QUESTION_ID>`
@@ -857,6 +854,8 @@ QUESTION_ID        | The ID of the question to save
 
 
 ## Remove Question from Favourites
+
+This endpoint removes a question from user's favourites.
 
 ```bash
 curl "https://<BASE_URL>/removeQuestion/<QUESTION_ID>" \
@@ -877,8 +876,6 @@ await lukaz.removeQuestion('<QUESTION_ID>')
 true
 ```
 
-This endpoint removes a question from user's favourites.
-
 ### HTTP Request
 
 `PUT https://<BASE_URL>/removeQuestion/<QUESTION_ID>`
@@ -895,6 +892,8 @@ QUESTION_ID         | The ID of the question to remove
 
 
 ## Rate Answer
+
+This endpoint rates the answer of question.
 
 ```bash
 curl "https://<BASE_URL>/rateAnswer/<QUESTION_ID>" \
@@ -917,8 +916,6 @@ await lukaz.rateAnswer('<QUESTION_ID>', {
 ```json
 true
 ```
-
-This endpoint rates the answer of question.
 
 ### HTTP Request
 
