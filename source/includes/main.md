@@ -8,6 +8,13 @@ You can install lukaz with the following command:
 
 `npm i @lukaz/client`
 
+Production environment `BASE_URL`:
+
+`europe-west1-lukaz-api.cloudfunctions.net`
+
+Development environment `BASE_URL`:
+
+`europe-west1-lukaz-dev.cloudfunctions.net`
 
 
 # Authentication
@@ -18,7 +25,7 @@ You can install lukaz with the following command:
 > Send a valid API key in the Authorization header for every request:
 
 ```bash
-curl "https://luk.az/getUser" \
+curl "https://<BASE_URL>/getUser" \
   -H "x-api-key: <API_KEY>" \
   -X POST
 ```
@@ -44,7 +51,7 @@ lukaz expects for the API key to be included in all API requests to the server i
 ## Get Authenticated User
 
 ```bash
-curl "https://luk.az/getUser" \
+curl "https://<BASE_URL>/getUser" \
   -H "x-api-key: <API_KEY>" \
   -X POST
 ```
@@ -79,7 +86,7 @@ This endpoint reads the user data related to the API key in use.
 
 ### HTTP Request
 
-`POST https://luk.az/getUser`
+`POST https://<BASE_URL>/getUser`
 
 
 
@@ -90,7 +97,7 @@ This endpoint reads the user data related to the API key in use.
 ## Get All Workspaces
 
 ```bash
-curl "https://luk.az/getWorkspaces"
+curl "https://<BASE_URL>/getWorkspaces"
   -H "x-api-key: <API_KEY>" \ 
   -X POST
 ```
@@ -144,7 +151,7 @@ This endpoint retrieves all workspaces that the authenticated user owns or has a
 
 ### HTTP Request
 
-`POST https://luk.az/getWorkspaces`
+`POST https://<BASE_URL>/getWorkspaces`
 
 
 ### HTTP Response Body
@@ -160,7 +167,7 @@ Workspace[]  | The array of workspaces
 ## Get Workspace
 
 ```bash
-curl "https://luk.az/getWorkspace/<WORKSPACE_ID>" \
+curl "https://<BASE_URL>/getWorkspace/<WORKSPACE_ID>" \
   -H "x-api-key: <API_KEY>" \
   -X POST
 ```
@@ -218,7 +225,7 @@ ID        | The ID of the workspace to retrieve
 
 ### HTTP Request
 
-`POST https://luk.az/getWorkspace/<WORKSPACE_ID>`
+`POST https://<BASE_URL>/getWorkspace/<WORKSPACE_ID>`
 
 
 ### HTTP Response Body
@@ -242,7 +249,7 @@ updatedAt    | The timestamp of the last update
 ## Create New Workspace
 
 ```bash
-curl "https://luk.az/createWorkspace/<WORKSPACE_ID>" \
+curl "https://<BASE_URL>/createWorkspace/<WORKSPACE_ID>" \
   -d '{"description": "Nice workspace description"}' \
   -H "x-api-key: <API_KEY>" \
   -X POST
@@ -271,7 +278,7 @@ WORKSPACE_ID        | The ID of the workspace to create
 
 ### HTTP Request
 
-`POST https://luk.az/createWorkspace/<WORKSPACE_ID>`
+`POST https://<BASE_URL>/createWorkspace/<WORKSPACE_ID>`
 
 
 
@@ -279,7 +286,7 @@ WORKSPACE_ID        | The ID of the workspace to create
 ## Update Workspace
 
 ```bash
-curl "https://luk.az/updateWorkspace/<WORKSPACE_ID>" \
+curl "https://<BASE_URL>/updateWorkspace/<WORKSPACE_ID>" \
   -d '{"description": null, "options": {"ask": false, "upload": false}, "roles": {"user@example.com": 3}}' \
   -H "x-api-key: <API_KEY>" \
   -X PUT
@@ -314,7 +321,7 @@ This endpoint updates workspace.
 
 ### HTTP Request
 
-`PUT https://luk.az/updateWorkspace/<WORKSPACE_ID>`
+`PUT https://<BASE_URL>/updateWorkspace/<WORKSPACE_ID>`
 
 ### URL Parameters
 
@@ -338,7 +345,7 @@ roles       | The users emails with their roles
 ## Delete Workspace
 
 ```bash
-curl "https://luk.az/deleteWorkspace/<WORKSPACE_ID>" \
+curl "https://<BASE_URL>/deleteWorkspace/<WORKSPACE_ID>" \
   -H "x-api-key: <API_KEY>" \
   -X POST
 ```
@@ -360,7 +367,7 @@ This endpoint deletes workspace.
 
 ### HTTP Request
 
-`POST https://luk.az/deleteWorkspace/<WORKSPACE_ID>`
+`POST https://<BASE_URL>/deleteWorkspace/<WORKSPACE_ID>`
 
 ### URL Parameters
 
@@ -375,7 +382,7 @@ WORKSPACE_ID        | The ID of the workspace to delete
 ## Upload File onto Workspace
 
 ```bash
-curl "https://luk.az/upload/<WORKSPACE_ID>" \
+curl "https://<BASE_URL>/upload/<WORKSPACE_ID>" \
   -F file=@Text_File.pdf \
   -H "x-api-key: <API_KEY>" \
   -X POST
@@ -401,7 +408,7 @@ This endpoint uploads a file onto a workspace.
 
 ### HTTP Request
 
-`POST https://luk.az/upload/<WORKSPACE_ID>`
+`POST https://<BASE_URL>/upload/<WORKSPACE_ID>`
 
 
 ### URL Parameters
@@ -417,7 +424,7 @@ WORKSPACE_ID        | The ID of the workspace to upload the file
 ## Delete File from Workspace
 
 ```bash
-curl "https://luk.az/deleteFile/<WORKSPACE_ID>" \
+curl "https://<BASE_URL>/deleteFile/<WORKSPACE_ID>" \
   -d '{"fileName": "<FILE_NAME>"}' \
   -H "x-api-key: <API_KEY>" \
   -X POST
@@ -442,7 +449,7 @@ This endpoint deletes a file from a workspace.
 
 ### HTTP Request
 
-`POST https://luk.az/deleteFile/<WORKSPACE_ID>`
+`POST https://<BASE_URL>/deleteFile/<WORKSPACE_ID>`
 
 ### URL Parameters
 
@@ -467,7 +474,7 @@ fileName    | The name of the file to be deleted
 ## Get Question Transcript
 
 ```bash
-curl "https://luk.az/getTranscript/<WORKSPACE_ID>" \
+curl "https://<BASE_URL>/getTranscript/<WORKSPACE_ID>" \
   -d '{"audioUrl": "https://example.com/Audio.wav"}' \
   -H "x-api-key: <API_KEY>" \
   -X POST
@@ -493,7 +500,7 @@ This endpoint transcripts the text from an audio file.
 
 ### HTTP Request
 
-`POST https://luk.az/getTranscript/<WORKSPACE_ID>`
+`POST https://<BASE_URL>/getTranscript/<WORKSPACE_ID>`
 
 ### URL Parameters
 
@@ -520,7 +527,7 @@ transcript  | The text extracted from the audio file
 ## Ask Question to Workspace
 
 ```bash
-curl "https://luk.az/ask/<WORKSPACE_ID>" \
+curl "https://<BASE_URL>/ask/<WORKSPACE_ID>" \
   -d '{"question": "What is this workspace about?", "translateAnswer": false}' \
   -H "x-api-key: <API_KEY>" \
   -X POST
@@ -551,7 +558,7 @@ This endpoint asks a question to a workspace.
 
 ### HTTP Request
 
-`POST https://luk.az/ask/<WORKSPACE_ID>`
+`POST https://<BASE_URL>/ask/<WORKSPACE_ID>`
 
 ### URL Parameters
 
@@ -582,7 +589,7 @@ sensitive   | Question context is sensitive or not
 ## Get Answer Audio
 
 ```bash
-curl "https://luk.az/getAudio/<QUESTION_ID>" \
+curl "https://<BASE_URL>/getAudio/<QUESTION_ID>" \
   -H "x-api-key: <API_KEY>" \
   -X POST
 ```
@@ -606,7 +613,7 @@ This endpoint generates an audio file from the answer.
 
 ### HTTP Request
 
-`POST https://luk.az/getAudio/<QUESTION_ID>`
+`POST https://<BASE_URL>/getAudio/<QUESTION_ID>`
 
 ### URL Parameters
 
@@ -631,7 +638,7 @@ audioUrl    | The file URL of the generated audio
 ## Get All Questions
 
 ```bash
-curl "https://luk.az/getQuestions/<WORKSPACE_ID>" \
+curl "https://<BASE_URL>/getQuestions/<WORKSPACE_ID>" \
   -H "x-api-key: <API_KEY>" \
   -X POST
 ```
@@ -666,7 +673,7 @@ This endpoint retrieves all user questions of workspace.
 
 ### HTTP Request
 
-`POST https://luk.az/getQuestions/<WORKSPACE_ID>`
+`POST https://<BASE_URL>/getQuestions/<WORKSPACE_ID>`
 
 ### HTTP Response Body
 
@@ -681,7 +688,7 @@ Question []  | The array of questions
 ## Get Question
 
 ```bash
-curl "https://luk.az/getQuestion/<QUESTION_ID>" \
+curl "https://<BASE_URL>/getQuestion/<QUESTION_ID>" \
   -H "x-api-key: <API_KEY>" \
   -X POST
 ```
@@ -714,7 +721,7 @@ This endpoint retrieves question.
 
 ### HTTP Request
 
-`POST https://luk.az/getQuestion/<QUESTION_ID>`
+`POST https://<BASE_URL>/getQuestion/<QUESTION_ID>`
 
 ### URL Parameters
 
@@ -742,7 +749,7 @@ workspaceId  | The id of the question's workspace
 ## Make Question Visible
 
 ```bash
-curl "https://luk.az/showQuestion/<QUESTION_ID>" \
+curl "https://<BASE_URL>/showQuestion/<QUESTION_ID>" \
   -H "x-api-key: <API_KEY>" \
   -X PUT
 ```
@@ -764,7 +771,7 @@ This endpoint makes a question visible on its workspace.
 
 ### HTTP Request
 
-`PUT https://luk.az/showQuestion/<QUESTION_ID>`
+`PUT https://<BASE_URL>/showQuestion/<QUESTION_ID>`
 
 ### URL Parameters
 
@@ -778,7 +785,7 @@ QUESTION_ID         | The ID of the question to make visible
 ## Make Question Invisible
 
 ```bash
-curl "https://luk.az/hideQuestion/<QUESTION_ID>" \
+curl "https://<BASE_URL>/hideQuestion/<QUESTION_ID>" \
   -H "x-api-key: <API_KEY>" \
   -X PUT
 ```
@@ -800,7 +807,7 @@ This endpoint makes a question invisible on its workspace.
 
 ### HTTP Request
 
-`PUT https://luk.az/hideQuestion/<QUESTION_ID>`
+`PUT https://<BASE_URL>/hideQuestion/<QUESTION_ID>`
 
 ### URL Parameters
 
@@ -815,7 +822,7 @@ QUESTION_ID         | The ID of the question to make invisible
 ## Save Question to Favourites
 
 ```bash
-curl "https://luk.az/saveQuestion/<QUESTION_ID>" \
+curl "https://<BASE_URL>/saveQuestion/<QUESTION_ID>" \
   -H "x-api-key: <API_KEY>" \
   -X PUT
 ```
@@ -837,7 +844,7 @@ This endpoint saves a question on user's favourites.
 
 ### HTTP Request
 
-`PUT https://luk.az/saveQuestion/<QUESTION_ID>`
+`PUT https://<BASE_URL>/saveQuestion/<QUESTION_ID>`
 
 ### URL Parameters
 
@@ -852,7 +859,7 @@ QUESTION_ID        | The ID of the question to save
 ## Remove Question from Favourites
 
 ```bash
-curl "https://luk.az/removeQuestion/<QUESTION_ID>" \
+curl "https://<BASE_URL>/removeQuestion/<QUESTION_ID>" \
   -H "x-api-key: <API_KEY>" \
   -X PUT
 ```
@@ -874,7 +881,7 @@ This endpoint removes a question from user's favourites.
 
 ### HTTP Request
 
-`PUT https://luk.az/removeQuestion/<QUESTION_ID>`
+`PUT https://<BASE_URL>/removeQuestion/<QUESTION_ID>`
 
 ### URL Parameters
 
@@ -890,7 +897,7 @@ QUESTION_ID         | The ID of the question to remove
 ## Rate Answer
 
 ```bash
-curl "https://luk.az/rateAnswer/<QUESTION_ID>" \
+curl "https://<BASE_URL>/rateAnswer/<QUESTION_ID>" \
   -d '{"feedback": 1}' \
   -H "x-api-key: <API_KEY>" \
   -X PUT
@@ -915,7 +922,7 @@ This endpoint rates the answer of question.
 
 ### HTTP Request
 
-`PUT https://luk.az/rateAnswer/<QUESTION_ID>`
+`PUT https://<BASE_URL>/rateAnswer/<QUESTION_ID>`
 
 ### URL Parameters
 
