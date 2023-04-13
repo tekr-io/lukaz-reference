@@ -17,6 +17,7 @@ Development environment `BASE_URL`:
 `europe-west1-lukaz-dev.cloudfunctions.net`
 
 
+
 # Authentication
 
 lukaz uses API keys to allow access to the API. You can create a new API key on the <a href="https://lukaz.ai/settings" target="_blank">settings</a> page under security options.
@@ -28,7 +29,7 @@ lukaz expects for the API key to be included in all API requests to the server i
 > Send a valid API key in the header for every request:
 
 ```bash
-curl "https://<BASE_URL>/getUser" \
+curl "https://<BASE_URL>/<ENDPOINT>" \
   -H "x-api-key: <API_KEY>" \
   -X POST
 ```
@@ -36,6 +37,8 @@ curl "https://<BASE_URL>/getUser" \
 ```javascript
 import {lukaz as client} from 'lukaz'
 const lukaz = new client('<API_KEY>')
+
+const workspaces = await lukaz.getWorkspaces()
 ```
 
 > Make sure to replace `<API_KEY>` with your API key.
@@ -80,7 +83,6 @@ const user = await lukaz.getUser()
 }
 ```
 
-
 ### HTTP Request
 
 `POST https://<BASE_URL>/getUser`
@@ -105,7 +107,7 @@ curl "https://<BASE_URL>/createWorkspace/<WORKSPACE_ID>" \
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
 
-await lukaz.workspace('<WORKSPACE_ID>')
+await lukaz.createWorkspace('<WORKSPACE_ID>')
 ```
 
 > HTTP Response Body:
@@ -212,6 +214,9 @@ roles        | Users emails with their roles
 stats        | Statistics of the workspace
 updatedAt    | Timestamp of the last update
 
+
+
+
 ## Get All Workspaces
 
 This endpoint retrieves all workspaces that the authenticated user owns or has access to.
@@ -287,7 +292,7 @@ This endpoint updates a workspace.
 
 ```bash
 curl "https://<BASE_URL>/updateWorkspace/<WORKSPACE_ID>" \
-  -d '{"description": null, "options": {"ask": false, "upload": false}, "roles": {"user@example.com": 3}}' \
+  -d '{"description": "My custom AI workspace.", "notify": true, "options": {"ask": true, "docs": false, "free": false, "public": false, "upload": true}, "roles": {"user@example.com": 3}}' \
   -H "x-api-key: <API_KEY>" \
   -X PUT
 ```
@@ -297,9 +302,11 @@ import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
 
 await lukaz.updateWorkspace('<WORKSPACE_ID>', {
-    description: 'Description of my AI workspace.',
+    description: 'My custom AI workspace.',
+    notify: true,
     options: {
         ask: true,
+        docs: false,
         free: false,
         public: false,
         upload: true
