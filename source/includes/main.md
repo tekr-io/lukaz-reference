@@ -70,7 +70,7 @@ const user = await lukaz.getUser()
 {
   "displayName": "Example User",
   "email": "user@example.com",
-  "photoURL": "https://example.com/Photo.jpg",
+  "photoURL": "https://example.com/Photo_File.jpg",
   "quota": {
     "questions": 1000,
     "workspaces": 10
@@ -486,21 +486,25 @@ fileName    | The name of the file to be deleted
 
 ## Get Question Transcript
 
-This endpoint transcripts the text from an audio file.
+This endpoint transcripts the text from an audio file hosted on the web or locally.
+Supported formats: mp3, mp4, mpeg, mpga, m4a, wav, or webm.
 
 ```bash
 curl "https://<BASE_URL>/getTranscript/<WORKSPACE_ID>" \
-  -d '{"audioUrl": "https://example.com/Audio.wav"}' \
+  -d '{"audioUrl": "https://example.com/Audio_File.mp3"}' \
+  -F file=@Audio_File.mp3 \
   -H "x-api-key: <API_KEY>" \
   -X POST
 ```
 
 ```javascript
+import * as fs from 'fs'
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
 
 const {transcript} = await lukaz.getTranscript('<WORKSPACE_ID>', {
-    audioUrl: 'https://example.com/Audio.wav',
+    audioUrl: 'https://example.com/Audio_File.mp3',
+    file: fs.createReadStream('<FILE_PATH>')
 })
 ```
 
@@ -526,7 +530,8 @@ WORKSPACE_ID        | The ID of the workspace to ask a questionn
 
 Property    | Description
 ---------   | -----------
-audioUrl    | The URL of a audio file
+audioUrl    | URL of a hosted audio file
+file        | A local audio file
 
 ### HTTP Response Body
 
