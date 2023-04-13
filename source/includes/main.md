@@ -178,7 +178,7 @@ const workspace = await lukaz.getWorkspace('<WORKSPACE_ID>')
 ```json
 {
   "createdAt": "2023-01-31T18:10:54.376Z",
-  "description": "This is my AI workspace on lukaz.",
+  "description": "My custom AI workspace.",
   "documents": [
     {
       "createdAt": "2023-01-31T18:10:54.376Z",
@@ -262,7 +262,7 @@ const workspaces = await lukaz.getWorkspaces()
 [
   {
     "createdAt": "2023-01-31T18:10:54.376Z",
-    "description": "This my AI workspace on lukaz.",
+    "description": "My custom AI workspace.",
     "documents": [
       {
         "createdAt": "2023-01-31T18:10:54.376Z",
