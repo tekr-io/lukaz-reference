@@ -632,7 +632,7 @@ const {audioUrl} = await lukaz.getAudio('<QUESTION_ID>')
 
 ```json
 {
-  "audioUrl": "https://example.com/Audio.mp3"
+  "audioUrl": "https://example.com/Audio_File.mp3"
 }
 ```
 
@@ -677,7 +677,7 @@ const question = await lukaz.getQuestion('<QUESTION_ID>')
 ```json
 {
   "answer": "This workspace is about AI.",
-  "audioUrl": "https://example.com/Audio.mp3",
+  "audioUrl": "https://example.com/Audio_File.mp3",
   "createdAt": "2023-01-31T18:10:54.376Z",
   "feedback": 0,
   "id": "<QUESTION_ID>",
@@ -741,7 +741,7 @@ const questions = await lukaz.getQuestions('<WORKSPACE_ID>')
 [
   {
     "answer": "This workspace is about AI.",
-    "audioUrl": "https://example.com/Audio.mp3",
+    "audioUrl": "https://example.com/Audio_File.mp3",
     "createdAt": "2023-01-31T18:10:54.376Z",
     "feedback": 0,
     "id": "<QUESTION_ID>",
