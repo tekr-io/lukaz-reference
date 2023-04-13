@@ -98,7 +98,20 @@ This endpoint creates a new workspace.
 
 ```bash
 curl "https://<BASE_URL>/createWorkspace/<WORKSPACE_ID>" \
-  -d '{"description": "My custom AI workspace.", "options": {"ask": true, "docs": true, "free": false, "public": false, "upload": true}}' \
+  -d '
+  {
+    "description": "My custom AI workspace.",
+    "options": {
+      "ask": true,
+      "docs": true,
+      "free": false,
+      "public": false,
+      "upload": true
+    },
+    "roles": {
+      "user@example.com": 2
+    }
+  }' \
   -H "x-api-key: <API_KEY>" \
   -X POST
 ```
@@ -115,6 +128,9 @@ await lukaz.createWorkspace('<WORKSPACE_ID>', {
         free: false,
         public: false,
         upload: true
+    },
+    roles: {
+        'user@example.com': 3
     }
 })
 ```
@@ -141,6 +157,7 @@ Property    | Description
 ---------   | -----------
 description | Descripton of the workspace
 options     | Options of the workspace
+roles       | User roles of the workspace
 
 
 
@@ -304,7 +321,21 @@ This endpoint updates a workspace.
 
 ```bash
 curl "https://<BASE_URL>/updateWorkspace/<WORKSPACE_ID>" \
-  -d '{"description": "My custom AI workspace.", "notify": true, "options": {"ask": true, "docs": true, "free": false, "public": false, "upload": true}, "roles": {"user@example.com": 3}}' \
+  -d '
+  {
+    "description": "My custom AI workspace.",
+    "notify": true,
+    "options": {
+      "ask": true,
+      "docs": true,
+      "free": false,
+      "public": false,
+      "upload": true
+    },
+    "roles": {
+      "user@example.com": 2
+    }
+  }' \
   -H "x-api-key: <API_KEY>" \
   -X PUT
 ```
@@ -324,7 +355,7 @@ await lukaz.updateWorkspace('<WORKSPACE_ID>', {
         upload: true
     },
     roles: {
-        'user@example.com': 4
+        'user@example.com': 2
     }
 })
 ```
