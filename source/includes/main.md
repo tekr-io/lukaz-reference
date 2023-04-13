@@ -107,9 +107,6 @@ curl "https://<BASE_URL>/createWorkspace/<WORKSPACE_ID>" \
       "free": false,
       "public": false,
       "upload": true
-    },
-    "roles": {
-      "user@example.com": 2
     }
   }' \
   -H "x-api-key: <API_KEY>" \
@@ -128,9 +125,6 @@ await lukaz.createWorkspace('<WORKSPACE_ID>', {
         free: false,
         public: false,
         upload: true
-    },
-    roles: {
-        'user@example.com': 3
     }
 })
 ```
@@ -157,7 +151,6 @@ Property    | Description
 ---------   | -----------
 description | Descripton of the workspace
 options     | Options of the workspace
-roles       | User roles of the workspace
 
 
 
