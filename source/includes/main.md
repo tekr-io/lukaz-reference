@@ -398,21 +398,21 @@ WORKSPACE_ID        | The ID of the workspace to delete
 ## Upload File onto Workspace
 
 This endpoint uploads a file onto a workspace.
+Supported formats: pdf, doc, docx, jpg, png, txt, md 
 
 ```bash
 curl "https://<BASE_URL>/upload/<WORKSPACE_ID>" \
-  -F file=@Text_File.pdf \
+  -F filePath=@Text_File.pdf \
   -H "x-api-key: <API_KEY>" \
   -X POST
 ```
 
 ```javascript
-import * as fs from 'fs'
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
 
 await lukaz.upload('<WORKSPACE_ID>', {
-    file: fs.createReadStream('<FILE_PATH>'),
+    filePath: '<FILE_PATH>',
 })
 ```
 
@@ -431,6 +431,13 @@ true
 Parameter           | Description
 ---------           | -----------
 WORKSPACE_ID        | The ID of the workspace to upload the file
+
+### HTTP Request Body
+
+Property    | Description
+---------   | -----------
+filePath    | Path of a local text file to upload
+
 
 
 
@@ -487,24 +494,23 @@ fileName    | The name of the file to be deleted
 ## Get Question Transcript
 
 This endpoint transcripts the text from an audio file hosted on the web or locally.
-Supported formats: mp3, mp4, mpeg, mpga, m4a, wav, or webm.
+Supported formats: mp3, mp4, mpeg, mpga, m4a, wav, webm
 
 ```bash
 curl "https://<BASE_URL>/getTranscript/<WORKSPACE_ID>" \
   -d '{"audioUrl": "https://example.com/Audio_File.mp3"}' \
-  -F file=@Audio_File.mp3 \
+  -F filePath=@Audio_File.mp3 \
   -H "x-api-key: <API_KEY>" \
   -X POST
 ```
 
 ```javascript
-import * as fs from 'fs'
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
 
 const {transcript} = await lukaz.getTranscript('<WORKSPACE_ID>', {
     audioUrl: 'https://example.com/Audio_File.mp3',
-    file: fs.createReadStream('<FILE_PATH>')
+    filePath: '<FILE_PATH>'
 })
 ```
 
@@ -524,14 +530,14 @@ const {transcript} = await lukaz.getTranscript('<WORKSPACE_ID>', {
 
 Parameter           | Description
 ---------           | -----------
-WORKSPACE_ID        | The ID of the workspace to ask a questionn
+WORKSPACE_ID        | The ID of the workspace to ask a question
 
 ### HTTP Request Body
 
 Property    | Description
 ---------   | -----------
 audioUrl    | URL of a hosted audio file
-file        | A local audio file
+filePath    | Path of a local audio file
 
 ### HTTP Response Body
 
