@@ -98,7 +98,7 @@ This endpoint creates a new workspace.
 
 ```bash
 curl "https://<BASE_URL>/createWorkspace/<WORKSPACE_ID>" \
-  -d '{"description": "My custom AI workspace."}' \
+  -d '{"description": "My custom AI workspace.", "options": {"ask": true, "docs": true, "free": false, "public": false, "upload": true}}' \
   -H "x-api-key: <API_KEY>" \
   -X POST
 ```
@@ -107,7 +107,16 @@ curl "https://<BASE_URL>/createWorkspace/<WORKSPACE_ID>" \
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
 
-await lukaz.createWorkspace('<WORKSPACE_ID>')
+await lukaz.createWorkspace('<WORKSPACE_ID>', {
+    description: 'My custom AI workspace.',
+    options: {
+        ask: true,
+        docs: false,
+        free: false,
+        public: false,
+        upload: true
+    }
+})
 ```
 
 > HTTP Response Body:
@@ -131,6 +140,7 @@ WORKSPACE_ID        | The ID of the workspace to create
 Property    | Description
 ---------   | -----------
 description | Descripton of the workspace
+options     | Options of the workspace
 
 
 
@@ -171,6 +181,7 @@ const workspace = await lukaz.getWorkspace('<WORKSPACE_ID>')
   "ownerEmail": "owner@example.com",
   "options": {
     "ask": true,
+    "docs": false,
     "free": false,
     "public": false,
     "upload": true
@@ -254,6 +265,7 @@ const workspaces = await lukaz.getWorkspaces()
     "ownerEmail": "owner@example.com",
     "options": {
       "ask": true,
+      "docs": false,
       "free": false,
       "public": false,
       "upload": true
@@ -292,7 +304,7 @@ This endpoint updates a workspace.
 
 ```bash
 curl "https://<BASE_URL>/updateWorkspace/<WORKSPACE_ID>" \
-  -d '{"description": "My custom AI workspace.", "notify": true, "options": {"ask": true, "docs": false, "free": false, "public": false, "upload": true}, "roles": {"user@example.com": 3}}' \
+  -d '{"description": "My custom AI workspace.", "notify": true, "options": {"ask": true, "docs": true, "free": false, "public": false, "upload": true}, "roles": {"user@example.com": 3}}' \
   -H "x-api-key: <API_KEY>" \
   -X PUT
 ```
@@ -306,13 +318,12 @@ await lukaz.updateWorkspace('<WORKSPACE_ID>', {
     notify: true,
     options: {
         ask: true,
-        docs: false,
+        docs: true,
         free: false,
         public: false,
         upload: true
     },
     roles: {
-        'owner@example.com': 5,
         'user@example.com': 4
     }
 })
