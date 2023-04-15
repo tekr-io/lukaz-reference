@@ -87,6 +87,33 @@ const user = await lukaz.getUser()
 
 `POST https://<BASE_URL>/getUser`
 
+### HTTP Response Body
+
+Property        | Description
+---------       | -----------
+createdAt       | Timestamp of the creation
+displayName     | User's display name
+email           | Email address
+photoURL        | URL of the profile photo
+quota           | Quota related to the subscription plan
+savedQuestions  | Array of IDs of user's favorite questions
+usage           | Usage of the current billing period
+
+#### User Quota
+
+Property          | Description
+---------         | -----------
+questions         | Number of questions / month allowed
+workspaces        | Number of workspaces allowed
+
+#### Plan Usage
+
+Property          | Description
+---------         | -----------
+questions         | Current number of questions asked
+workspaces        | Number of workspaces created
+
+
 
 
 
@@ -151,6 +178,16 @@ Property    | Description
 ---------   | -----------
 description | Descripton of the workspace
 options     | Options of the workspace
+
+#### Workspace Options
+
+Property    | Description
+---------   | -----------
+ask         | Asking questions enabled/disabled
+docs        | Documents shown/hidden on workspace
+free        | Asking questions free/paid
+public      | Workspace access public/private
+upload      | File upload enabled/disabled
 
 
 
@@ -235,6 +272,42 @@ roles        | Users emails with their roles
 stats        | Statistics of the workspace
 updatedAt    | Timestamp of the last update
 
+#### Workspace Options
+
+Property    | Description
+---------   | -----------
+ask         | Asking questions enabled/disabled
+docs        | Documents shown/hidden on workspace
+free        | Asking questions free/paid
+public      | Workspace access public/private
+upload      | File upload enabled/disabled
+
+#### User Roles
+
+Property        | Description
+---------       | -----------
+EMAIL_ADDRESS   | Email address or session ID
+
+##### User Roles Values
+
+EMAIL_ADDRESS  | Value
+---------       | -----------
+0               | disabled
+1               | viewer
+2               | asker
+3               | editor
+4               | admin
+5               | owner
+
+#### Workspace Statistics
+
+Property    | Description
+---------   | -----------
+answers     | Number of questions visible on workspace
+docs        | Number of documents processed
+questions   | Total number of questions asked (by all users)
+
+
 
 
 
@@ -304,6 +377,7 @@ const workspaces = await lukaz.getWorkspaces()
 Property     | Description
 ---------    | -----------
 Workspace[]  | The array of retrieved workspaces
+
 
 
 
@@ -378,6 +452,32 @@ notify      | Send invite email for new users
 options     | Options of the workspace
 roles       | Email addresses with their roles
 
+#### Workspace Options
+
+Property    | Description
+---------   | -----------
+ask         | Asking questions enabled/disabled
+docs        | Documents shown/hidden on workspace
+free        | Asking questions free/paid
+public      | Workspace access public/private
+upload      | File upload enabled/disabled
+
+#### User Roles
+
+Property        | Description
+---------       | -----------
+EMAIL_ADDRESS   | Email address or session ID
+
+##### User Roles Values
+
+EMAIL_ADDRESS   | Value
+---------       | -----------
+0               | disabled
+1               | viewer
+2               | asker
+3               | editor
+4               | admin
+5               | owner
 
 
 
@@ -557,6 +657,8 @@ Parameter           | Description
 WORKSPACE_ID        | The ID of the workspace to ask a question
 
 ### HTTP Request Body
+
+Just one of the properties is required.
 
 Property    | Description
 ---------   | -----------
@@ -786,7 +888,7 @@ const questions = await lukaz.getQuestions('<WORKSPACE_ID>')
 
 Property     | Description
 ---------    | -----------
-Question[]  | The array of retrieved questions
+Question[]   | The array of retrieved questions
 
 
 
@@ -824,6 +926,7 @@ true
 Parameter           | Description
 ---------           | -----------
 QUESTION_ID         | The ID of the question to make visible
+
 
 
 
@@ -975,3 +1078,10 @@ true
 Parameter          | Description
 ---------          | -----------
 QUESTION_ID        | The ID of the question to rate
+
+### HTTP Request Body
+
+Property     | Description
+---------    | -----------
+feedback     | 0 (bad) or 1 (good)
+
