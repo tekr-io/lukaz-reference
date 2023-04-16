@@ -1096,4 +1096,4 @@ feedback     | 0 (bad) or 1 (good)
 You can embed lukaz on any website with almost no code!
 Just copy the widget code from your workspace's options and follow the comments.
 
-For customization, read the documentation on npm: https://www.npmjs.com/package/@lukaz/widget
+For customization, read the documentation on <a href="https://www.npmjs.com/package/@lukaz/widget" target="_blank">npm</a>.
