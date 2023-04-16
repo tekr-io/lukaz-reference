@@ -288,7 +288,7 @@ Property        | Description
 ---------       | -----------
 EMAIL_ADDRESS   | Email address or session ID
 
-##### User Roles Values
+#### User Roles Values
 
 EMAIL_ADDRESS  | Value
 ---------       | -----------
@@ -468,7 +468,7 @@ Property        | Description
 ---------       | -----------
 EMAIL_ADDRESS   | Email address or session ID
 
-##### User Roles Values
+#### User Roles Values
 
 EMAIL_ADDRESS   | Value
 ---------       | -----------
