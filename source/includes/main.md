@@ -99,14 +99,14 @@ quota           | Quota related to the subscription plan
 savedQuestions  | Array of IDs of user's favorite questions
 usage           | Usage of the current billing period
 
-#### User Quota
+### User Quota
 
 Property          | Description
 ---------         | -----------
 questions         | Number of questions / month allowed
 workspaces        | Number of workspaces allowed
 
-#### Plan Usage
+### Plan Usage
 
 Property          | Description
 ---------         | -----------
@@ -179,7 +179,7 @@ Property    | Description
 description | Descripton of the workspace
 options     | Options of the workspace
 
-#### Workspace Options
+### Workspace Options
 
 Property    | Description
 ---------   | -----------
@@ -272,7 +272,7 @@ roles        | Users emails with their roles
 stats        | Statistics of the workspace
 updatedAt    | Timestamp of the last update
 
-#### Workspace Options
+### Workspace Options
 
 Property    | Description
 ---------   | -----------
@@ -282,24 +282,25 @@ free        | Asking questions free/paid
 public      | Workspace access public/private
 upload      | File upload enabled/disabled
 
-#### User Roles
+### User Roles
 
 Property        | Description
 ---------       | -----------
 EMAIL_ADDRESS   | Email address or session ID
 
-#### User Roles Values
+### User Roles Values
 
-EMAIL_ADDRESS  | Value
----------       | -----------
-0               | disabled
-1               | viewer
-2               | asker
-3               | editor
-4               | admin
-5               | owner
+EMAIL_ADDRESS   | Value    | Description
+---------       |----------| -----------
+0               | disabled | No access to the workspace
+1               | viewer   | Access to visible questions
+2               | asker    | View and ask questions
+3               | editor   | Show/hide questions
+4               | admin    | Upload new documents
+5               | owner    | Delete documents
+6               | creator  | Delete workspace
 
-#### Workspace Statistics
+### Workspace Statistics
 
 Property    | Description
 ---------   | -----------
@@ -452,7 +453,7 @@ notify      | Send invite email for new users
 options     | Options of the workspace
 roles       | Email addresses with their roles
 
-#### Workspace Options
+### Workspace Options
 
 Property    | Description
 ---------   | -----------
@@ -462,22 +463,23 @@ free        | Asking questions free/paid
 public      | Workspace access public/private
 upload      | File upload enabled/disabled
 
-#### User Roles
+### User Roles
 
 Property        | Description
 ---------       | -----------
 EMAIL_ADDRESS   | Email address or session ID
 
-#### User Roles Values
+### User Roles Values
 
-EMAIL_ADDRESS   | Value
----------       | -----------
-0               | disabled
-1               | viewer
-2               | asker
-3               | editor
-4               | admin
-5               | owner
+EMAIL_ADDRESS   | Value    | Description
+---------       |----------| -----------
+0               | disabled | No access to the workspace
+1               | viewer   | Access to visible questions
+2               | asker    | View and ask questions
+3               | editor   | Show/hide questions
+4               | admin    | Upload new documents
+5               | owner    | Delete documents
+6               | creator  | Delete workspace
 
 
 
