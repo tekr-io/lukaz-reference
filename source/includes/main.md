@@ -290,7 +290,7 @@ EMAIL_ADDRESS   | Email address or session ID
 
 ### User Roles Values
 
-EMAIL_ADDRESS   | Value    | Description
+Value           | Label    | Description
 ---------       |----------| -----------
 0               | disabled | No access to the workspace
 1               | viewer   | Access to visible questions
@@ -471,7 +471,7 @@ EMAIL_ADDRESS   | Email address or session ID
 
 ### User Roles Values
 
-EMAIL_ADDRESS   | Value    | Description
+Value           | Label    | Description
 ---------       |----------| -----------
 0               | disabled | No access to the workspace
 1               | viewer   | Access to visible questions
