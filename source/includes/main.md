@@ -1,20 +1,31 @@
 # Introduction
 
-Welcome to the lukaz API! You can use our API to access lukaz endpoints.
+Welcome to the lukaz API! You can use our API to develop your application based on lukaz.
 
-We have a client available in JavaScript. You can view code examples in the right side.
+We have an API client available in JavaScript. You can view code examples in the right side.
+
+## Installation
 
 You can install lukaz with the following command:
 
 `npm i @lukaz/client`
 
-Production environment `BASE_URL`:
+Or just use our HTTP endpoints described in this reference. 
+
+## Base URLs
+
+### Production Environment
 
 `europe-west1-lukaz-api.cloudfunctions.net`
 
-Development environment `BASE_URL`:
+### Development Environment
 
 `europe-west1-lukaz-dev.cloudfunctions.net`
+
+Create an account on our dev UI: <a href="https://lukaz.dev/sign-up?user=true" target="_blank">lukaz.dev</a>
+
+Set the dev environment on the JS client by passing `{dev: true}` in the second parameter.
+
 
 
 
@@ -680,6 +691,7 @@ transcript  | The text extracted from the audio
 ## Ask Question to Workspace
 
 This endpoint asks a question to a workspace.
+On the dev environment, it will return just a test answer.
 
 ```bash
 curl "https://<BASE_URL>/ask/<WORKSPACE_ID>" \
