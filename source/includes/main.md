@@ -1,7 +1,6 @@
 # Introduction
 
 Welcome to the lukaz API! You can use our API to develop your application based on lukaz.
-
 We have an API client available in JavaScript. You can view code examples in the right side.
 
 ## Installation
@@ -31,7 +30,8 @@ Set the dev environment on the JS client by passing `{dev: true}` in the second 
 
 # Authentication
 
-lukaz uses API keys to allow access to the API. You can create a new API key on the <a href="https://lukaz.ai/settings" target="_blank">settings</a> page under security options.
+lukaz uses API keys to allow access to the API.
+You can create a new API key on the <a href="https://lukaz.ai/settings" target="_blank">settings</a> page under security options.
 
 lukaz expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
@@ -244,7 +244,6 @@ const workspace = await lukaz.getWorkspace('<WORKSPACE_ID>')
     "public": false,
     "upload": true
   },
-  "processing": false,
   "roles": {
     "owner@example.com": 5,
     "user@example.com": 4
@@ -278,7 +277,6 @@ documents    | Documents uploaded to the workspace
 id           | The ID of the workspace
 ownerEmail   | Email address of the workspace's owner
 options      | Options of the workspace
-processing   | Status of its documents
 roles        | Users emails with their roles
 stats        | Statistics of the workspace
 updatedAt    | Timestamp of the last update
@@ -365,7 +363,6 @@ const workspaces = await lukaz.getWorkspaces()
       "public": false,
       "upload": true
     },
-    "processing": false,
     "roles": {
       "owner@example.com": 5,
       "user@example.com": 4
@@ -535,7 +532,10 @@ WORKSPACE_ID        | The ID of the workspace to delete
 ## Upload File onto Workspace
 
 This endpoint uploads a file onto a workspace.
-Supported formats: pdf, doc, docx, jpg, png, txt, md 
+
+Supported formats: `pdf, doc, docx, jpg, png, txt, md` 
+
+Max file size: `50MB`
 
 ```bash
 curl "https://<BASE_URL>/upload/<WORKSPACE_ID>" \
@@ -631,7 +631,8 @@ fileName    | The name of the file to be deleted
 ## Get Question Transcript
 
 This endpoint transcripts the text from an audio file hosted on the web or locally.
-Supported formats: mp3, mp4, mpeg, mpga, m4a, wav, webm
+
+Supported formats: `mp3, mp4, mpeg, mpga, m4a, wav, webm`
 
 ```bash
 curl "https://<BASE_URL>/getTranscript/<WORKSPACE_ID>" \
@@ -1106,6 +1107,6 @@ feedback     | 0 (bad) or 1 (good)
 # HTML Widget
 
 You can embed lukaz on any website with almost no code!
-Just copy the widget code from your workspace's options and follow the comments.
+Just copy the widget code from your workspace options and follow the comments.
 
 For customization, read the documentation on <a href="https://www.npmjs.com/package/@lukaz/widget" target="_blank">npm</a>.
