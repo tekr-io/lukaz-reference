@@ -1,7 +1,7 @@
 # Introduction
 
-Welcome to the lukaz API, a generative GPT for your documents!
-You can use our API to develop your application based on lukaz.
+Welcome to the lukaz API, a generative AI for your documents!
+You can use our API to develop an application based on lukaz.
 In the right side, you can view code examples in `JavaScript` and in `bash`.
 
 ## Installation
