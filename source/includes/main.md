@@ -24,7 +24,7 @@ Or just use our HTTP endpoints described in this reference.
 
 Create an account on our dev UI: <a href="https://lukaz.dev/sign-up?user=true" target="_blank">lukaz.dev</a>
 
-Set the dev environment on the JS client by passing `{dev: true}` in the second parameter.
+Set the dev environment on the JS client by passing `dev` in the second parameter.
 
 
 
@@ -636,6 +636,8 @@ fileName    | The name of the file to be deleted
 This endpoint transcripts the text from an audio file hosted on the web or locally.
 
 Supported formats: `mp3, mp4, mpeg, mpga, m4a, wav, webm`
+
+Max file size: `5MB`
 
 ```javascript
 import client from '@lukaz/client'
