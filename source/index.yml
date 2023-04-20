@@ -6,6 +6,7 @@ language_tabs:
 
 toc_footers:
    - <a href=https://lukaz.ai/settings target=_blank>Create API key on lukaz</a>
+   - <a href=https://lukaz.dev target=_blank>Open development UI</a>
    - <a href=https://github.com/tekr-io/lukaz-client target=_blank>Fork client on GitHub</a>
 
 includes:

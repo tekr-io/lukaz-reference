@@ -1,7 +1,8 @@
 # Introduction
 
-Welcome to the lukaz API! You can use our API to develop your application based on lukaz.
-We have an API client available in JavaScript. You can view code examples in the right side.
+Welcome to the lukaz API, a generative GPT for your documents!
+You can use our API to develop your application based on lukaz.
+In the right side, you can view code examples in `JavaScript` and in `bash`.
 
 ## Installation
 
@@ -40,7 +41,7 @@ The API key should be included in all requests to the server in a header that lo
 > Send a valid API key in the header for every request:
 
 ```javascript
-import {lukaz as client} from 'lukaz'
+import client from 'lukaz'
 const lukaz = new client('<API_KEY>')
 
 const workspaces = await lukaz.getWorkspaces()
@@ -133,6 +134,8 @@ workspaces        | Number of workspaces created
 ## Create New Workspace
 
 This endpoint creates a new workspace.
+A workspace is basically a collection of documents with questions and answers.
+It can be shared with other users or made publicly available.
 
 ```javascript
 import client from '@lukaz/client'
