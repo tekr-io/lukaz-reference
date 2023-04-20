@@ -33,23 +33,23 @@ Set the dev environment on the JS client by passing `{dev: true}` in the second 
 lukaz uses API keys to allow access to the API.
 You can create a new API key on the <a href="https://lukaz.ai/settings" target="_blank">settings</a> page under security options.
 
-lukaz expects for the API key to be included in all API requests to the server in a header that looks like the following:
+The API key should be included in all requests to the server in a header that looks like the following:
 
 `x-api-key: <API_KEY>`
 
 > Send a valid API key in the header for every request:
-
-```bash
-curl "https://<BASE_URL>/<ENDPOINT>" \
-  -H "x-api-key: <API_KEY>" \
-  -X POST
-```
 
 ```javascript
 import {lukaz as client} from 'lukaz'
 const lukaz = new client('<API_KEY>')
 
 const workspaces = await lukaz.getWorkspaces()
+```
+
+```bash
+curl "https://<BASE_URL>/<ENDPOINT>" \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 > Make sure to replace `<API_KEY>` with your API key.
@@ -62,17 +62,17 @@ const workspaces = await lukaz.getWorkspaces()
 This endpoint retrieves the user data related to the API key in use.
 Currently only available on the dev environment.
 
-```bash
-curl "https://<BASE_URL>/getUser" \
-  -H "x-api-key: <API_KEY>" \
-  -X POST
-```
-
 ```javascript
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
 
 const user = await lukaz.getUser()
+```
+
+```bash
+curl "https://<BASE_URL>/getUser" \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 > HTTP Response Body:
@@ -134,6 +134,22 @@ workspaces        | Number of workspaces created
 
 This endpoint creates a new workspace.
 
+```javascript
+import client from '@lukaz/client'
+const lukaz = new client('<API_KEY>')
+
+await lukaz.createWorkspace('<WORKSPACE_ID>', {
+    description: 'My custom AI workspace.',
+    options: {
+        ask: true,
+        docs: false,
+        free: false,
+        public: false,
+        upload: true
+    }
+})
+```
+
 ```bash
 curl "https://<BASE_URL>/createWorkspace/<WORKSPACE_ID>" \
   -d '
@@ -149,22 +165,6 @@ curl "https://<BASE_URL>/createWorkspace/<WORKSPACE_ID>" \
   }' \
   -H "x-api-key: <API_KEY>" \
   -X POST
-```
-
-```javascript
-import client from '@lukaz/client'
-const lukaz = new client('<API_KEY>')
-
-await lukaz.createWorkspace('<WORKSPACE_ID>', {
-    description: 'My custom AI workspace.',
-    options: {
-        ask: true,
-        docs: false,
-        free: false,
-        public: false,
-        upload: true
-    }
-})
 ```
 
 > HTTP Response Body:
@@ -208,17 +208,17 @@ upload      | File upload enabled/disabled
 
 This endpoint retrieves a workspace.
 
-```bash
-curl "https://<BASE_URL>/getWorkspace/<WORKSPACE_ID>" \
-  -H "x-api-key: <API_KEY>" \
-  -X POST
-```
-
 ```javascript
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
 
 const workspace = await lukaz.getWorkspace('<WORKSPACE_ID>')
+```
+
+```bash
+curl "https://<BASE_URL>/getWorkspace/<WORKSPACE_ID>" \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 > HTTP Response Body:
@@ -326,17 +326,17 @@ questions   | Total number of questions asked (by all users)
 This endpoint retrieves all workspaces that the authenticated user owns or has access to.
 See `getWorkspaces` for a detailed description of a workspace structure.
 
-```bash
-curl "https://<BASE_URL>/getWorkspaces"
-  -H "x-api-key: <API_KEY>" \ 
-  -X POST
-```
-
 ```javascript
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
 
 const workspaces = await lukaz.getWorkspaces()
+```
+
+```bash
+curl "https://<BASE_URL>/getWorkspaces"
+  -H "x-api-key: <API_KEY>" \ 
+  -X POST
 ```
 
 > HTTP Response Body:
@@ -395,6 +395,26 @@ Workspace[]  | The array of retrieved workspaces
 
 This endpoint updates a workspace.
 
+```javascript
+import client from '@lukaz/client'
+const lukaz = new client('<API_KEY>')
+
+await lukaz.updateWorkspace('<WORKSPACE_ID>', {
+    description: 'My custom AI workspace.',
+    notify: true,
+    options: {
+        ask: true,
+        docs: true,
+        free: false,
+        public: false,
+        upload: true
+    },
+    roles: {
+        'user@example.com': 2
+    }
+})
+```
+
 ```bash
 curl "https://<BASE_URL>/updateWorkspace/<WORKSPACE_ID>" \
   -d '
@@ -414,26 +434,6 @@ curl "https://<BASE_URL>/updateWorkspace/<WORKSPACE_ID>" \
   }' \
   -H "x-api-key: <API_KEY>" \
   -X PUT
-```
-
-```javascript
-import client from '@lukaz/client'
-const lukaz = new client('<API_KEY>')
-
-await lukaz.updateWorkspace('<WORKSPACE_ID>', {
-    description: 'My custom AI workspace.',
-    notify: true,
-    options: {
-        ask: true,
-        docs: true,
-        free: false,
-        public: false,
-        upload: true
-    },
-    roles: {
-        'user@example.com': 2
-    }
-})
 ```
 
 > HTTP Response Body:
@@ -496,17 +496,17 @@ Value           | Label    | Description
 
 This endpoint deletes a workspace.
 
-```bash
-curl "https://<BASE_URL>/deleteWorkspace/<WORKSPACE_ID>" \
-  -H "x-api-key: <API_KEY>" \
-  -X POST
-```
-
 ```javascript
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
 
 await lukaz.deleteWorkspace('<WORKSPACE_ID>')
+```
+
+```bash
+curl "https://<BASE_URL>/deleteWorkspace/<WORKSPACE_ID>" \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 > HTTP Response Body:
@@ -537,13 +537,6 @@ Supported formats: `pdf, doc, docx, jpg, png, txt, md`
 
 Max file size: `50MB`
 
-```bash
-curl "https://<BASE_URL>/upload/<WORKSPACE_ID>" \
-  -F filePath=@Text_File.pdf \
-  -H "x-api-key: <API_KEY>" \
-  -X POST
-```
-
 ```javascript
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
@@ -551,6 +544,13 @@ const lukaz = new client('<API_KEY>')
 await lukaz.upload('<WORKSPACE_ID>', {
     filePath: '<FILE_PATH>',
 })
+```
+
+```bash
+curl "https://<BASE_URL>/upload/<WORKSPACE_ID>" \
+  -F filePath=@Text_File.pdf \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 > HTTP Response Body:
@@ -584,13 +584,6 @@ filePath    | Path of a local text file to upload
 
 This endpoint deletes a file from a workspace.
 
-```bash
-curl "https://<BASE_URL>/deleteFile/<WORKSPACE_ID>" \
-  -d '{"fileName": "<FILE_NAME>"}' \
-  -H "x-api-key: <API_KEY>" \
-  -X POST
-```
-
 ```javascript
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
@@ -598,6 +591,13 @@ const lukaz = new client('<API_KEY>')
 await lukaz.deleteFile('<WORKSPACE_ID>', {
     fileName: '<FILE_NAME>',
 })
+```
+
+```bash
+curl "https://<BASE_URL>/deleteFile/<WORKSPACE_ID>" \
+  -d '{"fileName": "<FILE_NAME>"}' \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 > HTTP Response Body:
@@ -634,14 +634,6 @@ This endpoint transcripts the text from an audio file hosted on the web or local
 
 Supported formats: `mp3, mp4, mpeg, mpga, m4a, wav, webm`
 
-```bash
-curl "https://<BASE_URL>/getTranscript/<WORKSPACE_ID>" \
-  -d '{"audioUrl": "https://example.com/Audio_File.mp3"}' \
-  -F filePath=@Audio_File.mp3 \
-  -H "x-api-key: <API_KEY>" \
-  -X POST
-```
-
 ```javascript
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
@@ -650,6 +642,14 @@ const {transcript} = await lukaz.getTranscript('<WORKSPACE_ID>', {
     audioUrl: 'https://example.com/Audio_File.mp3',
     filePath: '<FILE_PATH>'
 })
+```
+
+```bash
+curl "https://<BASE_URL>/getTranscript/<WORKSPACE_ID>" \
+  -d '{"audioUrl": "https://example.com/Audio_File.mp3"}' \
+  -F filePath=@Audio_File.mp3 \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 > HTTP Response Body:
@@ -694,13 +694,6 @@ transcript  | The text extracted from the audio
 This endpoint asks a question to a workspace.
 On the dev environment, it will return just a test answer.
 
-```bash
-curl "https://<BASE_URL>/ask/<WORKSPACE_ID>" \
-  -d '{"question": "What is this workspace about?", "translateAnswer": false}' \
-  -H "x-api-key: <API_KEY>" \
-  -X POST
-```
-
 ```javascript
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
@@ -709,6 +702,13 @@ const answer = await lukaz.ask('<WORKSPACE_ID>', {
     question: 'What is this workspace about?',
     translateAnswer: false
 })
+```
+
+```bash
+curl "https://<BASE_URL>/ask/<WORKSPACE_ID>" \
+  -d '{"question": "What is this workspace about?", "translateAnswer": false}' \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 > HTTP Response Body:
@@ -756,17 +756,17 @@ sensitive   | Sensitiveness of the question's context
 
 This endpoint generates an audio file from the answer.
 
-```bash
-curl "https://<BASE_URL>/getAudio/<QUESTION_ID>" \
-  -H "x-api-key: <API_KEY>" \
-  -X POST
-```
-
 ```javascript
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
 
 const {audioUrl} = await lukaz.getAudio('<QUESTION_ID>')
+```
+
+```bash
+curl "https://<BASE_URL>/getAudio/<QUESTION_ID>" \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 > HTTP Response Body:
@@ -800,17 +800,17 @@ audioUrl    | The file URL of the generated audio
 
 This endpoint retrieves a question.
 
-```bash
-curl "https://<BASE_URL>/getQuestion/<QUESTION_ID>" \
-  -H "x-api-key: <API_KEY>" \
-  -X POST
-```
-
 ```javascript
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
 
 const question = await lukaz.getQuestion('<QUESTION_ID>')
+```
+
+```bash
+curl "https://<BASE_URL>/getQuestion/<QUESTION_ID>" \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 > HTTP Response Body:
@@ -863,17 +863,17 @@ workspaceId  | ID of the question's workspace
 This endpoint retrieves all questions of a workspace.
 See `getQuestion` for a detailed description of a question structure.
 
-```bash
-curl "https://<BASE_URL>/getQuestions/<WORKSPACE_ID>" \
-  -H "x-api-key: <API_KEY>" \
-  -X POST
-```
-
 ```javascript
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
 
 const questions = await lukaz.getQuestions('<WORKSPACE_ID>')
+```
+
+```bash
+curl "https://<BASE_URL>/getQuestions/<WORKSPACE_ID>" \
+  -H "x-api-key: <API_KEY>" \
+  -X POST
 ```
 
 > HTTP Response Body:
@@ -913,17 +913,17 @@ Question[]   | The array of retrieved questions
 
 This endpoint makes a question visible on its workspace.
 
-```bash
-curl "https://<BASE_URL>/showQuestion/<QUESTION_ID>" \
-  -H "x-api-key: <API_KEY>" \
-  -X PUT
-```
-
 ```javascript
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
 
 await lukaz.showQuestion('<QUESTION_ID>')
+```
+
+```bash
+curl "https://<BASE_URL>/showQuestion/<QUESTION_ID>" \
+  -H "x-api-key: <API_KEY>" \
+  -X PUT
 ```
 
 > HTTP Response Body:
@@ -950,17 +950,17 @@ QUESTION_ID         | The ID of the question to make visible
 
 This endpoint makes a question invisible on its workspace.
 
-```bash
-curl "https://<BASE_URL>/hideQuestion/<QUESTION_ID>" \
-  -H "x-api-key: <API_KEY>" \
-  -X PUT
-```
-
 ```javascript
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
 
 await lukaz.showQuestion('<QUESTION_ID>')
+```
+
+```bash
+curl "https://<BASE_URL>/hideQuestion/<QUESTION_ID>" \
+  -H "x-api-key: <API_KEY>" \
+  -X PUT
 ```
 
 > HTTP Response Body:
@@ -987,17 +987,17 @@ QUESTION_ID         | The ID of the question to make invisible
 
 This endpoint saves a question on user's favourites.
 
-```bash
-curl "https://<BASE_URL>/saveQuestion/<QUESTION_ID>" \
-  -H "x-api-key: <API_KEY>" \
-  -X PUT
-```
-
 ```javascript
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
 
 await lukaz.saveQuestion('<QUESTION_ID>')
+```
+
+```bash
+curl "https://<BASE_URL>/saveQuestion/<QUESTION_ID>" \
+  -H "x-api-key: <API_KEY>" \
+  -X PUT
 ```
 
 > HTTP Response Body:
@@ -1024,17 +1024,17 @@ QUESTION_ID        | The ID of the question to save
 
 This endpoint removes a question from user's favourites.
 
-```bash
-curl "https://<BASE_URL>/removeQuestion/<QUESTION_ID>" \
-  -H "x-api-key: <API_KEY>" \
-  -X PUT
-```
-
 ```javascript
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
 
 await lukaz.removeQuestion('<QUESTION_ID>')
+```
+
+```bash
+curl "https://<BASE_URL>/removeQuestion/<QUESTION_ID>" \
+  -H "x-api-key: <API_KEY>" \
+  -X PUT
 ```
 
 > HTTP Response Body:
@@ -1062,13 +1062,6 @@ QUESTION_ID         | The ID of the question to remove
 
 This endpoint rates the answer of the question.
 
-```bash
-curl "https://<BASE_URL>/rateAnswer/<QUESTION_ID>" \
-  -d '{"feedback": 1}' \
-  -H "x-api-key: <API_KEY>" \
-  -X PUT
-```
-
 ```javascript
 import client from '@lukaz/client'
 const lukaz = new client('<API_KEY>')
@@ -1076,6 +1069,13 @@ const lukaz = new client('<API_KEY>')
 await lukaz.rateAnswer('<QUESTION_ID>', {
     feedback: 1
 })
+```
+
+```bash
+curl "https://<BASE_URL>/rateAnswer/<QUESTION_ID>" \
+  -d '{"feedback": 1}' \
+  -H "x-api-key: <API_KEY>" \
+  -X PUT
 ```
 
 > HTTP Response Body:
