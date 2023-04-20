@@ -235,7 +235,8 @@ curl "https://<BASE_URL>/getWorkspace/<WORKSPACE_ID>" \
       "createdAt": "2023-01-31T18:10:54.376Z",
       "extension": "pdf",
       "name": "Text_File.pdf",
-      "processed": true
+      "processed": true,
+      "url": "https://example.com/Text_File.pdf"
     }
   ],
   "id": "<WORKSPACE_ID>",
@@ -354,7 +355,8 @@ curl "https://<BASE_URL>/getWorkspaces"
         "createdAt": "2023-01-31T18:10:54.376Z",
         "extension": "pdf",
         "name": "Text_File.pdf",
-        "processed": true
+        "processed": true,
+        "url": "https://example.com/Text_File.pdf"
       }
     ],
     "id": "<WORKSPACE_ID>",
