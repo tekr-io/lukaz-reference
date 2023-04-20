@@ -2,7 +2,7 @@
 
 Welcome to the lukaz API, a generative AI for your documents!
 You can use our API to develop an application based on lukaz.
-In the right side, you can view code examples in `JavaScript` and in `bash`.
+In this reference, you can find some code examples in `JavaScript` and in `bash`.
 
 ## Installation
 
@@ -22,7 +22,7 @@ Or just use our HTTP endpoints described in this reference.
 
 `europe-west1-lukaz-dev.cloudfunctions.net`
 
-Create an account on our dev UI: <a href="https://lukaz.dev/sign-up?user=true" target="_blank">lukaz.dev</a>
+Create an account on the dev UI: <a href="https://lukaz.dev/sign-up?user=true" target="_blank">lukaz.dev</a>
 
 Set the dev environment on the JS client by passing `dev` in the second parameter.
 
@@ -284,6 +284,16 @@ options      | Options of the workspace
 roles        | Users emails with their roles
 stats        | Statistics of the workspace
 updatedAt    | Timestamp of the last update
+
+### Documents
+
+Property    | Description
+---------   | -----------
+createdAt   | Timestamp of the updload
+extension   | File extension
+name        | File name
+processed   | Processing status
+url         | File URL on lukaz
 
 ### Workspace Options
 
