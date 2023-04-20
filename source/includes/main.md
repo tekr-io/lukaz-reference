@@ -867,7 +867,7 @@ workspaceId  | ID of the question's workspace
 
 ## Get All Questions
 
-This endpoint retrieves all questions of a workspace.
+This endpoint retrieves all questions of a workspace or made by the user.
 See `getQuestion` for a detailed description of a question structure.
 
 ```javascript
@@ -905,6 +905,14 @@ curl "https://<BASE_URL>/getQuestions/<WORKSPACE_ID>" \
 ### HTTP Request
 
 `POST https://<BASE_URL>/getQuestions/<WORKSPACE_ID>`
+
+### URL Parameters
+
+If `<WORKSPACE_ID>` is not provided, then the questions made by the user are retrieved.
+
+Parameter           | Description
+---------           | -----------
+WORKSPACE_ID        | The ID of the workspace to retrieve the questions
 
 ### HTTP Response Body
 
